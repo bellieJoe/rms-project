@@ -19,7 +19,8 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import EquipmentItem from 'App/Models/EquipmentItem';
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return EquipmentItem.all();
 })

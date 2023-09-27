@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.string("name", 1000).notNullable()
       table.double("price").notNullable()
       table.string("description").notNullable()
-      table.boolean("is_archive").notNullable().defaultTo(false)
+      table.boolean("is_archived").notNullable().defaultTo(false)
       table.boolean("online_availability").notNullable().defaultTo(true)
       table.timestamps()
     })
