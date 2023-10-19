@@ -16,17 +16,26 @@ export class HomePage {
     {
       title: "Users",
       subtitle: "Lorem ipsum dolor sit.",
-      icon: 'enter'
+      icon: 'enter',
+      route: '/users'
     },
     {
       title: "Products",
       subtitle: "Lorem ipsum dolor sit.",
-      icon: 'enter'
+      icon: 'enter',
+      route: 'products'
     },
     {
       title: "Inventory",
       subtitle: "Lorem ipsum dolor sit.",
-      icon: 'enter'
+      icon: 'enter',
+      route: 'inventory'
+    },
+    {
+      title: "Payroll",
+      subtitle: "Lorem ipsum dolor sit.",
+      icon: 'enter',
+      route: 'payroll'
     },
 
   ]

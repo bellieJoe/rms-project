@@ -1,0 +1,32 @@
+<ion-menu  menuId="user-menu" contentId="user-content" color="primary">
+  <ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+      <ion-title>User Management</ion-title>
+      <ion-button slot="end" fill="clear">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content color="primary">
+    <ion-list class="p-0 m-0">
+      <ion-item color="primary" button *ngFor="let menu of menus" routerLink="{{ menu.route }}" >
+        <ion-label>{{ menu.text }}</ion-label>
+      </ion-item >
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="user-content">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button menu="user-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Users</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content [fullscreen]="true">
+    
+  </ion-content>
+</div>
