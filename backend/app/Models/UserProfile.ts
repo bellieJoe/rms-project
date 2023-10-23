@@ -10,7 +10,9 @@ export default class UserProfile extends BaseModel {
 
   @column()
   userId: number
+  @column()
   name: string
+  @column()
   contactNumber: string
   
   @column.dateTime({ autoCreate: true })

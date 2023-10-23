@@ -10,6 +10,7 @@ export default class SystemModule extends BaseModel {
 
   @column()
   moduleName: string
+  @column()
   description: string
 
   @column.dateTime({ autoCreate: true })

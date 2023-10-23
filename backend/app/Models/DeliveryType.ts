@@ -9,6 +9,7 @@ export default class DeliveryType extends BaseModel {
 
   @column()
   public name: string
+  @column()
   public description: string
 
   @column.dateTime({ autoCreate: true })

@@ -8,6 +8,7 @@ export default class EquipmentCategory extends BaseModel {
 
   @column()
   public name: string
+  @column()
   public description: string
 
 

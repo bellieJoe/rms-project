@@ -4,8 +4,7 @@ import User from "App/Models/User";
 
 export default class UsersController {
     async register({request}){
-        return request
-        // User.create()
+        return "Hellp"
     }
 
 }

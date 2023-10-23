@@ -9,8 +9,11 @@ export default class MenuPackageItem extends BaseModel {
 
   @column()
   menuPackageId: number
+  @column()
   productId: number
+  @column()
   productVariantId: number
+  @column()
   version: number
 
   @column.dateTime({ autoCreate: true })

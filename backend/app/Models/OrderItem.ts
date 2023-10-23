@@ -9,9 +9,13 @@ export default class OrderItem extends BaseModel {
 
   @column()
   productVariantId: number
+  @column()
   price: number
+  @column()
   menuPackageId: number
+  @column()
   orderSnapshot: any
+  @column()
   orderId: number
 
   @column.dateTime({ autoCreate: true })

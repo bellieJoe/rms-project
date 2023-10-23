@@ -9,9 +9,13 @@ export default class SupplyItemVariant extends BaseModel {
 
   @column()
   supplyItemId: number
+  @column()
   supplyUnitId: number
+  @column()
   criticalLevel: number
+  @column()
   variantName: string
+  @column()
   onlyVariant: boolean
 
   @column.dateTime({ autoCreate: true })

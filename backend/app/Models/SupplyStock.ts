@@ -1,3 +1,4 @@
+
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
@@ -9,7 +10,9 @@ export default class SupplyStock extends BaseModel {
 
   @column()
   supplyItemVariantId: number
+  @column()
   batchNo: string
+  @column()
   stockAmount: number
   
   @column.dateTime()

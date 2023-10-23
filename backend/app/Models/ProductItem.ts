@@ -1,3 +1,4 @@
+
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
@@ -9,10 +10,15 @@ export default class ProductItem extends BaseModel {
 
   @column()
   name: string
+  @column()
   description: string
+  @column()
   image: string
+  @column()
   isArchived: boolean
+  @column()
   inMenu: boolean
+  @column()
   productCategoryId: number
 
   @column.dateTime({ autoCreate: true })

@@ -9,10 +9,15 @@ export default class Order extends BaseModel {
 
   @column()
   qrId: string
+  @column()
   notes: string
+  @column()
   modeOfPaymentId: number
+  @column()
   userId: number
+  @column()
   isPos: boolean
+  @column()
   deliveryTypeId: number
 
   @column.dateTime()

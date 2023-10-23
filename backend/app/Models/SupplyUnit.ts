@@ -10,6 +10,7 @@ export default class SupplyUnit extends BaseModel {
 
   @column()
   unitName: string
+  @column()
   description: string
   
   @column.dateTime({ autoCreate: true })

@@ -9,6 +9,7 @@ export default class OrderStatus extends BaseModel {
 
   @column()
   status: string
+  @column()
   color: string
 
   @column.dateTime({ autoCreate: true })

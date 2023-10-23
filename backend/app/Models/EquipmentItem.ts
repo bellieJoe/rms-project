@@ -9,10 +9,15 @@ export default class EquipmentItem extends BaseModel {
 
   @column()
   name: string
+  @column()
   equipmentNo: string
+  @column()
   equipmentStatusId: number
+  @column()
   equipmentCategoryId: number
+  @column()
   description: string
+  @column()
   bacthNo: string
 
   @column.dateTime()

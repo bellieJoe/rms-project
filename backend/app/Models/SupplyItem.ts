@@ -9,8 +9,11 @@ export default class SupplyItem extends BaseModel {
 
   @column()
   supplyCategoryId: number
+  @column()
   supplyName: string
+  @column()
   description: string
+  @column()
   isArchived: boolean
 
   @column.dateTime({ autoCreate: true })

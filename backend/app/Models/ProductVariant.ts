@@ -9,10 +9,15 @@ export default class ProductVariant extends BaseModel {
 
   @column()
   productItemId: number
+  @column()
   name: string
+  @column()
   price: number
+  @column()
   description: string
+  @column()
   isArchived: number
+  @column()
   onlineAvailability: boolean
 
   @column.dateTime({ autoCreate: true })

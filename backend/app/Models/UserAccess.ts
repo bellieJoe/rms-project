@@ -10,6 +10,7 @@ export default class UserAccess extends BaseModel {
 
   @column()
   userId: number
+  @column()
   systemModuleId: number
   
   @column.dateTime({ autoCreate: true })

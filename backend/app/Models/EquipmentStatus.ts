@@ -9,6 +9,7 @@ export default class EquipmentStatus extends BaseModel {
 
   @column()
   name: string
+  @column()
   color: string
 
   @column.dateTime({ autoCreate: true })

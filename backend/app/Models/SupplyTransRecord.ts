@@ -12,8 +12,11 @@ export default class SupplyTransRecord extends BaseModel {
 
   @column()
   transType: string
+  @column()
   amount: number
+  @column()
   careOf: number
+  @column()
   supplyStockId: number
 
   @column.dateTime({ autoCreate: true })

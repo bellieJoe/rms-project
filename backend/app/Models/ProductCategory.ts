@@ -9,8 +9,11 @@ export default class ProductCategory extends BaseModel {
 
   @column()
   name: string
+  @column()
   description: string
+  @column()
   color: string
+  @column()
   isArchived: boolean
 
   @column.dateTime({ autoCreate: true })

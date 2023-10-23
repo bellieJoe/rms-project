@@ -9,7 +9,9 @@ export default class OrderStatusHistory extends BaseModel {
 
   @column()
   orderId: number
+  @column()
   orderStatusId: number
+  @column()
   notes: string
 
   @column.dateTime({ autoCreate: true })

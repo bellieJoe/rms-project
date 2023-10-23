@@ -1,3 +1,4 @@
+
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
@@ -9,11 +10,17 @@ export default class MenuPackage extends BaseModel {
 
   @column()
   name: string
+  @column()
   description: string
+  @column()
   price: number
+  @column()
   inMenu: boolean
+  @column()
   activeVersion: number
+  @column()
   productCategoryId: number
+  @column()
   onlineAvailability: boolean
 
   @column.dateTime({ autoCreate: true })
