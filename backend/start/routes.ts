@@ -19,8 +19,13 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import EquipmentItem from 'App/Models/EquipmentItem';
 
 Route.get('/', async () => {
-  return EquipmentItem.all();
+  return "Hello World";
 })
+
+Route.group(()=>{
+  Route.group(() => {
+    Route.get('register', 'UsersController.register');
+  }).prefix('/users')
+}).prefix('/api')
