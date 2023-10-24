@@ -25,7 +25,6 @@ export class UserService {
     const res = await axios.post(`${environment.apiUrl}users/signin`, data)
     .then(res => res)
     .catch(err => err.response)
-    console.log(res)
     return res;
   }
 
