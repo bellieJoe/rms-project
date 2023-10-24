@@ -19,7 +19,7 @@ export default class UsersController {
             return await response.unauthorized({error: "Invalid Password"})
         }
 
-        user?.load('userProfile')
+        await user.load('userProfile')
         return user;
     }
 
