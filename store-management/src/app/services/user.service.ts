@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
+import { ErrorHandlerService } from './error-handler.service';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -13,7 +14,9 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 })
 export class UserService {
 
-  constructor() { }
+  constructor(
+    private errorHandler : ErrorHandlerService
+  ) { }
 
   // async login(data : any) : Promise<any> {
   //   const res = await axios.post(`${environment.apiUrl}/users/signin`, data)
@@ -22,10 +25,12 @@ export class UserService {
   //   return res;
   // }
   async signin(data : any) : Promise<any> {
-    const res = await axios.post(`${environment.apiUrl}users/signin`, data)
-    .then(res => res)
-    .catch(err => err.response)
-    return res;
+    try {
+      const res = await axios.post(`${environment.apiUrl}users/signin`, data)
+      return res;
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
   }
 
 
