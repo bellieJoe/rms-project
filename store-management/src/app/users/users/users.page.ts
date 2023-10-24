@@ -9,8 +9,6 @@ export class UsersPage implements OnInit {
 
   constructor() { }
 
-  
-
   ngOnInit() {
   }
 

@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-user-menu',
-  templateUrl: './user-menu.component.html',
-  styleUrls: ['./user-menu.component.scss'],
+  selector: 'app-test-menu',
+  templateUrl: './test-menu.component.html',
+  styleUrls: ['./test-menu.component.scss'],
 })
-export class UserMenuComponent  implements OnInit {
+export class TestMenuComponent  implements OnInit {
 
   constructor() { }
 
+  ngOnInit() {}
   menus = [
     {
       text: 'Users',
@@ -26,7 +27,5 @@ export class UserMenuComponent  implements OnInit {
       icon: 'grid-outline'
     }
   ]
-
-  ngOnInit() {}
 
 }

@@ -6,9 +6,11 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { UserMenuComponent } from './components/user-menu/user-menu.component';
+import { TestMenuComponent } from './components/test-menu/test-menu.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserMenuComponent, TestMenuComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -14,15 +14,33 @@ const routes: Routes = [
     loadChildren: () => import('./signin/signin.module').then( m => m.SigninPageModule),
     canActivate: [GuestGuard]
   },
+  // {
+  //   path: 'users',
+  //   loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
+  //   canActivate: [AuthGuard]
+  // },
   {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then( m => m.UsersPageModule),
+    path: 'user-access',
+    loadChildren: () => import('./users/user-access/user-access.module').then( m => m.UserAccessPageModule),
     canActivate: [AuthGuard]
   },
   {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
+  {
+    path: 'users',
+    loadChildren: () => import('./users/users/users.module').then( m => m.UsersPageModule)
+  },
+  {
+    path: 'test',
+    loadChildren: () => import('./test/test/test.module').then( m => m.TestPageModule)
+  },  {
+    path: 'test2',
+    loadChildren: () => import('./test/test2/test2.module').then( m => m.Test2PageModule)
+  },
+
+
 ];
 
 @NgModule({
