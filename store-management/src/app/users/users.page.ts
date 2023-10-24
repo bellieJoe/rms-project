@@ -9,12 +9,7 @@ export class UsersPage implements OnInit {
 
   constructor() { }
 
-  menus = [
-    {
-      text: 'Users',
-      route: '/users'
-    }
-  ]
+  
 
   ngOnInit() {
   }

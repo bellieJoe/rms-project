@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: UsersPage
+  },
+  {
+    path: 'user-access',
+    loadChildren: () => import('./user-access/user-access.module').then( m => m.UserAccessPageModule)
   }
 ];
 
