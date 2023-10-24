@@ -26,6 +26,11 @@ export class UserService {
   //   .catch(err => err.response)
   //   return res;
   // }
+  isAuth() : boolean {
+    const user = localStorage.getItem('user')
+    return user ? true : false;
+  }
+  
   async signin(data : any) : Promise<any> {
     try {
       const res = await axios.post(`${environment.apiUrl}users/signin`, data)
