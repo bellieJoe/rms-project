@@ -31,7 +31,8 @@ const routes: Routes = [
   },
   {
     path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule),
+    canActivate: [GuestGuard]
   },
   {
     path: 'users',

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -9,7 +10,8 @@ import { MenuController } from '@ionic/angular';
 export class UserMenuComponent  implements OnInit {
 
   constructor(
-    private menuCtrl : MenuController
+    private menuCtrl : MenuController,
+    private userService : UserService
   ) { }
 
   menus = [
@@ -28,17 +30,14 @@ export class UserMenuComponent  implements OnInit {
       route: '/home',
       icon: 'grid-outline'
     },
-    {
-      text: 'Logout',
-      route: '/home',
-      icon: 'log-out-outline'
-    }
   ]
 
   closeMenu() {
     console.log("Close menu")
     this.menuCtrl.close('user-menu')
   }
+
+  
 
   ngOnInit() {}
 

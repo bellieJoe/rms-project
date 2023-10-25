@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UserMenuComponent } from './user-menu/user-menu.component';
+import { MenuLogoutComponent } from './menu-logout/menu-logout.component';
 
 @NgModule({
   
@@ -13,9 +14,7 @@ import { UserMenuComponent } from './user-menu/user-menu.component';
     FormsModule,
     RouterModule
   ],
-  declarations: [],
-  exports: [
-    
-  ],
+  declarations: [MenuLogoutComponent, UserMenuComponent],
+  exports: [MenuLogoutComponent, UserMenuComponent],
 })
 export class ComponentsModule { }

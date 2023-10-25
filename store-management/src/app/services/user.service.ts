@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './error-handler.service';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -17,7 +18,8 @@ export class UserService {
 
   constructor(
     private errorHandler : ErrorHandlerService,
-    private router : Router
+    private router : Router,
+    private loadingCtrl : LoadingController
   ) { }
 
   // async login(data : any) : Promise<any> {
@@ -46,6 +48,20 @@ export class UserService {
     const _auth : any = await localStorage.getItem('user')
     const auth = JSON.parse(_auth)
     return auth
+  }
+
+  async logout () {
+    const loader = await this.loadingCtrl.create({
+      message: "Logging out",
+      spinner: 'bubbles',
+      backdropDismiss: false
+    })
+    await loader.present();
+    localStorage.clear()
+
+    await loader.dismiss();
+
+    this.router.navigate(['/signin'])
   }
 
 }
