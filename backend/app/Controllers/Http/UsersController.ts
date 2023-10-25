@@ -4,6 +4,8 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import User from "App/Models/User";
 import UserProfile from "App/Models/UserProfile";
 import { schema, rules } from '@ioc:Adonis/Core/Validator';
+import { messages } from './ValidationController';
+import Database from '@ioc:Adonis/Lucid/Database';
 
 export default class UsersController {
     async register({request}){
@@ -25,27 +27,28 @@ export default class UsersController {
         return user;
     }
 
-    async addUser({request}){
-        const newUserSchema = schema.create({
-            name: schema.string({}, [
-                rules.maxLength(100)
-            ]),
-            email: schema.string({}, [
-                rules.email(),
-                rules.maxLength(100),
-                rules.unique({table: 'users', column: 'email'})
-            ]),
-            contactNumber: schema.string({}, [
-                rules.maxLength(11),
-                rules.minLength(11)
-            ]),
-            password: schema.string({}, [
-                rules.email(),
-                rules.minLength(8)
-            ])
+    async addUser({request, response}){
+        return await Database.transaction(async (trx)=>{
+            const user = await User.create({
+                email: request.input('email'),
+                password: await Hash.make(request.input('password'))
+            })
+            user.useTransaction(trx)
+            await user.related('userProfile').create({
+                name: request.input('name'),
+                contactNumber: request.input('contactNumber')
+            })
+            user.useTransaction(trx)
+            return request
         })
+    }
 
-        const payload = await request.validate({ schema: newUserSchema })
+    async emailInUsed({request, response}){
+        const user = await User.findBy('email', request.params('email').email)
+        if(!user){
+            return response.notFound()
+        }
+        return user;
     }
 
 }

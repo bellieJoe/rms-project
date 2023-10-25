@@ -30,6 +30,7 @@ Route.group(()=>{
     Route.get('register', 'UsersController.register'); 
     Route.post('signin', 'UsersController.signin'); 
     Route.post('add-user', 'UsersController.addUser'); 
+    Route.get('email-inused/:email', 'UsersController.emailInUsed'); 
   }).prefix('/users')
 
 }).prefix('/api')

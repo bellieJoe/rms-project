@@ -4,6 +4,8 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './error-handler.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { AddUserData } from '../interfaces/form-inputs'
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -22,12 +24,6 @@ export class UserService {
     private loadingCtrl : LoadingController
   ) { }
 
-  // async login(data : any) : Promise<any> {
-  //   const res = await axios.post(`${environment.apiUrl}/users/signin`, data)
-  //   .then(res => res)
-  //   .catch(err => err.response)
-  //   return res;
-  // }
   isAuth() : boolean {
     const user = localStorage.getItem('user')
     return user ? true : false;
@@ -63,6 +59,36 @@ export class UserService {
 
     this.router.navigate(['/signin'])
   }
+
+  async addUser(data : AddUserData){
+    const res = await axios.post(`${environment.apiUrl}users/add-user`, data)
+    return res;
+  }
+
+  async emailInUsed(email:string){
+    const res = await axios.get(`${environment.apiUrl}users/email-inused/${email}`)
+    return res;
+  }
+
+  emailInUseValidator(control: AbstractControl): Promise<ValidationErrors | null> {
+    const email = control.value;
+    return new Promise((resolve) => {
+      axios.get(`${environment.apiUrl}users/email-inused/${email}`)
+      .then((res)=>{
+        if(res){
+          resolve({ emailInUse: true });
+        }
+        else{
+          resolve(null);
+        }
+      })
+      .catch((err)=>{
+        resolve(null);
+      })
+    });
+  }
+
+  
 
 }
 
