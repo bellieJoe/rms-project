@@ -10,7 +10,13 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content [fullscreen]="true">
-    
+  <ion-content [fullscreen]="true" class="ion-padding">
+    <app-add-user-form></app-add-user-form>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button id="add-user-btn">
+        <ion-icon name="add" ></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </ion-content>
 </div>
