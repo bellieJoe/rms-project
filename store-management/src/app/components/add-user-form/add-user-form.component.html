@@ -1,5 +1,5 @@
 
-<ion-modal trigger="add-user-btn" [isOpen]="isOpen">
+<ion-modal trigger="add-user-btn" [isOpen]="isOpen" [initialBreakpoint]="1" [breakpoints]="[1]">
   <ng-template>
     <ion-header>
       <ion-toolbar>
@@ -10,7 +10,23 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      This is add user form
+      <form [formGroup]="addUserForm" >
+        <ion-item>
+          <ion-input labelPlacement="floating" label="Name" required formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" label="Email" required formControlName="email" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" label="Contact Number" required formControlName="contactNumber" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input labelPlacement="floating" label="Temporary Password" required formControlName="password" type="text"></ion-input>
+        </ion-item>
+        <ion-button block color="primary" type="submit" [disabled]="addUserForm.invalid">
+          Save User
+        </ion-button>
+      </form>
     </ion-content>
   </ng-template>
 </ion-modal>

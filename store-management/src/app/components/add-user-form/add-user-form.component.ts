@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { IonModal } from '@ionic/angular';
 
 @Component({
@@ -12,6 +13,13 @@ export class AddUserFormComponent  implements OnInit {
   constructor() { }
 
   isOpen : boolean = false;
+
+  addUserForm = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+    contactNumber: new FormControl(''),
+    password: new FormControl('')
+  })
   
   close() {
     this.modal.dismiss()
