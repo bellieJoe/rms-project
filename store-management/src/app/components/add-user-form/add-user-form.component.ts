@@ -24,6 +24,8 @@ export class AddUserFormComponent  implements OnInit {
   close() {
     this.modal.dismiss()
   }
+  
+  submitAddUser(){}
  
 
   ngOnInit() {}

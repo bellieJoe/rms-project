@@ -10,7 +10,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <form [formGroup]="addUserForm" >
+      <form [formGroup]="addUserForm" (ngSubmit)="submitAddUser()">
         <ion-item>
           <ion-input labelPlacement="floating" label="Name" required formControlName="name" type="text"></ion-input>
         </ion-item>
@@ -23,7 +23,7 @@
         <ion-item>
           <ion-input labelPlacement="floating" label="Temporary Password" required formControlName="password" type="text"></ion-input>
         </ion-item>
-        <ion-button block color="primary" type="submit" [disabled]="addUserForm.invalid">
+        <ion-button class="pt-2 d-block"  color="primary" type="submit" [disabled]="addUserForm.invalid">
           Save User
         </ion-button>
       </form>
