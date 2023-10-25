@@ -1,4 +1,4 @@
-<ion-menu  menuId="user-menu" contentId="user-content" color="primary">
+<ion-menu  menuId="user-menu" contentId="user-content" color="primary" swipeGesture="false" type="overlay">
   <ion-header [translucent]="true">
     <ion-toolbar color="primary">
       <ion-title class="font-weight-bold">User Management</ion-title>
@@ -9,10 +9,14 @@
   </ion-header>
   <ion-content color="primary">
     <ion-list class="p-0 m-0">
-      <ion-item color="primary" button *ngFor="let menu of menus" routerLink="{{ menu.route }}" lines="none" details="none">
-        <ion-icon  slot="start" name="{{ menu.icon }}"></ion-icon>
-        <ion-label >{{ menu.text }}</ion-label>
-      </ion-item >
+      <ng-container *ngFor="let menu of menus">
+        <ion-menu-toggle>
+          <ion-item color="primary" button  routerLink="{{ menu.route }}" lines="none" details="none" >
+            <ion-icon  slot="start" name="{{ menu.icon }}"></ion-icon>
+            <ion-label >{{ menu.text }}</ion-label>
+          </ion-item >
+        </ion-menu-toggle>
+      </ng-container>
     </ion-list>
   </ion-content>
 </ion-menu>
