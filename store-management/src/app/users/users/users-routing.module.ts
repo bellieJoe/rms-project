@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: UsersPage
+  },  {
+    path: 'view',
+    loadChildren: () => import('./view/view.module').then( m => m.ViewPageModule)
   }
+
 ];
 
 @NgModule({
