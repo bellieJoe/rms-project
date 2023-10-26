@@ -28,11 +28,12 @@ Route.group(()=>{
 
   Route.group(() => {
     Route.get('', 'UsersController.index'); 
+    Route.get('search-by-name', 'UsersController.searchByName'); 
     Route.get('register', 'UsersController.register'); 
     Route.post('signin', 'UsersController.signin'); 
     Route.post('add-user', 'UsersController.addUser'); 
     Route.get('email-inused/:email', 'UsersController.emailInUsed'); 
-    Route.get('test', 'UsersController.test'); 
+    Route.get('test', 'UsersController.index'); 
   }).prefix('/users')
 
 }).prefix('/api')

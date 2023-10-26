@@ -88,6 +88,16 @@ export class UserService {
     });
   }
 
+  async fetchUsers(page:number){
+    const res = await axios.get(`${environment.apiUrl}users/?page=${page}`)
+    return res;
+  }
+
+  async searchUserByName(keyword:number){
+    const res = await axios.get(`${environment.apiUrl}users/search-by-name?keyword=${keyword}`)
+    return res;
+  }
+
   
 
 }

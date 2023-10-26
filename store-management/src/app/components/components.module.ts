@@ -8,6 +8,7 @@ import { MenuLogoutComponent } from './menu-logout/menu-logout.component';
 import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import { InputErrMsgComponent } from './input-err-msg/input-err-msg.component';
 import { UserService } from '../services/user.service';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   
@@ -22,13 +23,15 @@ import { UserService } from '../services/user.service';
     MenuLogoutComponent, 
     UserMenuComponent, 
     AddUserFormComponent,
-    InputErrMsgComponent
+    InputErrMsgComponent,
+    UserListComponent
   ],
   exports: [
     MenuLogoutComponent, 
     UserMenuComponent, 
     AddUserFormComponent,
-    InputErrMsgComponent
+    InputErrMsgComponent,
+    UserListComponent
   ],
   providers: []
 })

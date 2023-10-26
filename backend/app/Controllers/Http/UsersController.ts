@@ -3,18 +3,26 @@
 import Hash from '@ioc:Adonis/Core/Hash'
 import User from "App/Models/User";
 import UserProfile from "App/Models/UserProfile";
-import { schema, rules } from '@ioc:Adonis/Core/Validator';
-import { messages } from './ValidationController';
+
 import Database from '@ioc:Adonis/Lucid/Database';
-import Mail from '@ioc:Adonis/Addons/Mail';
-import View from '@ioc:Adonis/Core/View';
 import MailController from './MailController';
 
 
 export default class UsersController {
 
     async index({request}){
+        const users = await User.query().preload('userProfile').paginate(request.input('page'), 20)
+        return users.all();
+    }
 
+    async searchByName({request}){
+        const usersProfileQuery = UserProfile.query()
+        const userProfiles = await usersProfileQuery.where('name', 'like', `%${request.input('keyword')}%`)
+        const userIds =  userProfiles.map((userProfile : UserProfile) => {
+            return userProfile.userId
+        })
+        const users = await User.query().whereIn('id', userIds).preload('userProfile')
+        return users;
     }
 
     async register({request}){
@@ -49,14 +57,13 @@ export default class UsersController {
             })
             await user.load('userProfile')
             user.useTransaction(trx)
-            await MailController.sendEmail(
+            MailController.sendEmail(
                 'emails/welcome', 
                 {
                     name: user.userProfile.name,
                 },
                 user.email
             )
-            user.useTransaction(trx)
         })
     }
 

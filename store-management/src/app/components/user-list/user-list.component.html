@@ -1,0 +1,13 @@
+<ion-list>
+  <ng-container *ngFor="let user of users">
+    <ion-item>
+      <ion-label>
+        <ion-label color="primary">{{user.userProfile.name}}</ion-label>
+        {{user.email}}
+      </ion-label>
+    </ion-item>
+  </ng-container>
+</ion-list>
+<ion-text color="medium"*ngIf="users.length <= 0">
+  <p class="text-center py-2">No Users found</p>
+</ion-text>
