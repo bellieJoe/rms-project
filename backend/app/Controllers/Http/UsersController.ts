@@ -6,8 +6,17 @@ import UserProfile from "App/Models/UserProfile";
 import { schema, rules } from '@ioc:Adonis/Core/Validator';
 import { messages } from './ValidationController';
 import Database from '@ioc:Adonis/Lucid/Database';
+import Mail from '@ioc:Adonis/Addons/Mail';
+import View from '@ioc:Adonis/Core/View';
+import MailController from './MailController';
+
 
 export default class UsersController {
+
+    async index({request}){
+
+    }
+
     async register({request}){
         return "sad";
         return UserProfile.all()
@@ -28,7 +37,7 @@ export default class UsersController {
     }
 
     async addUser({request, response}){
-        return await Database.transaction(async (trx)=>{
+        await Database.transaction(async (trx)=>{
             const user = await User.create({
                 email: request.input('email'),
                 password: await Hash.make(request.input('password'))
@@ -38,8 +47,16 @@ export default class UsersController {
                 name: request.input('name'),
                 contactNumber: request.input('contactNumber')
             })
+            await user.load('userProfile')
             user.useTransaction(trx)
-            return request
+            await MailController.sendEmail(
+                'emails/welcome', 
+                {
+                    name: user.userProfile.name,
+                },
+                user.email
+            )
+            user.useTransaction(trx)
         })
     }
 
@@ -50,5 +67,13 @@ export default class UsersController {
         }
         return user;
     }
+
+    async test({request}){
+        const user = await User.findBy('email', 'admin@email.com')
+        await user?.load('userProfile')
+        return user;
+    }
+
+    
 
 }

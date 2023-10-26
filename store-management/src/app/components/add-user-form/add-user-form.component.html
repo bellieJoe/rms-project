@@ -30,10 +30,11 @@
             <ion-item>
               <ion-input labelPlacement="floating" label="Contact Number" required formControlName="contactNumber" type="text"></ion-input>
             </ion-item>
+            <app-input-err-msg *ngIf="contactNumber?.hasError('required') && email?.touched">Contact Number is required</app-input-err-msg>
             <app-input-err-msg *ngIf="(contactNumber?.hasError('maxlength') || contactNumber?.hasError('minlength')) && contactNumber?.touched">Length must be 11 characters</app-input-err-msg>
 
             <ion-item>
-              <ion-input labelPlacement="floating" label="Temporary Password" required formControlName="password" type="text"></ion-input>
+              <ion-input labelPlacement="floating" label="Temporary Password" required formControlName="password" type="password"></ion-input>
             </ion-item>
             <app-input-err-msg *ngIf="password?.hasError('required') && password?.touched">Password is required</app-input-err-msg>
             <app-input-err-msg *ngIf="password?.hasError('minlength') && password?.touched">Length must be minimum if 8 characters</app-input-err-msg>

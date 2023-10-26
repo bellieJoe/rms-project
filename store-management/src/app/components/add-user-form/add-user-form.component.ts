@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { IonModal } from '@ionic/angular';
+import { AlertController, IonModal, LoadingController, ToastController } from '@ionic/angular';
 import { AddUserData } from 'src/app/interfaces/form-inputs';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,7 +15,11 @@ export class AddUserFormComponent  implements OnInit {
   
   constructor(
     private userService : UserService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private loadingCtrl : LoadingController,
+    private toastCtrl : ToastController,
+    private alertCtrl : AlertController,
+    private errorHandler : ErrorHandlerService
   ) { }
 
   addUserForm = this.fb.group({
@@ -44,15 +49,32 @@ export class AddUserFormComponent  implements OnInit {
       contactNumber: this.addUserForm.value.contactNumber!,
     }
 
+    const loader = await this.loadingCtrl.create({
+      message: "Creating new User",
+      spinner: 'lines',
+      backdropDismiss: false
+    })
+    const toast = await this.toastCtrl.create({
+      message: "User created successfully",
+      icon: 'checkmark-circle',
+      duration: 1000
+    })
+
     try {
+      await loader.present()
       const res = await this.userService.addUser(data);
       console.log(res)
+      await this.close()
+      await loader.dismiss()
+      await toast.present()
     } catch (error) {
-      console.log(error)
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
     }
   }
 
-  close() {
+  async close() {
+    await this.addUserForm.reset()
     this.modal.dismiss()
   }
  
