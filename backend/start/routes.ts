@@ -36,4 +36,13 @@ Route.group(()=>{
     Route.get('test', 'UsersController.index'); 
   }).prefix('/users')
 
+  Route.group(()=>{
+    
+  }).prefix('/products')
+
+  Route.group(()=>{
+    Route.post('', 'ProductCategoriesController.store')
+    Route.get('', 'ProductCategoriesController.index')
+  }).prefix('/product-categories')
+
 }).prefix('/api')

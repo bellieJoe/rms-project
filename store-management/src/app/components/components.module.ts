@@ -9,6 +9,8 @@ import { AddUserFormComponent } from './add-user-form/add-user-form.component';
 import { InputErrMsgComponent } from './input-err-msg/input-err-msg.component';
 import { UserService } from '../services/user.service';
 import { UserListComponent } from './user-list/user-list.component';
+import { GridWrapperComponent } from './grid-wrapper/grid-wrapper.component';
+import { ProductsMenuComponent } from './products-menu/products-menu.component';
 
 @NgModule({
   
@@ -24,14 +26,18 @@ import { UserListComponent } from './user-list/user-list.component';
     UserMenuComponent, 
     AddUserFormComponent,
     InputErrMsgComponent,
-    UserListComponent
+    UserListComponent,
+    GridWrapperComponent,
+    ProductsMenuComponent
   ],
   exports: [
     MenuLogoutComponent, 
     UserMenuComponent, 
     AddUserFormComponent,
     InputErrMsgComponent,
-    UserListComponent
+    UserListComponent,
+    GridWrapperComponent,
+    ProductsMenuComponent
   ],
   providers: []
 })

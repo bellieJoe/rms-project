@@ -11,40 +11,42 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" class="ion-padding">
-  <ion-item lines="none">
-    <ion-label color="primary"><h1 class="mb-0">{{user.userProfile.name}}</h1></ion-label>
-  </ion-item>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Information</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none">
-        <ion-label >
-          <ion-label color="primary">Email</ion-label>
-          <ion-label>{{user.email}}</ion-label>
-        </ion-label>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-label >
-          <ion-label color="primary">Contact Number</ion-label>
-          <ion-label>{{user.userProfile.contact_number}}</ion-label>
-        </ion-label>
-      </ion-item>
-    </ion-card-content>
-  </ion-card>
-  
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Actions</ion-label>
-    </ion-list-header>
-    <ion-item button>
-      <ion-icon slot="start" name="hammer"></ion-icon>
-      <ion-label>Set Capabilities</ion-label>
+  <app-grid-wrapper>
+    <ion-item lines="none">
+      <ion-label color="primary"><h1 class="mb-0">{{user.userProfile.name}}</h1></ion-label>
     </ion-item>
-    <ion-item button>
-      <ion-icon slot="start" name="warning" color="danger"></ion-icon>
-      <ion-label color="danger">Deactivate</ion-label>
-    </ion-item>
-  </ion-list>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Information</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-label >
+            <ion-label color="primary">Email</ion-label>
+            <ion-label>{{user.email}}</ion-label>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label >
+            <ion-label color="primary">Contact Number</ion-label>
+            <ion-label>{{user.userProfile.contact_number}}</ion-label>
+          </ion-label>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Actions</ion-label>
+      </ion-list-header>
+      <ion-item button>
+        <ion-icon slot="start" name="hammer"></ion-icon>
+        <ion-label>Set Capabilities</ion-label>
+      </ion-item>
+      <ion-item button>
+        <ion-icon slot="start" name="warning" color="danger"></ion-icon>
+        <ion-label color="danger">Deactivate</ion-label>
+      </ion-item>
+    </ion-list>
+  </app-grid-wrapper>
 </ion-content>

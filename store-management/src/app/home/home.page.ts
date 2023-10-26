@@ -23,19 +23,19 @@ export class HomePage {
       title: "Products",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: 'products'
+      route: '/products'
     },
     {
       title: "Inventory",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: 'inventory'
+      route: '/inventory'
     },
     {
       title: "Payroll",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: 'payroll'
+      route: '/payroll'
     },
 
   ]

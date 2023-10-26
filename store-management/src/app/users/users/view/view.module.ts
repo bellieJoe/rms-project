@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ViewPageRoutingModule } from './view-routing.module';
 
 import { ViewPage } from './view.page';
+import { ComponentsModule } from 'src/app/components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ViewPageRoutingModule
+    ViewPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [ViewPage]
 })

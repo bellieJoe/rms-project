@@ -4,3 +4,8 @@ export interface AddUserData{
     email: string
     password: string
 }
+
+export interface AddProductCategoryData{
+    name: string
+    description: string
+}

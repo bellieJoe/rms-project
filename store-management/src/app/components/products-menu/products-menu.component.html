@@ -1,7 +1,7 @@
-<ion-menu  menuId="user-menu" contentId="user-content" color="primary" swipeGesture="false">
+<ion-menu  menuId="products-menu" contentId="user-content" color="primary" swipeGesture="false" >
   <ion-header [translucent]="true">
     <ion-toolbar color="primary">
-      <ion-title class="font-weight-bold">User Management</ion-title>
+      <ion-title class="font-weight-bold">Product Management</ion-title>
       <ion-button slot="end" fill="clear">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
@@ -10,7 +10,7 @@
   <ion-content color="primary">
     <ion-list class="p-0 m-0">
       <ng-container *ngFor="let menu of menus">
-        <ion-menu-toggle menu="user-menu">
+        <ion-menu-toggle menu="products-menu">
           <ion-item color="primary" button  routerLink="{{ menu.route }}" lines="none" details="none" >
             <ion-icon  slot="start" name="{{ menu.icon }}"></ion-icon>
             <ion-label >{{ menu.text }}</ion-label>
