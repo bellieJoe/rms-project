@@ -29,4 +29,9 @@ export class ProductCategoryService {
     const res = await axios.get(`${environment.apiUrl}product-categories/?page=${page}`)
     return res;
   }
+
+  async searchCategoryByName(keyword:number){
+    const res = await axios.get(`${environment.apiUrl}product-categories/search-by-name?keyword=${keyword}`)
+    return res;
+  }
 }

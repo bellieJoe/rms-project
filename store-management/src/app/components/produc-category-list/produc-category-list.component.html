@@ -1,0 +1,15 @@
+<ion-list>
+  <!-- <ion-list-header>
+    <ion-label>Category Masterlist</ion-label>
+  </ion-list-header> -->
+  <ng-container *ngFor="let category of categories">
+    <ion-item button (click)="categoryClick(category)">
+      <ion-label>
+        {{category.name}}
+      </ion-label>
+    </ion-item>
+  </ng-container>
+</ion-list>
+<ion-text color="medium"*ngIf="categories.length <= 0">
+  <p class="text-center py-2">No Categories found</p>
+</ion-text>

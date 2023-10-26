@@ -11,6 +11,7 @@ import { UserService } from '../services/user.service';
 import { UserListComponent } from './user-list/user-list.component';
 import { GridWrapperComponent } from './grid-wrapper/grid-wrapper.component';
 import { ProductsMenuComponent } from './products-menu/products-menu.component';
+import { ProducCategoryListComponent } from './produc-category-list/produc-category-list.component';
 
 @NgModule({
   
@@ -28,7 +29,8 @@ import { ProductsMenuComponent } from './products-menu/products-menu.component';
     InputErrMsgComponent,
     UserListComponent,
     GridWrapperComponent,
-    ProductsMenuComponent
+    ProductsMenuComponent,
+    ProducCategoryListComponent
   ],
   exports: [
     MenuLogoutComponent, 
@@ -37,7 +39,8 @@ import { ProductsMenuComponent } from './products-menu/products-menu.component';
     InputErrMsgComponent,
     UserListComponent,
     GridWrapperComponent,
-    ProductsMenuComponent
+    ProductsMenuComponent,
+    ProducCategoryListComponent
   ],
   providers: []
 })

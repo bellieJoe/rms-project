@@ -7,7 +7,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
+
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullFactor="0.8" pullMin="60" pullMax="120" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-grid-wrapper>
+    <ion-searchbar (ionClear)="fetchCategories()"   (ionChange)="searchCategoryByName($event)" placeholder="Searh Category" inputmode="decimal" type="decimal"  [debounce]="250" showCancelButton="always"></ion-searchbar>
+    <app-produc-category-list [(categories)]="categories"></app-produc-category-list>
+  </app-grid-wrapper>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="create" >
