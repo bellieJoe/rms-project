@@ -11,7 +11,12 @@ export default class ProductCategoriesController {
     }
 
     async index({request}){
-        const categories = await ProductCategory.query().paginate(request.params('page'), 20)
+        const categories = await ProductCategory.query().paginate(request.input('page'), 20)
         return categories.all();
+    }
+
+    async searchByName({request}){
+        const categories = await ProductCategory.query().where('name', 'like', `%${request.input('keyword')}%`)
+        return categories;
     }
 }
