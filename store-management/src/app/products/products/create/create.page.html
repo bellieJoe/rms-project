@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create Products</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="addProductForm" (ngSubmit)="submitAddProduct()">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Category Name</ion-label>
+            <ion-input legacy="true"  placeHolder="Enter Name" label=""  required formControlName="name" type="text"></ion-input>
+          </ion-item>
+          <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Category Name is required</app-input-err-msg>
+          <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Max Length is 1000 characters</app-input-err-msg>
+
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea legacy="true" counter maxlength="5000" label="Description" labelPlacement="floating" formControlName="description" placeholder="Enter text"></ion-textarea>
+          </ion-item>
+          <app-input-err-msg *ngIf="description?.hasError('required') && description?.touched">Description is required</app-input-err-msg>
+          <app-input-err-msg *ngIf="description?.hasError('maxlength') && description?.touched">Max Length is 5000 characters</app-input-err-msg>
+
+          <ion-input label="Image" labelPlacement="floating" required formControlName="image" type="file"></ion-input>
+
+          <ng-select required 
+                  [items]="ages"
+                  [selectOnTab]="true"
+                  bindValue="value"
+                  labelForId="age"
+                  placeholder="Select age"
+                  formControlName="age">
+          </ng-select>
+          
+
+          <ion-button class="pt-2" expand="block" color="primary" type="submit" [disabled]="addProductForm.invalid">
+            Save Product
+          </ion-button>
+        </form>
+      </div>
+    </div>
+    <!-- <ion-card>
+      <ion-card-content> --> 
+      <!-- </ion-card-content>
+    </ion-card> -->
+
+  </app-grid-wrapper>
+  
+</ion-content>

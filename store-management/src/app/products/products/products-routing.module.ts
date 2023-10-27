@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: ProductsPage
+  },  {
+    path: 'create',
+    loadChildren: () => import('./create/create.module').then( m => m.CreatePageModule)
   }
+
 ];
 
 @NgModule({
