@@ -69,7 +69,11 @@ export class ProductCategoryPage implements OnInit {
     }
   }
 
-  async ngOnInit() {
+  ngOnInit(){
+
+  }
+
+  async ionViewDidEnter() {
     const loader = await this.loadingCtrl.create({
       message: 'Loading',
       backdropDismiss: false,

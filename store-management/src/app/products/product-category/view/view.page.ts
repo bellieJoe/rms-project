@@ -16,6 +16,14 @@ export class ViewPage implements OnInit {
   navState : any;
   category : any;
 
+  async edit(){
+    this.router.navigate(['/product-category/edit'], {
+      state: {
+        category: this.category
+      }
+    })
+  }
+
   ngOnInit() {
     if(!this.router.getCurrentNavigation()?.extras.state ){
       location.href = "/";

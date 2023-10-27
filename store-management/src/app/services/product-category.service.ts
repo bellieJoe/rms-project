@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './error-handler.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { AddProductCategoryData, AddUserData } from '../interfaces/form-inputs'
+import { AddProductCategoryData, AddUserData, UpdateProductCategoryData } from '../interfaces/form-inputs'
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 axios.defaults.withCredentials = true;
@@ -22,6 +22,11 @@ export class ProductCategoryService {
 
   async addProductCategory(data: AddProductCategoryData){
     const res = await axios.post(`${environment.apiUrl}product-categories`, data)
+    return res;
+  }
+
+  async updateProductCategory(data: UpdateProductCategoryData){
+    const res = await axios.put(`${environment.apiUrl}product-categories/update/${data.id}`, data)
     return res;
   }
 

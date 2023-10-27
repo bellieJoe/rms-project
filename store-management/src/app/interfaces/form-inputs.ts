@@ -9,3 +9,9 @@ export interface AddProductCategoryData{
     name: string
     description: string
 }
+
+export interface UpdateProductCategoryData{
+    id: number
+    name: string
+    description: string
+}
