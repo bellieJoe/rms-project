@@ -19,4 +19,9 @@ export default class ProductCategoriesController {
         const categories = await ProductCategory.query().where('name', 'like', `%${request.input('keyword')}%`)
         return categories;
     }
+
+    async active({request}){
+        const categories = await ProductCategory.query().where('is_archived', 0)
+        return categories;
+    }
 }

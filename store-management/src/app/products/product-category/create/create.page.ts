@@ -23,7 +23,8 @@ export class CreatePage implements OnInit {
 
   addCategoryForm = this.fb.group({
     name: ['', [Validators.maxLength(1000), Validators.required]],
-    description: ['', [Validators.maxLength(5000), Validators.required]]
+    description: ['', [Validators.maxLength(5000), Validators.required]],
+   
   })
 
   get name () {

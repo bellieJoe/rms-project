@@ -39,4 +39,9 @@ export class ProductCategoryService {
     const res = await axios.get(`${environment.apiUrl}product-categories/search-by-name?keyword=${keyword}`)
     return res;
   }
+
+  async active(){
+    const res = await axios.get(`${environment.apiUrl}product-categories/active`)
+    return res;
+  }
 }

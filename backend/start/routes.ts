@@ -44,6 +44,7 @@ Route.group(()=>{
     Route.post('', 'ProductCategoriesController.store')
     Route.get('', 'ProductCategoriesController.index')
     Route.get('search-by-name', 'ProductCategoriesController.searchByName')
+    Route.get('active', 'ProductCategoriesController.active')
   }).prefix('/product-categories')
 
 }).prefix('/api')

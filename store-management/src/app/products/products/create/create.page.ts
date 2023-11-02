@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
+import { Observable, Subject, concat } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ProductCategoryService } from 'src/app/services/product-category.service';
 
@@ -21,11 +22,13 @@ export class CreatePage implements OnInit {
     private router : Router
   ) { }
 
+  categories! : any
+
   addProductForm = this.fb.group({
     name: ['', [Validators.maxLength(1000), Validators.required]],
     description: ['', [Validators.maxLength(5000), Validators.required]],
     image: [''],
-    product_category: [''],
+    product_category: [undefined],
     age: [undefined]
   })
 
@@ -39,22 +42,23 @@ export class CreatePage implements OnInit {
   async submitAddProduct(){
 
   }
-  ngOnInit() {
+
+  async loadProductCategories(){
+    try {
+      const res =  await this.productCategoryService.active()
+      console.log(res.data)
+      return res.data;
+      
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
+    
   }
 
-  selectedCar: any;
+  async ngOnInit() {
+    this.categories = await this.loadProductCategories()
+  }
 
-    cars = [
-        { id: 1, name: 'Volvo' },
-        { id: 2, name: 'Saab' },
-        { id: 3, name: 'Opel' },
-        { id: 4, name: 'Audi' },
-    ];
 
-    ages: any[] = [
-      { value: '<18', label: 'Under 18' },
-      { value: '18', label: '18' },
-      { value: '>18', label: 'More than 18' },
-  ];
 
 }

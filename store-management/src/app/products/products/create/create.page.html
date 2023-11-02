@@ -28,15 +28,12 @@
   
           <ion-input label="Image" labelPlacement="floating" required formControlName="image" type="file"></ion-input>
   
-          <ng-select required 
-                  class="custom"
-                  [items]="ages"
-                  [selectOnTab]="true"
-                  bindValue="value"
-                  labelForId="age"
-                  placeholder="Select age"
-                  formControlName="age">
-          </ng-select>
+          <ion-item class="ion-no-padding">
+            <ion-label>Product Category</ion-label>
+            <ion-select legacy="true"  placeholder="Select Category">
+                <ion-select-option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
           
   
           <ion-button class="pt-2" expand="block" color="primary" type="submit" [disabled]="addProductForm.invalid">
