@@ -13,7 +13,7 @@
       <ion-card-content> 
         <form [formGroup]="addProductForm" (ngSubmit)="submitAddProduct()">
           <ion-item class="ion-no-padding">
-            <ion-label position="floating" id="category_label"> Category Name</ion-label>
+            <ion-label position="floating" id="category_label"> Product Name</ion-label>
             <ion-input legacy="true"  placeHolder="Enter Name" label=""  required formControlName="name" type="text"></ion-input>
           </ion-item>
           <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Category Name is required</app-input-err-msg>
@@ -25,15 +25,14 @@
           </ion-item>
           <app-input-err-msg *ngIf="description?.hasError('required') && description?.touched">Description is required</app-input-err-msg>
           <app-input-err-msg *ngIf="description?.hasError('maxlength') && description?.touched">Max Length is 5000 characters</app-input-err-msg>
-  
-          <ion-input label="Image" labelPlacement="floating" required formControlName="image" type="file"></ion-input>
-  
+
           <ion-item class="ion-no-padding">
             <ion-label>Product Category</ion-label>
-            <ion-select legacy="true"  placeholder="Select Category">
+            <ion-select legacy="true"  placeholder="Select Category" formControlName="product_category">
                 <ion-select-option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</ion-select-option>
             </ion-select>
           </ion-item>
+          <app-input-err-msg *ngIf="product_category?.hasError('required') && product_category?.touched">Category is required</app-input-err-msg>
           
   
           <ion-button class="pt-2" expand="block" color="primary" type="submit" [disabled]="addProductForm.invalid">

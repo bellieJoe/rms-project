@@ -15,3 +15,9 @@ export interface UpdateProductCategoryData{
     name: string
     description: string
 }
+
+export interface AddProductItemData{
+    name: string
+    description: string
+    product_category: number
+}

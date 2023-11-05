@@ -5,6 +5,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { Observable, Subject, concat } from 'rxjs';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ProductCategoryService } from 'src/app/services/product-category.service';
+import { ProductItemService } from 'src/app/services/product-item.service';
 
 @Component({
   selector: 'app-create',
@@ -19,7 +20,8 @@ export class CreatePage implements OnInit {
     private errorHandler : ErrorHandlerService,
     private loadingCtrl : LoadingController,
     private toastCtrl : ToastController,
-    private router : Router
+    private router : Router,
+    private productItemService : ProductItemService
   ) { }
 
   categories! : any
@@ -27,9 +29,7 @@ export class CreatePage implements OnInit {
   addProductForm = this.fb.group({
     name: ['', [Validators.maxLength(1000), Validators.required]],
     description: ['', [Validators.maxLength(5000), Validators.required]],
-    image: [''],
-    product_category: [undefined],
-    age: [undefined]
+    product_category: [undefined, [Validators.required]]
   })
 
   get name () {
@@ -38,8 +38,40 @@ export class CreatePage implements OnInit {
   get description () {
     return this.addProductForm.get('description')
   }
+  get product_category () {
+    return this.addProductForm.get('product_category')
+  }
 
   async submitAddProduct(){
+    const loader = await this.loadingCtrl.create({
+      message: 'Saving Product',
+      backdropDismiss: false,
+      spinner: 'lines'
+    })
+    const toast = await this.toastCtrl.create({
+      message: "Product created successfully",
+      icon: 'checkmark-circle',
+      duration: 2000
+    })
+    try {
+      await loader.present()
+      const res = await this.productItemService.addProductItem({
+        name: this.addProductForm.value.name!,
+        description: this.addProductForm.value.description!,
+        product_category: this.addProductForm.value.product_category!
+      })
+      await this.router.navigate(['/products/change-image'], {
+        state: {
+          product: res.data
+        }
+      })
+      toast.present()
+      await loader.dismiss()
+    } catch (error) {
+      await loader.dismiss()
+      console.log(error)
+      this.errorHandler.handleError(error)
+    }
 
   }
 

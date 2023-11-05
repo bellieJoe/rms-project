@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductItemService } from 'src/app/services/product-item.service';
 
 @Component({
   selector: 'app-products',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private productItemService : ProductItemService
+  ) { }
 
-  ngOnInit() {
+  image! : string;
+
+  async ngOnInit() {
+    try {
+      const res = await this.productItemService.imageReader()
+      this.image = res.data
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
 }
