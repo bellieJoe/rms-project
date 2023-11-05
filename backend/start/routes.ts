@@ -39,7 +39,7 @@ Route.group(()=>{
   Route.group(()=>{
     Route.post('', 'ProductItemsController.store');
     Route.post('upload-image', 'ProductItemsController.uploadImage');
-    Route.get('read', 'ProductItemsController.read');
+    Route.get('read-image', 'ProductItemsController.readImage');
   }).prefix('/products')
 
   Route.group(()=>{

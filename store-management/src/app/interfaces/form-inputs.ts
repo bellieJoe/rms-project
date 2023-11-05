@@ -21,3 +21,8 @@ export interface AddProductItemData{
     description: string
     product_category: number
 }
+
+export interface ImageUploadData{
+    id: number
+    image: string
+}

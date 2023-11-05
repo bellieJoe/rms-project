@@ -1,3 +1,91 @@
-<p>
-  image-cropper works!
-</p>
+
+<app-grid-wrapper>
+  
+  <div >
+    <ion-button (click)="uploadImage()"  expand="block" *ngIf="croppedImage"   color="tertiary">
+      <ion-icon slot="start" name="cloud-upload"></ion-icon>
+      Upload Image
+    </ion-button>
+    <br>
+
+    <!-- Hidden input -->
+    <input #_fileInput type="file" (change)="cropper.selectInputEvent($event)" accept="image/*" hidden>
+    <!-- <button raised ly-button bg="accent" *ngIf="croppedImage">Upload</button> -->
+  </div>
+
+  <ion-card *ngIf="ready" class="m-1 mb-3">
+    <ion-card-content>
+      <ion-row >
+        <ion-col>
+          <ion-button (click)="cropper.zoomIn()" fill="clear">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cropper.zoomOut()" fill="clear">
+            <ion-icon slot="icon-only" name="remove"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cropper.rotate(-90)" fill="clear">
+            <ion-icon slot="icon-only" name="sync"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cropper.fit()" fill="clear">Fit</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cropper.fitToScreen()" fill="clear">Fit to screen</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cropper.setScale(1)" fill="clear">1:1</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="cropper.clean()" fill="clear">Clean</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+
+  
+
+  <ly-img-cropper 
+  class="m-1"
+    [withClass]="classes.cropper"
+    [config]="myConfig"
+    [(scale)]="scale"
+    (minScale)="minScale = $event"
+    (ready)="ready = true"
+    (cleaned)="ready = false"
+    (cropped)="onCropped($event)"
+    (loaded)="onLoaded($event)"
+    (error)="onError($event)"
+  >
+    <ion-button  expand="block" fill="clear" color="medium">
+      <ion-icon slot="start"  name="folder"></ion-icon> Select a File
+    </ion-button>
+  </ly-img-cropper>
+
+  <div *ngIf="ready" >
+    <ly-slider
+      class="d-block mx-auto w-100"
+      [thumbVisible]="false"
+      [min]="minScale"
+      [max]="1"
+      [(ngModel)]="scale"
+      (input)="onSliderInput($event)"
+      [step]="0.000001"></ly-slider>
+  </div>
+  
+  <ion-button *ngIf="ready" (click)="cropper.crop()" expand="block" color="primary">
+    <ion-icon slot="icon-only" name="crop"></ion-icon>
+    Crop
+  </ion-button>
+
+  <div *ngIf="croppedImage">
+    <div >
+      <img [src]="croppedImage" class="mx-auto d-block">
+    </div>
+  </div>
+
+</app-grid-wrapper>

@@ -25,16 +25,20 @@ export default class ProductItemsController {
         }
     
         // Move the uploaded file to a desired location
-        await image.move(Application.tmpPath('uploads/new.png'), {
+        await image.move(Application.tmpPath(`uploads/product-item-image/${request.input('id')}`), {
             overwrite: true,
             visibility: 'public',
             contentType: 'image/png'
         });
+
+        const productItem = await ProductItem.find(request.input('id'))
+        productItem!.image = `product-item-image/${request.input('id')}/blob`
+        productItem?.save()
     
         return response.status(200).json({ message: 'Image uploaded successfully' });
     }
 
-    async read(){
+    async readImage(){
         const contents = await Drive.get('new.png/blob')
         return contents.toString()
     }

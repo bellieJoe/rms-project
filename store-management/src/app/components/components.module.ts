@@ -12,6 +12,10 @@ import { UserListComponent } from './user-list/user-list.component';
 import { GridWrapperComponent } from './grid-wrapper/grid-wrapper.component';
 import { ProductsMenuComponent } from './products-menu/products-menu.component';
 import { ProducCategoryListComponent } from './produc-category-list/produc-category-list.component';
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
+import { LyImageCropperModule } from '@alyle/ui/image-cropper';
+import { LySliderModule } from '@alyle/ui/slider';
+import { LyButtonModule } from '@alyle/ui/button';
 
 @NgModule({
   
@@ -20,7 +24,10 @@ import { ProducCategoryListComponent } from './produc-category-list/produc-categ
     IonicModule,
     FormsModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LyImageCropperModule,
+    LySliderModule,
+    LyButtonModule,
   ],
   declarations: [
     MenuLogoutComponent, 
@@ -30,7 +37,8 @@ import { ProducCategoryListComponent } from './produc-category-list/produc-categ
     UserListComponent,
     GridWrapperComponent,
     ProductsMenuComponent,
-    ProducCategoryListComponent
+    ProducCategoryListComponent,
+    ImageCropperComponent
   ],
   exports: [
     MenuLogoutComponent, 
@@ -40,7 +48,8 @@ import { ProducCategoryListComponent } from './produc-category-list/produc-categ
     UserListComponent,
     GridWrapperComponent,
     ProductsMenuComponent,
-    ProducCategoryListComponent
+    ProducCategoryListComponent,
+    ImageCropperComponent
   ],
   providers: []
 })

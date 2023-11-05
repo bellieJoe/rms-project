@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { AddProductItemData } from '../interfaces/form-inputs';
+import { AddProductItemData, ImageUploadData } from '../interfaces/form-inputs';
 import { Buffer } from 'buffer';
 
 axios.defaults.withCredentials = true;
@@ -22,10 +22,11 @@ export class ProductItemService {
     return res;
   }
 
-  async uploadImage(data: any){
+  async uploadImage(data: ImageUploadData){
     const newData = Buffer.from(data.image)
     const res = await axios.post(`${environment.apiUrl}products/upload-image`, {
-      image: newData
+      image: newData,
+      id: data.id
     }, {
       headers: {
         'Content-Type': 'multipart/form-data',
