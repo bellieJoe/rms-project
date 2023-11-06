@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.integer("product_item_id").unsigned().notNullable()
       table.string("name", 1000).notNullable()
+      table.string('image', 1000).notNullable()
       table.double("price").notNullable()
       table.string("description").notNullable()
       table.boolean("is_archived").notNullable().defaultTo(false)
