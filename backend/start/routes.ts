@@ -38,6 +38,8 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.post('', 'ProductItemsController.store');
+    Route.get('active', 'ProductItemsController.active');
+    Route.get('search-by-name', 'ProductItemsController.searchByName');
     Route.post('upload-image', 'ProductItemsController.uploadImage');
     Route.get('read-image', 'ProductItemsController.readImage');
   }).prefix('/products')

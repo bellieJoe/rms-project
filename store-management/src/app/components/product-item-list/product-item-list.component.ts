@@ -16,11 +16,11 @@ export class ProductItemListComponent  implements OnInit {
   @Output() productsChange: EventEmitter<any> = new EventEmitter<any>();
 
   async productClick(product : any){
-    // this.router.navigate(['/users/view'], {
-    //   state: {
-    //     user: user
-    //   }
-    // })
+    this.router.navigate(['/products/view'], {
+      state: {
+        product: product
+      }
+    })
   }
 
 

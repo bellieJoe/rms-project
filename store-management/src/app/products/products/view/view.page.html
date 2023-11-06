@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-card class="m-0 mb-3">
+      <div class="w-100" style="height: 200px !important; overflow-y: hidden;">
+        <ion-button class="m-2" fill="outline" style="position: absolute; top: 0;" color="secondary" (click)="updatePhoto()">
+          <ion-icon slot="start" name="camera"></ion-icon>
+          Update Photo
+        </ion-button>
+        <ion-img *ngIf="image" [src]="image" alt="Product Image" style="width: 100% !important; height: auto;"></ion-img>
+        <div *ngIf="!image">
+          <br><br><br><br>
+          <h4 class="text-center"><i class="fa-solid fa-ban"></i> No Photo</h4>
+        </div>
+      </div>
+      <ion-card-content>
+        <ion-title color="primary" class="p-0">{{ product.name }}</ion-title>
+        <p>{{ product.description }}</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Actions</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-icon slot="start" name="add"></ion-icon>
+        <ion-label>Add Variant</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        <ion-label>Edit Details</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="archive-outline" color="danger"></ion-icon>
+        <ion-label color="danger">Archive</ion-label>
+      </ion-item>
+    </ion-list>
+  </app-grid-wrapper>
+</ion-content>

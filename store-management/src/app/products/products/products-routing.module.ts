@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'change-image',
     loadChildren: () => import('./change-image/change-image.module').then( m => m.ChangeImagePageModule)
+  },
+  {
+    path: 'view',
+    loadChildren: () => import('./view/view.module').then( m => m.ViewPageModule)
   }
 
 ];

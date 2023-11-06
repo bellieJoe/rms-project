@@ -35,8 +35,8 @@ export class ProductItemService {
     return res;
   }
 
-  async imageReader(){
-    const res = await axios.get(`${environment.apiUrl}products/read`)
+  async imageReader(url : string){
+    const res = await axios.get(`${environment.apiUrl}products/read-image?url=${url}`)
     return res;
   }
 

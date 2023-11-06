@@ -38,8 +38,19 @@ export default class ProductItemsController {
         return response.status(200).json({ message: 'Image uploaded successfully' });
     }
 
-    async readImage(){
-        const contents = await Drive.get('new.png/blob')
+    async readImage({request}){
+        const url = request.input('url')
+        const contents = await Drive.get(url)
         return contents.toString()
+    }
+
+    async active({request}){
+        const products = await ProductItem.query().paginate(request.input('page'), 20)
+        return products.all();
+    }
+
+    async searchByName({request}){
+        const products = await ProductItem.query().where('name', 'like', `%${request.input('keyword')}%`)
+        return products;
     }
 }
