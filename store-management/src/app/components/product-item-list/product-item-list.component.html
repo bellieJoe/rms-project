@@ -1,0 +1,12 @@
+<ion-list>
+  <ng-container *ngFor="let product of products">
+    <ion-item button (click)="productClick(product)">
+      <ion-label>
+        {{product.name}}
+      </ion-label>
+    </ion-item>
+  </ng-container>
+</ion-list>
+<ion-text color="medium"*ngIf="products.length <= 0">
+  <p class="text-center py-2">No Products found</p>
+</ion-text>

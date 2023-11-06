@@ -39,4 +39,14 @@ export class ProductItemService {
     const res = await axios.get(`${environment.apiUrl}products/read`)
     return res;
   }
+
+  async fetchProducts(page:number){
+    const res = await axios.get(`${environment.apiUrl}products/active?page=${page}`)
+    return res;
+  }
+
+  async searchProductByName(keyword:number){
+    const res = await axios.get(`${environment.apiUrl}products/search-by-name?keyword=${keyword}`)
+    return res;
+  }
 }

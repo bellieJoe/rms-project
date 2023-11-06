@@ -8,10 +8,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  ok
+  
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullFactor="0.8" pullMin="60" pullMax="120" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <app-grid-wrapper>
-    <img [src]="image" alt="" width="400">
+    <ion-searchbar (ionClear)="fetchProducts()"   (ionChange)="searchProductByName($event)" placeholder="Seacrh Product Name" inputmode="decimal" type="decimal"  [debounce]="250" showCancelButton="always"></ion-searchbar>
+    <app-product-item-list [(products)]="products"></app-product-item-list>
   </app-grid-wrapper>
+
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/products/create"  >

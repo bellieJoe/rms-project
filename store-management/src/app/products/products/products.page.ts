@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ProductItemService } from 'src/app/services/product-item.service';
 
 @Component({
@@ -9,19 +11,76 @@ import { ProductItemService } from 'src/app/services/product-item.service';
 export class ProductsPage implements OnInit {
 
   constructor(
-    private productItemService : ProductItemService
+    private productItemService : ProductItemService,
+    private errorHandler : ErrorHandlerService,
+    private loadingCtrl : LoadingController
   ) { }
 
-  image! : string;
+
+  products : any = []
+  page : number = 1
+
+  async fetchProducts(){
+    if(this.page == 1){
+      this.products = []
+    }
+    try {
+      const _users = await this.productItemService.fetchProducts(this.page)
+      this.products = [...this.products, ..._users.data]
+      // console.log(this.products)
+      this.page++
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
+  }
+
+  async refresh(event : any){
+    this.page = 1
+    this.products = []
+    await this.fetchProducts()
+    event.target.complete()
+  }
+
+  async onIonInfinite(event : any){
+    await this.fetchProducts()
+    event.target.complete()
+  }
+
+  async searchProductByName(event: any){
+    if(!event.target.value){
+      return
+    }
+
+    const loader = await this.loadingCtrl.create({
+      message: 'Searching User',
+      backdropDismiss: false,
+      spinner: 'lines'
+    })
+
+    try {
+      await loader.present()
+      const _users = await this.productItemService.searchProductByName(event.target.value)
+      this.products = _users.data
+      this.page = 1
+      await loader.dismiss()
+    } catch (error) {
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
+    }
+  }
 
   async ngOnInit() {
-    try {
-      const res = await this.productItemService.imageReader()
-      this.image = res.data
-      console.log(res)
-    } catch (error) {
-      console.log(error)
-    }
+    const loader = await this.loadingCtrl.create({
+      message: 'Loading',
+      backdropDismiss: false,
+      spinner: 'lines'
+    })
+
+    await loader.present()
+    this.products = []
+    this.page = 1
+    await this.fetchProducts()
+    await loader.dismiss()
   }
 
 }
