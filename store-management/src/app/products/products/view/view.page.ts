@@ -18,6 +18,7 @@ export class ViewPage implements OnInit {
 
   product : any
   image : any
+  phase : number = 1
 
   async ngOnInit() {
     const navState = this.helperService.getRouterNavState()
@@ -30,6 +31,14 @@ export class ViewPage implements OnInit {
 
   async updatePhoto(){
     this.router.navigate(['/products/change-image'], {
+      state: {
+        product : this.product
+      }
+    })
+  }
+
+  async addVariant(){
+    this.router.navigate(['/products/add-variant'], {
       state: {
         product : this.product
       }

@@ -59,6 +59,7 @@ export class ProductsPage implements OnInit {
 
     try {
       await loader.present()
+      
       const _users = await this.productItemService.searchProductByName(event.target.value)
       this.products = _users.data
       this.page = 1
@@ -69,18 +70,24 @@ export class ProductsPage implements OnInit {
     }
   }
 
-  async ngOnInit() {
+  async ionViewDidEnter() {
     const loader = await this.loadingCtrl.create({
       message: 'Loading',
       backdropDismiss: false,
       spinner: 'lines'
     })
 
-    await loader.present()
+    if(this.products.length <= 0){
+      await loader.present()
+    }
     this.products = []
     this.page = 1
     await this.fetchProducts()
     await loader.dismiss()
+  }
+
+  async ngOnInit() {
+    
   }
 
 }

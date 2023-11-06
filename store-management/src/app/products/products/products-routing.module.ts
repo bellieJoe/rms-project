@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'view',
     loadChildren: () => import('./view/view.module').then( m => m.ViewPageModule)
+  },
+  {
+    path: 'add-variant',
+    loadChildren: () => import('./add-variant/add-variant.module').then( m => m.AddVariantPageModule)
   }
 
 ];

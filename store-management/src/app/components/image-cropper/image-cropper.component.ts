@@ -49,6 +49,7 @@ export class ImageCropperComponent  implements OnInit {
     private toastCtrl : ToastController
   ) { }
 
+  @Input() showUploadBtn : boolean | undefined | null;
   @Input() product : any;
   @Output() onUpload = new EventEmitter<any>()
 

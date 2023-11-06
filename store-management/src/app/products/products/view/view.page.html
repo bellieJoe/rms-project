@@ -21,17 +21,17 @@
           <h4 class="text-center"><i class="fa-solid fa-ban"></i> No Photo</h4>
         </div>
       </div>
-      <ion-card-content>
-        <ion-title color="primary" class="p-0">{{ product.name }}</ion-title>
-        <p>{{ product.description }}</p>
-      </ion-card-content>
+      <ion-card-header>
+        <ion-card-subtitle>{{ product.name }}</ion-card-subtitle>
+        <ion-card-title>{{ product.description }}</ion-card-title>
+      </ion-card-header>
     </ion-card>
 
     <ion-list>
       <ion-list-header>
         <ion-label>Actions</ion-label>
       </ion-list-header>
-      <ion-item>
+      <ion-item (click)="addVariant()">
         <ion-icon slot="start" name="add"></ion-icon>
         <ion-label>Add Variant</ion-label>
       </ion-item>

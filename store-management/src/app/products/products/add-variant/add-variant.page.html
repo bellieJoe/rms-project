@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Product Variant</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-card class="m-0">
+      <ion-card-content>
+        <form [formGroup]="addProductVariantForm" >
+          <input formControlName="product_item_id" type="hidden" >
+          <ng-container *ngIf="phase == 1">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> <ion-text color="danger">Name</ion-text></ion-label>
+              <ion-input legacy="true" formControlName="name" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> <ion-text color="danger">Price</ion-text></ion-label>
+              <ion-input legacy="true" formControlName="price" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> <ion-text color="danger">Description</ion-text></ion-label>
+              <ion-input legacy="true" formControlName="description" type="text"></ion-input>
+            </ion-item>
+            <br>
+            <ion-button  (click)="next()" expand="block" color="primary" fill="outline" [disabled]="name.invalid || description.invalid || price.invalid">
+              <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+              Next
+            </ion-button>
+          </ng-container>
+          
+          <ng-container *ngIf="phase ==2">
+            <app-image-cropper showUploadButton="false"></app-image-cropper>
+            <ion-button  (click)="back()" expand="block" color="primary" fill="outline" >
+              <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+              Back
+            </ion-button>
+  
+            <ion-button  expand="block" color="primary" type="submit" [disabled]="addProductVariantForm.invalid">
+              <ion-icon slot="start" name="save-outline"></ion-icon>
+              Save
+            </ion-button>
+          </ng-container>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </app-grid-wrapper>
+</ion-content>
