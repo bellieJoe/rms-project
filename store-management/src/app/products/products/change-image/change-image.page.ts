@@ -14,6 +14,7 @@ import { ImageCropperComponent } from 'src/app/components/image-cropper/image-cr
 })
 
 export class ChangeImagePage implements OnInit {
+
   
   navState : any;
   product : any;

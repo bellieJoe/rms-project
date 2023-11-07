@@ -49,9 +49,10 @@ export class ImageCropperComponent  implements OnInit {
     private toastCtrl : ToastController
   ) { }
 
-  @Input() showUploadBtn : boolean | undefined | null;
+  @Input() showUploadBtn : string | undefined | null;
   @Input() product : any;
   @Output() onUpload = new EventEmitter<any>()
+  @Output() onImageCropped = new EventEmitter<any>()
 
   classes = this.sRenderer.renderSheet(STYLES);
   croppedImage?: string | null = null;
@@ -70,8 +71,8 @@ export class ImageCropperComponent  implements OnInit {
 
   onCropped(e: ImgCropperEvent) {
     this.croppedImage = e.dataURL;
-    console.log('cropped img: ', e);
-    
+    // console.log('cropped img: ', e);
+    this.onImageCropped.emit(this.croppedImage)
   }
   onLoaded(e: ImgCropperEvent) {
     console.log('img loaded', e);
