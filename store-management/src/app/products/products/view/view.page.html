@@ -27,6 +27,22 @@
       </ion-card-header>
     </ion-card>
 
+    <ion-list class="mb-3">
+      <ion-list-header>
+        <ion-label>Variants</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let variant of variants">
+        <ion-thumbnail slot="start">
+          <img [src]="variant.image" />
+        </ion-thumbnail>
+        <ion-label>
+          {{ variant.name }} <br>
+          {{ variant.price | currency : 'PHP' }}
+        </ion-label>
+      </ion-item>
+      <p *ngIf="variants.length <= 0" class="text-center opacity-75"><i class="fa-regular fa-face-frown-open"></i> No variants</p>
+    </ion-list>
+
     <ion-list>
       <ion-list-header>
         <ion-label>Actions</ion-label>

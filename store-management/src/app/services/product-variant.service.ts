@@ -32,4 +32,9 @@ export class ProductVariantService {
     })
     return res;
   }
+
+  async getVariantsByProductItemId(id:number){
+    const res = await axios.get(`${environment.apiUrl}product-variants/get-variants-by-product-item-id?product_item_id=${id}`)
+    return res
+  }
 }

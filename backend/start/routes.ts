@@ -19,6 +19,7 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
+import Drive from '@ioc:Adonis/Core/Drive'
 
 Route.get('/', async () => {
   return "Hello World";
@@ -55,5 +56,13 @@ Route.group(()=>{
     Route.get('search-by-name', 'ProductCategoriesController.searchByName')
     Route.get('active', 'ProductCategoriesController.active')
   }).prefix('/product-categories')
+
+  Route.group(()=>{
+    Route.get('read-by-url',  async ({request})=>{
+        const url = request.input('url')
+        const contents = await Drive.get(url)
+        return contents.toString()
+    })
+  }).prefix('/images')
 
 }).prefix('/api')
