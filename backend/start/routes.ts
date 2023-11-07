@@ -45,6 +45,10 @@ Route.group(()=>{
   }).prefix('/products')
 
   Route.group(()=>{
+    Route.post('', 'ProductVariantsController.store');
+  }).prefix('/product-variants')
+
+  Route.group(()=>{
     Route.post('', 'ProductCategoriesController.store')
     Route.get('', 'ProductCategoriesController.index')
     Route.get('search-by-name', 'ProductCategoriesController.searchByName')

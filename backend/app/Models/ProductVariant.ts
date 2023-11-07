@@ -16,6 +16,8 @@ export default class ProductVariant extends BaseModel {
   @column()
   description: string
   @column()
+  image: string
+  @column()
   isArchived: number
   @column()
   onlineAvailability: boolean
