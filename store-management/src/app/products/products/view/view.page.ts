@@ -41,6 +41,18 @@ export class ViewPage implements OnInit {
     if(this.variants.length > 0){
       await this.getVariants()
     }
+    if(this.product){
+      this.getProduct()
+    }
+  }
+
+  async getProduct(){
+    try {
+      const res = await this.productItemService.getById(this.product.id)
+      this.product = res.data
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
   }
 
   async getVariants(){
@@ -72,6 +84,14 @@ export class ViewPage implements OnInit {
     this.router.navigate(['/products/add-variant'], {
       state: {
         product : this.product
+      }
+    })
+  }
+
+  editProduct(){
+    this.router.navigate(['/products/edit'], {
+      state: {
+        product: this.product
       }
     })
   }

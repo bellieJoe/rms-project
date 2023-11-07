@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { AddProductItemData, ImageUploadData } from '../interfaces/form-inputs';
+import { AddProductItemData, ImageUploadData, UpdateProductItemData } from '../interfaces/form-inputs';
 import { Buffer } from 'buffer';
 
 axios.defaults.withCredentials = true;
@@ -47,6 +47,16 @@ export class ProductItemService {
 
   async searchProductByName(keyword:number){
     const res = await axios.get(`${environment.apiUrl}products/search-by-name?keyword=${keyword}`)
+    return res;
+  }
+
+  async updateProductItem(data : UpdateProductItemData){
+    const res = await axios.put(`${environment.apiUrl}products/update`, data)
+    return res;
+  }
+
+  async getById(id : number){
+    const res = await axios.get(`${environment.apiUrl}products/get-by-id?id=${id}`)
     return res;
   }
 }

@@ -53,4 +53,16 @@ export default class ProductItemsController {
         const products = await ProductItem.query().where('name', 'like', `%${request.input('keyword')}%`)
         return products;
     }
+
+    async update ({request}) {
+        const product = await ProductItem.find(request.input('id'))
+        product!.productCategoryId = request.input('product_category')
+        product!.name = request.input('name')
+        product!.description = request.input('description')
+        product?.save()
+    }
+
+    async getById({request}){
+        return ProductItem.find(request.input('id'))
+    }
 }

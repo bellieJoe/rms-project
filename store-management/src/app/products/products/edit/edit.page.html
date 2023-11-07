@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-card>
+      <ion-card-content> 
+        <form [formGroup]="editProductForm" (ngSubmit)="submitEditProduct()">
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating" id="category_label"> Product Name</ion-label>
+            <ion-input legacy="true"  placeHolder="Enter Name" label=""  required formControlName="name" type="text"></ion-input>
+          </ion-item>
+          <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Category Name is required</app-input-err-msg>
+          <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Max Length is 1000 characters</app-input-err-msg>
+  
+          <ion-item class="ion-no-padding">
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea legacy="true" counter maxlength="5000" label="Description" labelPlacement="floating" formControlName="description" placeholder="Enter text"></ion-textarea>
+          </ion-item>
+          <app-input-err-msg *ngIf="description?.hasError('required') && description?.touched">Description is required</app-input-err-msg>
+          <app-input-err-msg *ngIf="description?.hasError('maxlength') && description?.touched">Max Length is 5000 characters</app-input-err-msg>
+
+          <ion-item class="ion-no-padding">
+            <ion-label>Product Category</ion-label>
+            <ion-select legacy="true"  placeholder="Select Category" formControlName="product_category" value="{{ product.product_category_id }}">
+                <ion-select-option *ngFor="let category of categories" value="{{ category.id }}" >{{ category.name }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-input-err-msg *ngIf="product_category?.hasError('required') && product_category?.touched">Category is required</app-input-err-msg>
+          
+  
+          <ion-button class="pt-2" expand="block" color="primary" type="submit" [disabled]="editProductForm.invalid">
+            Save Changes
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+  </app-grid-wrapper>
+</ion-content>

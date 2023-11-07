@@ -39,6 +39,8 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.post('', 'ProductItemsController.store');
+    Route.get('get-by-id', 'ProductItemsController.getById');
+    Route.put('update', 'ProductItemsController.update');
     Route.get('active', 'ProductItemsController.active');
     Route.get('search-by-name', 'ProductItemsController.searchByName');
     Route.post('upload-image', 'ProductItemsController.uploadImage');

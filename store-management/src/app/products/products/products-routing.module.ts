@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'add-variant',
     loadChildren: () => import('./add-variant/add-variant.module').then( m => m.AddVariantPageModule)
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
   }
 
 ];

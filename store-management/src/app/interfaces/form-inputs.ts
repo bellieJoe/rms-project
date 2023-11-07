@@ -22,6 +22,13 @@ export interface AddProductItemData{
     product_category: number
 }
 
+export interface UpdateProductItemData{
+    id: number
+    name: string
+    description: string
+    product_category: number
+}
+
 export interface AddProductVariantData{
     name: string
     description: string
