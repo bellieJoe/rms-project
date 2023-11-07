@@ -35,4 +35,8 @@ export default class ProductVariantsController {
         })
 
     }
+    
+    async getVariantsByProductItemId ({request}) {
+        const variants = ProductVariant.query().where('product_item_id', request.input('product_item_id'))
+    }
 }

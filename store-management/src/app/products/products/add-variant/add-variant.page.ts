@@ -5,6 +5,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { ProductVariantService } from 'src/app/services/product-variant.service';
 import { Location } from '@angular/common'
+import { HelperService } from 'src/app/services/helper.service';
 @Component({
   selector: 'app-add-variant',
   templateUrl: './add-variant.page.html',
@@ -19,7 +20,8 @@ export class AddVariantPage implements OnInit {
     private loadingCtrl : LoadingController,
     private toastCtrl : ToastController,
     private router : Router,
-    private location: Location
+    private location: Location,
+    private helperService : HelperService
   ) { }
 
   phase : number = 1
@@ -90,7 +92,10 @@ export class AddVariantPage implements OnInit {
     }
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.addProductVariantForm.patchValue({
+      product_item_id: this.helperService.getRouterNavState().product.id
+    })
   }
 
 }

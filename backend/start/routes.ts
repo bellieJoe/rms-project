@@ -46,6 +46,7 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.post('', 'ProductVariantsController.store');
+    Route.get('get-variants-by-product-item-id', 'ProductVariantsController.getVariantsByProductItemId');
   }).prefix('/product-variants')
 
   Route.group(()=>{
