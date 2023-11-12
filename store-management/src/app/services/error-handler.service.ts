@@ -13,7 +13,7 @@ export class ErrorHandlerService {
   async handleError(error : any){
     const alert = await this.alertController.create({
       message: error.message,
-      header: error.response.statusText,
+      header: 'Unexpected Error',
       buttons: ['Ok']
     });
     console.log(error)

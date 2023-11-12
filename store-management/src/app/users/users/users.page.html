@@ -10,7 +10,7 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content [fullscreen]="true" class="ion-padding">
+  <ion-content [fullscreen]="true" class="">
     
 
     <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullFactor="0.8" pullMin="60" pullMax="120" >
@@ -18,7 +18,7 @@
     </ion-refresher>
 
     <app-grid-wrapper>
-      <ion-searchbar (ionClear)="fetchUsers()"   (ionChange)="searchUserByName($event)" placeholder="Searh Name" inputmode="decimal" type="decimal"  [debounce]="250" showCancelButton="always"></ion-searchbar>
+      <ion-searchbar (ionClear)="fetchUsers()"   (ionChange)="searchUserByName($event)" placeholder="Searh Name"  [debounce]="250" showCancelButton="always"></ion-searchbar>
       <app-user-list [(users)]="users"></app-user-list>
     </app-grid-wrapper>
 

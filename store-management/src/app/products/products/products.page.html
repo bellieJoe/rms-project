@@ -14,7 +14,7 @@
   </ion-refresher>
 
   <app-grid-wrapper>
-    <ion-searchbar (ionClear)="fetchProducts()"   (ionChange)="searchProductByName($event)" placeholder="Seacrh Product Name" inputmode="decimal" type="decimal"  [debounce]="250" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar (ionClear)="fetchProducts()"   (ionChange)="searchProductByName($event)" placeholder="Seacrh Product Name"   [debounce]="250" showCancelButton="always"></ion-searchbar>
     <app-product-item-list [(products)]="products"></app-product-item-list>
   </app-grid-wrapper>
 

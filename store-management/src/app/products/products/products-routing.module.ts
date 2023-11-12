@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'edit',
     loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
+  },
+  {
+    path: 'view-variant',
+    loadChildren: () => import('./view-variant/view-variant.module').then( m => m.ViewVariantPageModule)
   }
 
 ];

@@ -37,6 +37,14 @@ export interface AddProductVariantData{
     image : string
 }
 
+export interface UpdateProductVariantData{
+    name: string
+    description: string
+    price: number
+    id : number
+    image : string
+}
+
 export interface ImageUploadData{
     id: number
     image: string

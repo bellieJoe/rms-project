@@ -53,6 +53,7 @@ export class ImageCropperComponent  implements OnInit {
   @Input() product : any;
   @Output() onUpload = new EventEmitter<any>()
   @Output() onImageCropped = new EventEmitter<any>()
+  @Output() onCropperClear = new EventEmitter<any>()
 
   classes = this.sRenderer.renderSheet(STYLES);
   croppedImage?: string | null = null;
@@ -82,6 +83,11 @@ export class ImageCropperComponent  implements OnInit {
   }
   onSliderInput(event: LySliderChange) {
     this.scale = event.value as number;
+  }
+  clearCropper(){
+    this.cropper.clean()
+    this.croppedImage = null
+    this.onCropperClear.emit()
   }
 
   async uploadImage(){

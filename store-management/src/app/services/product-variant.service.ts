@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { Buffer } from 'buffer';
-import { AddProductVariantData } from '../interfaces/form-inputs';
+import { AddProductVariantData, UpdateProductVariantData } from '../interfaces/form-inputs';
 import { environment } from 'src/environments/environment';
 
 axios.defaults.withCredentials = true;
@@ -22,6 +22,23 @@ export class ProductVariantService {
     const res = await axios.post(`${environment.apiUrl}product-variants`, {
       image: newData,
       product_item_id: data.product_item_id,
+      price: data.price,
+      description : data.description,
+      name : data.name
+    }, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+    return res;
+  }
+
+  async updateVariant(data: UpdateProductVariantData){
+    const newData = data.image ? Buffer.from(data.image) : null;
+    console.log(newData)
+    const res = await axios.put(`${environment.apiUrl}product-variants/update`, {
+      image: newData,
+      id: data.id,
       price: data.price,
       description : data.description,
       name : data.name

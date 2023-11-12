@@ -31,7 +31,7 @@
       <ion-list-header>
         <ion-label>Variants</ion-label>
       </ion-list-header>
-      <ion-item *ngFor="let variant of variants">
+      <ion-item *ngFor="let variant of variants" (click)="viewVariant(variant)">
         <ion-thumbnail slot="start">
           <img [src]="variant.image" />
         </ion-thumbnail>

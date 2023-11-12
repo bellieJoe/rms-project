@@ -36,6 +36,7 @@ export class UserService {
       console.log(res.data)
       await localStorage.setItem('user', JSON.stringify(res.data))
     } catch (error) {
+      console.log(error)
       this.errorHandler.handleError(error)
     }
   }

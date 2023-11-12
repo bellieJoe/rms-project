@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Variant</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-card class="m-0">
+      <ion-card-content>
+        <form [formGroup]="editProductVariantForm" (ngSubmit)="submitEditProductVariant()">
+          <input formControlName="id" type="hidden" >
+          <ng-container *ngIf="phase == 1">
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> <ion-text color="danger">Name</ion-text></ion-label>
+              <ion-input legacy="true" formControlName="name" type="text"></ion-input>
+            </ion-item>
+            <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Variant Name is required</app-input-err-msg>
+            <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Max Length is 1000 characters</app-input-err-msg>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> <ion-text color="danger">Price</ion-text></ion-label>
+              <ion-input legacy="true" formControlName="price" type="number"></ion-input>
+            </ion-item>
+            <app-input-err-msg *ngIf="price?.hasError('required') && price?.touched">Price is required</app-input-err-msg>
+
+            <ion-item class="ion-no-padding">
+              <ion-label position="floating"> <ion-text color="danger">Description</ion-text></ion-label>
+              <ion-input legacy="true" formControlName="description" type="text"></ion-input>
+            </ion-item>
+            <app-input-err-msg *ngIf="description?.hasError('required') && description?.touched">Description is required</app-input-err-msg>
+            <app-input-err-msg *ngIf="description?.hasError('maxlength') && description?.touched">Max Length is 5000 characters</app-input-err-msg>
+
+            <br>
+            <ion-button  (click)="next()" expand="block" color="primary" fill="outline" [disabled]="name.invalid || description.invalid || price.invalid">
+              <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+              Next
+            </ion-button>
+          </ng-container>
+          
+          <ng-container *ngIf="phase ==2">
+            <h5>Select Image</h5>
+            <app-image-cropper (onCropperClear)="clearImage()" showUploadButton="false" (onImageCropped)="onImageCropped($event)"></app-image-cropper>
+            <ion-button  (click)="back()" expand="block" color="primary" fill="outline" >
+              <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+              Back
+            </ion-button>
+  
+            <ion-button  expand="block" color="primary" type="submit" [disabled]="editProductVariantForm.invalid">
+              <ion-icon slot="start" name="save-outline"></ion-icon>
+              Save
+            </ion-button>
+          </ng-container>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </app-grid-wrapper>
+</ion-content>

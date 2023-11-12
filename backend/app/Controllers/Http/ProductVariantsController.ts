@@ -40,4 +40,40 @@ export default class ProductVariantsController {
         const variants = ProductVariant.query().where('product_item_id', request.input('product_item_id'))
         return variants;
     }
+
+    async update({request, response}){
+        return await Database.transaction(async(trx)=>{
+            let variant = await ProductVariant.find(request.input('id'))
+            if(request.input('name')){
+                variant!.name = request.input('name')
+            }
+            if(request.input('description')){
+                variant!.description = request.input('description')
+            }
+            if(request.input('price')){
+                variant!.price = request.input('price')
+            }
+            variant!.useTransaction(trx)
+            await variant!.save()
+
+            if(request.file('image')){
+                const imageName = `product-variant-image/${variant!.id}/blob`;
+        
+                const image = request.file('image');
+                
+                await image.move(Application.tmpPath(`uploads/product-variant-image/${variant!.id}`), {
+                    overwrite: true,
+                    visibility: 'public',
+                    contentType: 'image/png'
+                });
+                variant!.useTransaction(trx)
+                variant!.image = imageName
+            }
+            
+            return variant
+            // variant?.refresh()
+            // return response(variant)
+            
+        })
+    }
 }

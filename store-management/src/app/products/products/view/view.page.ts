@@ -96,4 +96,12 @@ export class ViewPage implements OnInit {
     })
   }
 
+  async viewVariant(variant : any){
+    this.router.navigate(['/products/view-variant'], {
+      state: {
+        variant : variant
+      }
+    })
+  }
+
 }
