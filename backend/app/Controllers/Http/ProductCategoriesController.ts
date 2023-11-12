@@ -24,4 +24,11 @@ export default class ProductCategoriesController {
         const categories = await ProductCategory.query().where('is_archived', 0)
         return categories;
     }
+
+    async update({request, response}){
+        const category = await ProductCategory.find(request.params('id').id)
+        category!.name = request.input('name')
+        category!.description = request.input('description')
+        category!.save()
+    }
 }

@@ -20,6 +20,8 @@ export default class ProductVariant extends BaseModel {
   @column()
   isArchived: number
   @column()
+  inMenu: number
+  @column()
   onlineAvailability: boolean
 
   @column.dateTime({ autoCreate: true })

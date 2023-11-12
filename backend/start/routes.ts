@@ -50,11 +50,13 @@ Route.group(()=>{
   Route.group(()=>{
     Route.post('', 'ProductVariantsController.store');
     Route.put('update', 'ProductVariantsController.update');
+    Route.put('toggle-in-menu', 'ProductVariantsController.toggleInMenu');
     Route.get('get-variants-by-product-item-id', 'ProductVariantsController.getVariantsByProductItemId');
   }).prefix('/product-variants')
 
   Route.group(()=>{
     Route.post('', 'ProductCategoriesController.store')
+    Route.put('update/:id', 'ProductCategoriesController.update')
     Route.get('', 'ProductCategoriesController.index')
     Route.get('search-by-name', 'ProductCategoriesController.searchByName')
     Route.get('active', 'ProductCategoriesController.active')

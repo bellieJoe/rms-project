@@ -26,6 +26,7 @@ export class ProductCategoryService {
   }
 
   async updateProductCategory(data: UpdateProductCategoryData){
+    console.log(data)
     const res = await axios.put(`${environment.apiUrl}product-categories/update/${data.id}`, data)
     return res;
   }

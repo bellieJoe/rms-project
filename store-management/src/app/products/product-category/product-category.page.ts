@@ -69,11 +69,9 @@ export class ProductCategoryPage implements OnInit {
     }
   }
 
-  ngOnInit(){
 
-  }
 
-  async ionViewDidEnter() {
+  async ngOnInit(){
     const loader = await this.loadingCtrl.create({
       message: 'Loading',
       backdropDismiss: false,
@@ -85,6 +83,14 @@ export class ProductCategoryPage implements OnInit {
     this.page = 1
     await this.fetchCategories()
     await loader.dismiss()
+  }
+
+  async ionViewDidEnter() {
+    if(this.categories.length > 0){
+      this.categories = []
+      this.page = 1
+      await this.fetchCategories()
+    }
   }
 
 }

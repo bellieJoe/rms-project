@@ -76,4 +76,11 @@ export default class ProductVariantsController {
             
         })
     }
+
+    async toggleInMenu({request, response}){
+        const variant = await ProductVariant.find(request.input('id'))
+        variant!.inMenu = variant?.inMenu == 0 ? 1 : 0;
+        await variant!.save()
+        return variant
+    }
 }

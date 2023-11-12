@@ -3,6 +3,7 @@ import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { AddProductItemData, ImageUploadData, UpdateProductItemData } from '../interfaces/form-inputs';
 import { Buffer } from 'buffer';
+import { ErrorHandlerService } from './error-handler.service';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -15,7 +16,12 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 })
 export class ProductItemService {
 
-  constructor() { }
+  constructor(
+    private errorHandler : ErrorHandlerService
+  ) { }
+
+  page : number = 1
+  products : any = []
 
   async addProductItem(data : AddProductItemData){
     const res = await axios.post(`${environment.apiUrl}products`, data)
@@ -40,9 +46,18 @@ export class ProductItemService {
     return res;
   }
 
-  async fetchProducts(page:number){
-    const res = await axios.get(`${environment.apiUrl}products/active?page=${page}`)
-    return res;
+  async fetchProducts(){
+    if(this.page == 1){
+      this.products = []
+    }
+    try {
+      const res = await axios.get(`${environment.apiUrl}products/active?page=${this.page}`)
+      this.products = [...this.products, ...res.data]
+      this.page++
+    } catch (error) {
+      console.log(error)
+      this.errorHandler.handleError(error)
+    }
   }
 
   async searchProductByName(keyword:number){

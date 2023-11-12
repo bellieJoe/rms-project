@@ -11,7 +11,7 @@
   <app-grid-wrapper>
     <ion-card class="m-0 mb-3">
       <div class="w-100" style="height: 200px !important; overflow-y: hidden;">
-        <ion-button class="m-2" fill="outline" style="position: absolute; top: 0;" color="secondary" (click)="updatePhoto()">
+        <ion-button class="m-2" fill="outline" style="position: absolute; top: 0;" color="primary" (click)="updatePhoto()">
           <ion-icon slot="start" name="camera"></ion-icon>
           Update Photo
         </ion-button>
@@ -35,12 +35,14 @@
         <ion-thumbnail slot="start">
           <img [src]="variant.image" />
         </ion-thumbnail>
+        <ion-badge *ngIf="variant.in_menu" color="primary" slot="end">In menu</ion-badge>
         <ion-label>
           {{ variant.name }} <br>
           {{ variant.price | currency : 'PHP' }}
         </ion-label>
       </ion-item>
-      <p *ngIf="variants.length <= 0" class="text-center opacity-75"><i class="fa-regular fa-face-frown-open"></i> No variants</p>
+      <ion-note *ngIf="variants.length <= 0"><i class="fa-regular fa-face-frown-open mr-1"></i> No variants</ion-note>
+      <p  class="text-center opacity-75"></p>
     </ion-list>
 
     <ion-list>

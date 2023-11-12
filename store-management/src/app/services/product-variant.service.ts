@@ -54,4 +54,9 @@ export class ProductVariantService {
     const res = await axios.get(`${environment.apiUrl}product-variants/get-variants-by-product-item-id?product_item_id=${id}`)
     return res
   }
+
+  async toggleInMenu(id : number){
+    const res = await axios.put(`${environment.apiUrl}product-variants/toggle-in-menu`, {id : id})
+    return res
+  }
 }
