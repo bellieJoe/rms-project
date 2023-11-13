@@ -7,12 +7,12 @@ import Drive from '@ioc:Adonis/Core/Drive'
 export default class ProductItemsController {
 // 
     async store({request}){
-        const productItem = ProductItem.create({
+        const productItem = await ProductItem.create({
             name: request.input('name'),
             productCategoryId: request.input('product_category'),
             description: request.input('description')
         })
-
+        await productItem.load('productVariants')
         return productItem;
     }
 
@@ -45,8 +45,10 @@ export default class ProductItemsController {
     }
 
     async active({request}){
-        const products = await ProductItem.query().paginate(request.input('page'), 20)
-        return products.all();
+        const _products = await ProductItem.query()
+        .preload('productVariants')
+        .paginate(request.input('page'), 20)
+        return _products.all();
     }
 
     async searchByName({request}){

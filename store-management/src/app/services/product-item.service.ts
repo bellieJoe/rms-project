@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { AddProductItemData, ImageUploadData, UpdateProductItemData } from '../interfaces/form-inputs';
 import { Buffer } from 'buffer';
 import { ErrorHandlerService } from './error-handler.service';
+import { HelperService } from './helper.service';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -17,7 +18,8 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 export class ProductItemService {
 
   constructor(
-    private errorHandler : ErrorHandlerService
+    private errorHandler : ErrorHandlerService,
+    private helperService : HelperService
   ) { }
 
   page : number = 1
@@ -30,6 +32,7 @@ export class ProductItemService {
 
   async uploadImage(data: ImageUploadData){
     const newData = Buffer.from(data.image)
+    console.log(data)
     const res = await axios.post(`${environment.apiUrl}products/upload-image`, {
       image: newData,
       id: data.id
@@ -53,6 +56,15 @@ export class ProductItemService {
     try {
       const res = await axios.get(`${environment.apiUrl}products/active?page=${this.page}`)
       this.products = [...this.products, ...res.data]
+      this.products = this.products.map((product : any) => {
+        // product.imageData = await (await this.helperService.readImage(product.image)).data
+        // console.log(product)
+        return product;
+      })
+      this.products.forEach(async (el:any, i:any) => {
+        this.products[i].imageData = await (await this.helperService.readImage(el.image)).data
+      });
+      console.log(this.products)
       this.page++
     } catch (error) {
       console.log(error)

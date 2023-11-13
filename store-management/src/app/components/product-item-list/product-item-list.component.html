@@ -1,9 +1,13 @@
 <ion-list>
   <ng-container *ngFor="let product of products">
     <ion-item button (click)="productClick(product)">
+      <ion-thumbnail slot="start" >
+        <img [src]="product.imageData" class="rounded" />
+      </ion-thumbnail>
       <ion-label>
         {{product.name}}
       </ion-label>
+      <ion-badge color="primary" *ngIf="product.menuVisibility">In Menu</ion-badge>
     </ion-item>
   </ng-container>
 </ion-list>
