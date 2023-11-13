@@ -13,6 +13,7 @@ export default class ProductItemsController {
             description: request.input('description')
         })
         await productItem.load('productVariants')
+        await productItem.load('productCategory')
         return productItem;
     }
 
@@ -47,6 +48,7 @@ export default class ProductItemsController {
     async active({request}){
         const _products = await ProductItem.query()
         .preload('productVariants')
+        .preload('productCategory')
         .paginate(request.input('page'), 20)
         return _products.all();
     }

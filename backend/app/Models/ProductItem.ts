@@ -1,7 +1,8 @@
 
 import { DateTime } from 'luxon'
-import { BaseModel, HasMany, afterFetch, column, computed, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasMany, HasOne, afterFetch, belongsTo, column, computed, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import ProductVariant from './ProductVariant';
+import ProductCategory from './ProductCategory';
 
 export default class ProductItem extends BaseModel {
   static table = "product_items";
@@ -31,6 +32,9 @@ export default class ProductItem extends BaseModel {
 
   @hasMany(() => ProductVariant)
   public productVariants: HasMany<typeof ProductVariant>
+
+  @belongsTo(() => ProductCategory)
+  public productCategory: BelongsTo<typeof ProductCategory>
 
   @computed()
   public get menuVisibility(){

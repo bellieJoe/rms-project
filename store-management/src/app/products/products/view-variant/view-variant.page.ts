@@ -55,6 +55,30 @@ export class ViewVariantPage implements OnInit {
     }
   }
 
+  async toggleOnline(){
+    const loader = await this.loadingCtrl.create({
+      spinner: 'circular',
+      message: 'Updating Online Availability',
+      backdropDismiss: false
+    })
+    const toast = await this.toastCtrl.create({
+      icon: 'checkmark',
+      message: 'Online Availability Updated',
+      duration: 2000
+    })
+    try {
+      await loader.present()
+      const res = await this.productVariantService.toggleOnline(this.variant.id)
+      this.variant.online_availability = res.data.online_availability
+      await loader.dismiss()
+      await toast.present()
+    } catch (error) {
+      await loader.dismiss()
+      console.log(error)
+      this.errorHandler.handleError(error)
+    }
+  }
+
   edit(){
     this.router.navigate(['/products/view-variant/edit'], {
       state: {

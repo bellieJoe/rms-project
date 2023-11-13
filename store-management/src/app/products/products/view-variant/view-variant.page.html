@@ -27,8 +27,14 @@
         <ion-label>Actions</ion-label>
       </ion-list-header>
       <ion-item>
-        <ion-toggle (ionChange)="toggleInMenu()" slot="start" checked="{{ variant.in_menu ? 'true' : 'false' }}"></ion-toggle>
+        <ion-icon slot="start" name="grid-outline"></ion-icon>
         <ion-label>Shown in Menu</ion-label>
+        <ion-toggle (ionChange)="toggleInMenu()" slot="end" checked="{{ variant.in_menu ? 'true' : 'false' }}"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-icon slot="start" name="globe-outline"></ion-icon>
+        <ion-label>Online Availability</ion-label>
+        <ion-toggle  (ionChange)="toggleOnline()" slot="end" checked="{{ variant.online_availability ? 'true' : 'false' }}" slot="end" ></ion-toggle>
       </ion-item>
       <ion-item button (click)="edit()">
         <ion-icon slot="start" name="create-outline"></ion-icon>

@@ -83,4 +83,11 @@ export default class ProductVariantsController {
         await variant!.save()
         return variant
     }
+
+    async toggleOnline({request, response}){
+        const variant = await ProductVariant.find(request.input('id'))
+        variant!.onlineAvailability = variant?.inMenu == 0 ? true : false;
+        await variant!.save()
+        return variant
+    }
 }
