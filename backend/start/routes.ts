@@ -71,4 +71,8 @@ Route.group(()=>{
     })
   }).prefix('/images')
 
+  Route.group(()=>{
+    Route.get('init', 'MenusController.init')
+  }).prefix('/menu')
+
 }).prefix('/api')

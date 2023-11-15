@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="products-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Menu</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary" fill="clear">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <br>
+  <app-grid-wrapper>
+    <h1 class="text-center py-3 font-weight-bold" style="font-size: 35px; line-height: 1.5;">
+      <ion-label color="primary" class="mr-2"><i class="fa-solid fa-utensils mr-2"></i> Savor.</ion-label>
+      <ion-label color="dark" class="mr-2"><i class="fa-solid fa-computer-mouse mr-2"></i>Click.</ion-label>
+      <ion-label color="primary"><i class="fa-solid fa-face-smile-beam mr-2"></i>Enjoy.</ion-label>
+    </h1>
+    <ion-segment color="primary" value="{{ selectedCategory }}" [scrollable]="true" mode="ios" (ionChange)="categorySelect($event)">
+      <ion-segment-button class="p-3" *ngFor="let m of menu" value="{{ m.id }}" >
+        <ion-label>{{ m.name }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-center">
+        <ng-container *ngFor="let item of products">
+          <ion-col class="p-0 " size="6" *ngFor="let variant of item.productVariants">
+            <ion-card >
+              <ion-card-header>
+                <ion-card-title>{{ item.name }}</ion-card-title>
+                <ion-note class="mt-0" color="primary">Variation: {{ variant.name }}</ion-note>
+                <ion-card-subtitle class="mt-0">{{ variant.price | currency:'PHP' }}</ion-card-subtitle>
+                <ion-button expand="block" shape="round" >
+                  <ion-icon slot="start" name="cart"></ion-icon>
+                  Add
+                </ion-button>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+  </app-grid-wrapper>
+    
+</ion-content>

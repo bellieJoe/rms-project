@@ -45,9 +45,10 @@ const routes: Routes = [
   {
     path: 'product-category',
     loadChildren: () => import('./products/product-category/product-category.module').then( m => m.ProductCategoryPageModule)
-  },  {
+  },
+  {
     path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
+    loadChildren: () => import('./products/menu/menu.module').then( m => m.MenuPageModule)
   },
 
 ];

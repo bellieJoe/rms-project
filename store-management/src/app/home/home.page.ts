@@ -17,25 +17,29 @@ export class HomePage {
       title: "Users",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/users'
+      route: '/users',
+      image: '../../assets/images/users.jpg'
     },
     {
       title: "Products",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/products'
+      route: '/products',
+      image: '../../assets/images/products.jpg'
     },
     {
       title: "Inventory",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/inventory'
+      route: '/inventory',
+      image: '../../assets/images/inventory.jpg'
     },
     {
       title: "Payroll",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/payroll'
+      route: '/payroll',
+      image: '../../assets/images/employee.jpg'
     },
 
   ]

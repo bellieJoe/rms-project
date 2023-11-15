@@ -20,6 +20,11 @@ export class ProductsMenuComponent  implements OnInit {
       route: '/product-category',
       icon: 'file-tray-stacked-outline'
     },
+    // {
+    //   text: 'Menu',
+    //   route: '/menu',
+    //   icon: 'grid-outline'
+    // },
     {
       text: 'Dashboard',
       route: '/home',

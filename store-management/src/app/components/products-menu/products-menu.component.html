@@ -17,6 +17,28 @@
           </ion-item >
         </ion-menu-toggle>
       </ng-container>
+      <ion-accordion-group >
+        <ion-accordion value="first" color="primary">
+          <ion-item slot="header" color="light" color="primary">
+            <ion-icon slot="start" name="reader-outline"></ion-icon>
+            <ion-label>Menu</ion-label>
+          </ion-item>
+          <div slot="content" color="primary" >
+            <ion-menu-toggle menu="products-menu">
+              <ion-item color="primary" [routerLink]="['/menu']" >
+                <ion-icon slot="start" name="radio-button-off-outline"></ion-icon>
+                <ion-label>View Menu</ion-label>
+              </ion-item>
+            </ion-menu-toggle>  
+            <ion-menu-toggle menu="products-menu">
+              <ion-item color="primary" [routerLink]="['/menu']" >
+                <ion-icon slot="start" name="radio-button-off-outline"></ion-icon>
+                <ion-label>Menu Packages Menu</ion-label>
+              </ion-item>
+            </ion-menu-toggle>  
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
       <app-menu-logout></app-menu-logout>
     </ion-list>
   </ion-content>
