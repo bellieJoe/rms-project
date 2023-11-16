@@ -20,30 +20,22 @@
       <ion-label color="dark" class="mr-2"><i class="fa-solid fa-computer-mouse mr-2"></i>Click.</ion-label>
       <ion-label color="primary"><i class="fa-solid fa-face-smile-beam mr-2"></i>Enjoy.</ion-label>
     </h1>
+
     <ion-segment color="primary" value="{{ selectedCategory }}" [scrollable]="true" mode="ios" (ionChange)="categorySelect($event)">
       <ion-segment-button class="p-3" *ngFor="let m of menu" value="{{ m.id }}" >
         <ion-label>{{ m.name }}</ion-label>
       </ion-segment-button>
     </ion-segment>
+
     <ion-grid fixed>
       <ion-row class="ion-align-items-center">
         <ng-container *ngFor="let item of products">
-          <ion-col class="p-0 " size="6" *ngFor="let variant of item.productVariants">
-            <ion-card >
-              <ion-card-header>
-                <ion-card-title>{{ item.name }}</ion-card-title>
-                <ion-note class="mt-0" color="primary">Variation: {{ variant.name }}</ion-note>
-                <ion-card-subtitle class="mt-0">{{ variant.price | currency:'PHP' }}</ion-card-subtitle>
-                <ion-button expand="block" shape="round" >
-                  <ion-icon slot="start" name="cart"></ion-icon>
-                  Add
-                </ion-button>
-              </ion-card-header>
-            </ion-card>
+          <ion-col class="p-0 " size-sm="6" size-md="3" size-lg="2" >
+            <app-menu-product-card [item]="item"></app-menu-product-card>
           </ion-col>
         </ng-container>
       </ion-row>
     </ion-grid>
   </app-grid-wrapper>
-    
+
 </ion-content>

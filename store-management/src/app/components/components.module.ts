@@ -17,6 +17,7 @@ import { LyImageCropperModule } from '@alyle/ui/image-cropper';
 import { LySliderModule } from '@alyle/ui/slider';
 import { LyButtonModule } from '@alyle/ui/button';
 import { ProductItemListComponent } from './product-item-list/product-item-list.component';
+import { MenuProductCardComponent } from './menu-product-card/menu-product-card.component';
 
 @NgModule({
   
@@ -40,7 +41,8 @@ import { ProductItemListComponent } from './product-item-list/product-item-list.
     ProductsMenuComponent,
     ProducCategoryListComponent,
     ImageCropperComponent,
-    ProductItemListComponent
+    ProductItemListComponent,
+    MenuProductCardComponent
   ],
   exports: [
     MenuLogoutComponent, 
@@ -52,7 +54,8 @@ import { ProductItemListComponent } from './product-item-list/product-item-list.
     ProductsMenuComponent,
     ProducCategoryListComponent,
     ImageCropperComponent,
-    ProductItemListComponent
+    ProductItemListComponent,
+    MenuProductCardComponent
   ],
   providers: []
 })
