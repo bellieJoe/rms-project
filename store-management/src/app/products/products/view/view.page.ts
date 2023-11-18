@@ -1,6 +1,6 @@
-import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import { AlertController, IonToggle, LoadingController, ToastController } from '@ionic/angular';
 import { HelperService } from 'src/app/services/helper.service';
 import { ProductItemService } from 'src/app/services/product-item.service';
 import { ProductVariantService } from 'src/app/services/product-variant.service';
@@ -19,12 +19,16 @@ export class ViewPage implements OnInit {
     private productVariantService : ProductVariantService,
     private errorHandler : ErrorHandler,
     private loadingCtrl : LoadingController,
+    private alertCtrl : AlertController,
+    private toastCtrl : ToastController
   ) { }
 
   product : any
   image : any
   phase : number = 1
   variants : any[] = []
+
+  @ViewChild('showMenuToggle') showMenuToggle: IonToggle | any;
 
   async ngOnInit() {
     const navState = this.helperService.getRouterNavState()
@@ -102,6 +106,50 @@ export class ViewPage implements OnInit {
         variant : variant
       }
     })
+  }
+
+  async showInMenu(ev:any){
+    const loader = await this.loadingCtrl.create({
+      spinner: 'circular',
+      message: 'Updating Menu Visibility',
+      backdropDismiss: false
+    })
+    const toast = await this.toastCtrl.create({
+      icon: 'checkmark',
+      message: 'Menu Visibility Updated',
+      duration: 2000
+    })
+    try {
+      await loader.present()
+      if(!await this.hasVariants()){
+        await loader.dismiss()
+        this.showMenuToggle.checked = false
+        return
+      }
+      const res = await this.productItemService.toggleInMenu(this.product.id)
+      this.product.in_menu = res.data.in_menu
+      await loader.dismiss()
+      await toast.present()
+    } catch (error) {
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
+    }
+    
+    console.log("Show in Menu triggered")
+  }
+
+  async hasVariants(){
+    if(this.variants.length <= 0){
+      const alert = await this.alertCtrl.create({
+        message: "You must add a variant first to show this product to the menu",
+        animated: true,
+        header: "Missing Variants",
+        buttons: ['Ok']
+      })
+      await alert.present()
+      return false;
+    }
+    return true
   }
 
 }

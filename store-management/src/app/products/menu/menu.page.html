@@ -13,6 +13,11 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <br>
   <app-grid-wrapper>
     <h1 class="text-center py-3 font-weight-bold" style="font-size: 35px; line-height: 1.5;">
@@ -21,8 +26,8 @@
       <ion-label color="primary"><i class="fa-solid fa-face-smile-beam mr-2"></i>Enjoy.</ion-label>
     </h1>
 
-    <ion-segment color="primary" value="{{ selectedCategory }}" [scrollable]="true" mode="ios" (ionChange)="categorySelect($event)">
-      <ion-segment-button class="p-3" *ngFor="let m of menu" value="{{ m.id }}" >
+    <ion-segment #categorySegment color="primary" value="{{ selectedCategory }}" [scrollable]="true" mode="ios" (ionChange)="categorySelect($event)">
+      <ion-segment-button class="p-3" *ngFor="let m of menu" value="{{ m.id }}"  >
         <ion-label>{{ m.name }}</ion-label>
       </ion-segment-button>
     </ion-segment>

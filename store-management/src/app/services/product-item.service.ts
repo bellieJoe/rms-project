@@ -86,4 +86,10 @@ export class ProductItemService {
     const res = await axios.get(`${environment.apiUrl}products/get-by-id?id=${id}`)
     return res;
   }
+
+  async toggleInMenu(id : number){
+    const res = await axios.put(`${environment.apiUrl}products/toggle-in-menu`, {id : id})
+    return res
+  }
+
 }

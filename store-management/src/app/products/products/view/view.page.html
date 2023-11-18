@@ -42,7 +42,7 @@
           {{ variant.price | currency : 'PHP' }}
         </ion-label>
       </ion-item>
-      <ion-note *ngIf="variants.length <= 0"><i class="fa-regular fa-face-frown-open mr-1"></i> No variants</ion-note>
+      <ion-note *ngIf="variants.length <= 0"><i class="fa-regular fa-face-frown-open mr-1"></i> No Added variants</ion-note>
       <p  class="text-center opacity-75"></p>
     </ion-list>
 
@@ -51,9 +51,9 @@
         <ion-label>Actions</ion-label>
       </ion-list-header>
       <ion-item>
-        <ion-icon slot="start" name="grid-outline"></ion-icon>
+        <ion-icon slot="start" name="grid-outline" ></ion-icon>
         <ion-label>Shown in Menu</ion-label>
-        <ion-toggle  slot="end" ></ion-toggle>
+        <ion-toggle  slot="end" (ionChange)="showInMenu($event)" #showMenuToggle checked="{{ product.in_menu ? 'true' : 'false' }}"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-icon slot="start" name="globe-outline"></ion-icon>

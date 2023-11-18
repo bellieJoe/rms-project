@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonSegment } from '@ionic/angular';
 import { HelperService } from 'src/app/services/helper.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -14,13 +15,14 @@ export class MenuPage implements OnInit {
     private helperService : HelperService
   ) { }
 
+  @ViewChild('categorySegment') categorySegment : IonSegment|any;
   selectedCategory : any
   products : any = []
   menu : any
+
   async ngOnInit() {
     this.menu = await this.menuService.initializeMenu()
     await this.initImages()
-    console.log(this.menu)
     this.selectedCategory = this.menu[0].id
     this.products = this.menu[0].productItems
   }
@@ -49,6 +51,17 @@ export class MenuPage implements OnInit {
         this.products = val.productItems
       }
     })
+  }
+
+  async handleRefresh(event : any){
+    this.menu = await this.menuService.initializeMenu()
+    await this.initImages()
+    this.menu.forEach((val : any) => {
+      if(val.id == this.categorySegment.value){
+        this.products = val.productItems
+      }
+    })
+    event.target.complete()
   }
 
 }

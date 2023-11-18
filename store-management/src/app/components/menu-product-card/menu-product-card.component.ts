@@ -17,7 +17,7 @@ export class MenuProductCardComponent  implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.item)
+    // console.log(this.item)
   }
 
 }
