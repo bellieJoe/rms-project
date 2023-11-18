@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonSegment } from '@ionic/angular';
+import { IonSegment, ModalController } from '@ionic/angular';
 import { HelperService } from 'src/app/services/helper.service';
 import { MenuService } from 'src/app/services/menu.service';
+import { AddToCartPage } from './add-to-cart/add-to-cart.page';
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +13,8 @@ export class MenuPage implements OnInit {
 
   constructor(
     private menuService : MenuService,
-    private helperService : HelperService
+    private helperService : HelperService,
+    private modalCtrl : ModalController
   ) { }
 
   @ViewChild('categorySegment') categorySegment : IonSegment|any;
@@ -62,6 +64,19 @@ export class MenuPage implements OnInit {
       }
     })
     event.target.complete()
+  }
+
+  async addToCart(item:any){
+    console.log("Add to cart")
+    const modal = await this.modalCtrl.create({
+      component: AddToCartPage,
+      breakpoints: [0, 1],
+      initialBreakpoint: 1,
+      componentProps: {item: item}
+    })
+    console.log(item)
+
+    modal.present()
   }
 
 }

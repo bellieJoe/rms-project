@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar> 
+    <ion-title><i class="fa-solid fa-cart-shopping mr-2" ></i> Add to Cart</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-item lines="none" class="mb-3">
+      <ion-thumbnail slot="start">
+        <img [src]="item.imageData" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2 class="font-weight-bold mb-0">{{ item.name }}</h2>
+        <ion-label>{{ price | currency:'PHP' }}</ion-label>
+        <p>{{ item.description }}</p>
+      </ion-label>
+    </ion-item>
+
+    <div class="mb-3">
+      <ion-note>Choose Variation</ion-note><br>
+  
+      <ng-container *ngFor="let variant of item.productVariants">
+        <ion-chip 
+        id="{{ 'variant-' + variant.id }}"
+        [color]="selectedVariant && selectedVariant.id == variant.id ? 'primary' : 'medium'"  
+        [outline]="selectedVariant && selectedVariant.id == variant.id ? 'true' : 'false'" 
+        (click)="selectVariant(variant)">
+          <ion-avatar>
+            <img [src]="variant.imageData" />
+          </ion-avatar>
+          <ion-label>{{ variant.name }}</ion-label>
+        </ion-chip>
+        <ion-popover trigger="{{ 'variant-' + variant.id }}" triggerAction="context-menu">
+          <ng-template>
+            <ion-content class="ion-padding">{{ variant.description }}</ion-content>
+          </ng-template>
+        </ion-popover>
+      </ng-container>
+    </div>
+
+    <div class="mb-3">
+      <ion-note>Quantity</ion-note><br>
+      <ion-input 
+      fill="solid"  
+      inputMode="numeric" 
+      type="number" 
+      label="Enter Order Quantity" 
+      labelPlacement="floating"
+      (ionInput)="quantityChange($event)"
+      #quantityEl></ion-input>
+    </div>
+
+  </app-grid-wrapper>
+</ion-content>
+  
+  <ion-footer>
+    <ion-toolbar mode="md">
+      <ion-title>
+        <ion-note>Total</ion-note><br>
+        {{ total | currency:'PHP' }}
+      </ion-title>
+      <ion-buttons slot="end">
+        <ion-button fill="solid" color="primary" (click)="addToCart()">
+          <ion-icon slot="start" name="cart"></ion-icon>
+          Add to Cart
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+

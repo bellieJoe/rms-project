@@ -36,7 +36,7 @@
       <ion-row class="ion-align-items-center">
         <ng-container *ngFor="let item of products">
           <ion-col class="p-0 " size-sm="6" size-md="3" size-lg="2" >
-            <app-menu-product-card [item]="item"></app-menu-product-card>
+            <app-menu-product-card [item]="item" (onAddCart)="addToCart($event)"></app-menu-product-card>
           </ion-col>
         </ng-container>
       </ion-row>
