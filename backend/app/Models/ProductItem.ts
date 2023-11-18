@@ -19,7 +19,7 @@ export default class ProductItem extends BaseModel {
   @column()
   isArchived: boolean
   @column()
-  inMenu: boolean
+  inMenu: number
   @column()
   productCategoryId: number
 

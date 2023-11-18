@@ -12,6 +12,7 @@ export default class ProductVariantsController {
                 name: request.input('name'),
                 description: request.input('description'),
                 price: request.input('price'),
+                inMenu: 1
             })
             variant.useTransaction(trx)
     

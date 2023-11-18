@@ -69,4 +69,12 @@ export default class ProductItemsController {
     async getById({request}){
         return ProductItem.find(request.input('id'))
     }
+
+    async toggleInMenu({request}){
+        const item = await ProductItem.find(request.input('id'))
+        item!.inMenu = item?.inMenu == 0 ? 1 : 0;
+        await item!.save()
+        await item?.load('productVariants')
+        return item
+    }
 }

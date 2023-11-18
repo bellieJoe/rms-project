@@ -45,6 +45,7 @@ Route.group(()=>{
     Route.get('search-by-name', 'ProductItemsController.searchByName');
     Route.post('upload-image', 'ProductItemsController.uploadImage');
     Route.get('read-image', 'ProductItemsController.readImage');
+    Route.put('toggle-in-menu', 'ProductItemsController.toggleInMenu');
   }).prefix('/products')
 
   Route.group(()=>{

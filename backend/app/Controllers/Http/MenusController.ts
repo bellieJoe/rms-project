@@ -8,6 +8,7 @@ export default class MenusController {
     async init () {
         const categories = await ProductCategory.query()
         .preload('productItems', (q) => {
+            q.where('in_menu', 1)
             q.preload('productVariants', (q) => {
                 q.where('in_menu', 1)
             })
