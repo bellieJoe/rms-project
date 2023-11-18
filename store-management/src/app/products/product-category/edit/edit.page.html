@@ -9,22 +9,18 @@
 
 <ion-content [fullscreen]="true">
   <app-grid-wrapper>
-    <ion-card>
-      <ion-card-content>
-        <form [formGroup]="editCategoryForm" (ngSubmit)="submitEditCategory()">
-          <ion-input  label="Category Name" labelPlacement="floating" required formControlName="name" type="text"></ion-input>
-          <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Category Name is required</app-input-err-msg>
-          <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Max Length is 1000 characters</app-input-err-msg>
+    <form [formGroup]="editCategoryForm" (ngSubmit)="submitEditCategory()">
+      <ion-input fill="solid"  label="Category Name" labelPlacement="floating" required formControlName="name" type="text"></ion-input>
+      <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Category Name is required</app-input-err-msg>
+      <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Max Length is 1000 characters</app-input-err-msg>
 
-          <ion-textarea counter maxlength="5000" label="Description" labelPlacement="floating" formControlName="description" placeholder="Enter text"></ion-textarea>
-          <app-input-err-msg *ngIf="description?.hasError('required') && description?.touched">Description is required</app-input-err-msg>
-          <app-input-err-msg *ngIf="description?.hasError('maxlength') && description?.touched">Max Length is 5000 characters</app-input-err-msg>
+      <ion-textarea fill="solid" counter maxlength="5000" label="Description" labelPlacement="floating" formControlName="description" placeholder="Enter text"></ion-textarea>
+      <app-input-err-msg *ngIf="description?.hasError('required') && description?.touched">Description is required</app-input-err-msg>
+      <app-input-err-msg *ngIf="description?.hasError('maxlength') && description?.touched">Max Length is 5000 characters</app-input-err-msg>
 
-          <ion-button class="pt-2" expand="block" color="primary" type="submit" [disabled]="editCategoryForm.invalid">
-            Save Changes
-          </ion-button>
-        </form>
-      </ion-card-content>
-    </ion-card>
+      <ion-button class="pt-2" expand="block" color="primary" type="submit" [disabled]="editCategoryForm.invalid">
+        Save Changes
+      </ion-button>
+    </form>
   </app-grid-wrapper>
 </ion-content>

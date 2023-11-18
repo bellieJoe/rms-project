@@ -1,3 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>Header</ion-title> -->
+    <ion-buttons slot="end">
+      <ion-button fill="clear" id="open-settings">
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
   <ion-grid fixed>
     <br><br>
@@ -24,5 +35,7 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-action-sheet trigger="open-settings" header="Actions" [buttons]="actionSheetButtons"></ion-action-sheet>
   
 </ion-content>

@@ -9,33 +9,25 @@
         <ion-title>Add User</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-no-padding">
       <ion-card>
         <ion-card-content>
           <form [formGroup]="addUserForm" (ngSubmit)="submitAddUser()">
-            <ion-item>
-              <ion-input labelPlacement="floating" label="Name" required formControlName="name" type="text"></ion-input>
-            </ion-item>
+            <ion-input labelPlacement="floating" label="Name" fill="solid" required formControlName="name" type="text"></ion-input>
             <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Name is required</app-input-err-msg>
             <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Length exceeds 100 characters</app-input-err-msg>
 
-            <ion-item>
-              <ion-input labelPlacement="floating" label="Email" required formControlName="email" type="text"></ion-input>
-            </ion-item>
+            <ion-input labelPlacement="floating" label="Email" fill="solid" required formControlName="email" type="text"></ion-input>
             <app-input-err-msg *ngIf="email?.hasError('required') && email?.touched">Email is required</app-input-err-msg>
             <app-input-err-msg *ngIf="email?.hasError('email') && email?.touched">Email is invalid</app-input-err-msg>
             <app-input-err-msg *ngIf="email?.hasError('emailInUse') && email?.touched">Email is already used</app-input-err-msg>
             
 
-            <ion-item>
-              <ion-input labelPlacement="floating" label="Contact Number" required formControlName="contactNumber" type="text"></ion-input>
-            </ion-item>
+            <ion-input labelPlacement="floating" label="Contact Number" fill="solid" required formControlName="contactNumber" type="text"></ion-input>
             <app-input-err-msg *ngIf="contactNumber?.hasError('required') && email?.touched">Contact Number is required</app-input-err-msg>
             <app-input-err-msg *ngIf="(contactNumber?.hasError('maxlength') || contactNumber?.hasError('minlength')) && contactNumber?.touched">Length must be 11 characters</app-input-err-msg>
 
-            <ion-item>
-              <ion-input labelPlacement="floating" label="Temporary Password" required formControlName="password" type="password"></ion-input>
-            </ion-item>
+            <ion-input labelPlacement="floating" label="Temporary Password" fill="solid" required formControlName="password" type="password"></ion-input>
             <app-input-err-msg *ngIf="password?.hasError('required') && password?.touched">Password is required</app-input-err-msg>
             <app-input-err-msg *ngIf="password?.hasError('minlength') && password?.touched">Length must be minimum if 8 characters</app-input-err-msg>
 

@@ -30,13 +30,23 @@ export class UserService {
   }
   
   async signin(data : any) : Promise<any> {
+    const loader = await this.loadingCtrl.create(
+      {
+        message: "Signing In",
+        backdropDismiss: false,
+        spinner: 'circular'
+      }
+    )
     try {
+      await loader.present()
       const res = await axios.post(`${environment.apiUrl}users/signin`, data)
       this.router.navigate(['/home'])
       console.log(res.data)
       await localStorage.setItem('user', JSON.stringify(res.data))
+      await loader.dismiss()
     } catch (error) {
       console.log(error)
+      await loader.dismiss()
       this.errorHandler.handleError(error)
     }
   }

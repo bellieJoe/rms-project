@@ -11,12 +11,8 @@
           </ion-card-header>
           <ion-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
-              <ion-item>
-                <ion-input labelPlacement="floating" label="Email" required formControlName="email" type="text"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-input  labelPlacement="floating" label="Password" required formControlName="password" type="text"></ion-input>
-              </ion-item>
+              <ion-input fill="solid" labelPlacement="floating" label="Email" required formControlName="email" type="text"></ion-input>
+              <ion-input fill="solid"  labelPlacement="floating" label="Password" required formControlName="password" type="password"></ion-input>
               
               <br>
               <ion-button expand="block"  color="primary" type="submit" [disabled]="loginForm.invalid">

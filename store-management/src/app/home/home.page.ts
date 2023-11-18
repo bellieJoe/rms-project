@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { RefresherCustomEvent } from '@ionic/angular';
 
 import { DataService, Message } from '../services/data.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +11,9 @@ import { DataService, Message } from '../services/data.service';
 })
 export class HomePage {
 
-  constructor() {}
+  constructor(
+    private userService : UserService
+  ) {}
 
   items : any = [
     {
@@ -43,6 +46,35 @@ export class HomePage {
     },
 
   ]
+
+  public actionSheetButtons = [
+    {
+      text: 'Profile',
+      role: 'destructive',
+      icon: 'person-outline',
+      data: {
+        action: 'delete',
+      },
+    },
+    {
+      text: 'Logout',
+      icon: 'log-out-outline',
+      data: {
+        action: 'share',
+      },
+      handler: async () => {
+        await this.userService.logout()
+      }
+    },
+    {
+      text: 'Cancel',
+      role: 'cancel',
+      icon: 'close-outline',
+      data: {
+        action: 'cancel',
+      },
+    },
+  ];
 
 
 
