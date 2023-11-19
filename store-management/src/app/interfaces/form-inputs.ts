@@ -49,3 +49,9 @@ export interface ImageUploadData{
     id: number
     image: string
 }
+
+export interface AddToCartData{
+    quantity: number
+    variant: any
+    product_item : any
+}

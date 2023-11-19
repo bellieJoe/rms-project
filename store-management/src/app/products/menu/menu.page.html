@@ -5,8 +5,9 @@
     </ion-buttons>
     <ion-title>Menu</ion-title>
     <ion-buttons slot="end">
-      <ion-button color="primary" fill="clear">
-        <ion-icon slot="icon-only" name="cart"></ion-icon>
+      <ion-button size="large" color="primary" fill="clear" (click)="viewCart()">
+        <ion-icon name="cart"></ion-icon>
+        <ion-badge color="danger">{{ cartCount }}</ion-badge>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

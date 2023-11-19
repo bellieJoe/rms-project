@@ -3,6 +3,7 @@ import { IonSegment, ModalController } from '@ionic/angular';
 import { HelperService } from 'src/app/services/helper.service';
 import { MenuService } from 'src/app/services/menu.service';
 import { AddToCartPage } from './add-to-cart/add-to-cart.page';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -14,13 +15,15 @@ export class MenuPage implements OnInit {
   constructor(
     private menuService : MenuService,
     private helperService : HelperService,
-    private modalCtrl : ModalController
+    private modalCtrl : ModalController,
+    private router : Router
   ) { }
 
   @ViewChild('categorySegment') categorySegment : IonSegment|any;
   selectedCategory : any
   products : any = []
   menu : any
+  cartCount: number = this.menuService.countCart()
 
   async ngOnInit() {
     this.menu = await this.menuService.initializeMenu()
@@ -76,7 +79,13 @@ export class MenuPage implements OnInit {
     })
     console.log(item)
 
-    modal.present()
+    await modal.present()
+    await modal.onDidDismiss()
+    this.cartCount = this.menuService.countCart()
+  }
+
+  async viewCart(){
+    await this.router.navigate(['/menu/cart'])
   }
 
 }

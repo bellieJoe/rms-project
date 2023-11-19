@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { AlertController, IonInput, ModalController, NavParams } from '@ionic/angular';
+import { Component, OnInit, Input, ViewChild, ErrorHandler } from '@angular/core';
+import { AlertController, IonInput, LoadingController, ModalController, NavParams, ToastController } from '@ionic/angular';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-add-to-cart',
@@ -11,7 +12,11 @@ export class AddToCartPage implements OnInit {
   constructor(
     private navParams: NavParams, 
     private modalController: ModalController,
-    private alertCtrl : AlertController
+    private alertCtrl : AlertController,
+    private loadingCtrl : LoadingController,
+    private toastCtrl : ToastController,
+    private menuService : MenuService,
+    private errorHandler : ErrorHandler
     ) {
     
    }
@@ -21,6 +26,7 @@ export class AddToCartPage implements OnInit {
   selectedVariant : any
   price : any
   total : any = 0
+  cartCount : number = this.menuService.countCart()
 
   ngOnInit() {
     this.item = this.navParams.get('item')
@@ -46,6 +52,16 @@ export class AddToCartPage implements OnInit {
   }
 
   async addToCart(){
+    const loader = await this.loadingCtrl.create({
+      message: "Adding product to cart",
+      backdropDismiss: false,
+      spinner: 'circular'
+    })
+    const toast = await this.toastCtrl.create({
+      icon: 'checkmark',
+      message: 'Product successfully saved',
+      duration: 3000
+    })
     if(!this.selectedVariant){
       const alert = await this.alertCtrl.create({
         header: "Incomplete Data",
@@ -63,10 +79,21 @@ export class AddToCartPage implements OnInit {
       })
       await alert.present()
     }
-    console.log({
-      variant : this.selectedVariant,
-      quantity: this.quantityEl.value,
-    })
+    try {
+      await loader.present()
+      this.menuService.addToCart({
+        variant : this.selectedVariant,
+        quantity: this.quantityEl.value,
+        product_item: this.item
+      })
+      await loader.dismiss()
+      this.modalController.dismiss()
+      toast.present()
+    } catch (error) {
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
+    }
+    this.cartCount = this.menuService.countCart()
   }
 
   async computeTotalPrice(){

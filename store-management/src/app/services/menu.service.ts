@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './error-handler.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { AddUserData } from '../interfaces/form-inputs'
+import { AddToCartData, AddUserData } from '../interfaces/form-inputs'
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 axios.defaults.withCredentials = true;
@@ -31,5 +31,55 @@ export class MenuService {
       console.log(error)
       this.errorHandler.handleError(error)
     }
+  }
+
+  async addToCart(data : AddToCartData){
+    const _cart = this.getCart()
+    if(!_cart || _cart.length <= 0){
+      this.setCart([
+        {
+          variant : data.variant,
+          quantity: data.quantity,
+          product_item: data.product_item
+        }
+      ])
+      return
+    }
+    let hasDuplicate = false
+    let cart = _cart.map((val:any, i:number)=>{
+      if(val.variant.id == data.variant.id){
+        val.quantity += data.quantity
+        hasDuplicate = true
+        return val;
+      }
+      return val
+    })
+    if(!hasDuplicate){
+      cart.push(
+        {
+          variant : data.variant,
+          quantity: data.quantity,
+          product_item: data.product_item
+        }
+      )
+    }
+    this.setCart(cart)
+    console.log(this.getCart())
+  }
+
+  getCart(){
+    return JSON.parse(localStorage.getItem('cart')!)
+  }
+
+  setCart(data:any){
+    localStorage.setItem('cart', JSON.stringify(data))
+  }
+
+  countCart(){
+    const cart = this.getCart()
+    return cart ? cart.length : 0
+  }
+  clearCart(){
+    localStorage.removeItem('cart')
   }
 }

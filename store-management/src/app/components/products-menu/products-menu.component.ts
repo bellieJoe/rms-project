@@ -11,6 +11,11 @@ export class ProductsMenuComponent  implements OnInit {
 
   menus = [
     {
+      text: 'Dashboard',
+      route: '/home',
+      icon: 'grid-outline'
+    },
+    {
       text: 'Products',
       route: '/products',
       icon: 'fast-food-outline'
@@ -25,11 +30,7 @@ export class ProductsMenuComponent  implements OnInit {
     //   route: '/menu',
     //   icon: 'grid-outline'
     // },
-    {
-      text: 'Dashboard',
-      route: '/home',
-      icon: 'grid-outline'
-    },
+    
   ]
 
   ngOnInit() {}

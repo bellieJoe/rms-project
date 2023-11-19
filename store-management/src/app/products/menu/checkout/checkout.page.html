@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title><i class="fa-solid fa-bag-shopping mr-1"></i>Checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-list>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Order Items</ion-label>
+        </ion-item-divider>
+        <ng-container *ngFor="let i of checkout">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img [src]="i.product_item.imageData" />
+            </ion-thumbnail>
+            <ion-label>
+              <ion-label>{{ i.product_item.name }}</ion-label>
+              <ion-note>Variation: {{ i.variant.name }}</ion-note><br>
+              <ion-note>{{ i.variant.price | currency:'PHP' }}</ion-note>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Other Details</ion-label>
+        </ion-item-divider>
+        <ion-input fill="solid" label="Table No." labelPlacement="floating" type="number" placeholder="Awesome Input"></ion-input>
+        <ion-textarea fill="solid" label="Notes" labelPlacement="floating"></ion-textarea>
+      </ion-item-group>
+    </ion-list>
+  </app-grid-wrapper>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>
+      <ion-note>Total </ion-note><br>
+      <ion-label color="primary">{{ 0 | currency:'PHP' }}</ion-label>
+    </ion-title>
+    <ion-buttons slot="end" color="medium">
+      <ion-button fill="outline">
+        Cancel
+      </ion-button>
+      <ion-button fill="solid" color="primary">
+        <ion-icon slot="start" name="card"></ion-icon>
+        Place Order
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
