@@ -25,6 +25,8 @@ export class CartPage implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.checkout = []
+    this.total = 0
     this.cart = this.menuService.getCart()
   }
 

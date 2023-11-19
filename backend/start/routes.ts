@@ -74,6 +74,7 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.get('init', 'MenusController.init')
+    Route.post('place-order-pos', 'MenusController.placeOrderPOS')
   }).prefix('/menu')
 
 }).prefix('/api')

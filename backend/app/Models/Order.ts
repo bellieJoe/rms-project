@@ -19,6 +19,10 @@ export default class Order extends BaseModel {
   isPos: boolean
   @column()
   deliveryTypeId: number
+  @column()
+  status: string
+  @column()
+  tableNo: number
 
   @column.dateTime()
   dateOrdered: DateTime

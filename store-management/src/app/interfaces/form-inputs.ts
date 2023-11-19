@@ -55,3 +55,11 @@ export interface AddToCartData{
     variant: any
     product_item : any
 }
+
+export interface PlaceOrderData{
+    items : AddToCartData[]
+    table_no: number
+    notes? : string
+    user_id : number
+    delivery_type_id? : number
+}

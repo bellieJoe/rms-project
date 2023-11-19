@@ -32,6 +32,10 @@ export class MenuPage implements OnInit {
     this.products = this.menu[0].productItems
   }
 
+  ionViewDidEnter(){
+    this.cartCount = this.menuService.countCart()
+  }
+
   async initImages(){
     this.menu.forEach((category : any, i : number) => {
       const items = category.productItems

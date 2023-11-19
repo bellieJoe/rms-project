@@ -17,7 +17,7 @@
         <ng-container *ngFor="let i of checkout">
           <ion-item>
             <ion-thumbnail slot="start">
-              <img [src]="i.product_item.imageData" />
+              <img src="{{ i.product_item.imageData }}" />
             </ion-thumbnail>
             <ion-label>
               <ion-label>{{ i.product_item.name }}</ion-label>
@@ -32,8 +32,8 @@
         <ion-item-divider>
           <ion-label>Other Details</ion-label>
         </ion-item-divider>
-        <ion-input fill="solid" label="Table No." labelPlacement="floating" type="number" placeholder="Awesome Input"></ion-input>
-        <ion-textarea fill="solid" label="Notes" labelPlacement="floating"></ion-textarea>
+        <ion-input #tableNoInput fill="solid" label="Table No." labelPlacement="floating" type="number" placeholder="Awesome Input"></ion-input>
+        <ion-textarea #notesInput fill="solid" label="Notes" labelPlacement="floating"></ion-textarea>
       </ion-item-group>
     </ion-list>
   </app-grid-wrapper>
@@ -49,7 +49,7 @@
       <ion-button fill="outline">
         Cancel
       </ion-button>
-      <ion-button fill="solid" color="primary">
+      <ion-button fill="solid" color="primary" (click)="placeOrder()">
         <ion-icon slot="start" name="card"></ion-icon>
         Place Order
       </ion-button>

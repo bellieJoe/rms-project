@@ -12,6 +12,8 @@ export default class OrderItem extends BaseModel {
   @column()
   price: number
   @column()
+  quantity: number
+  @column()
   menuPackageId: number
   @column()
   orderSnapshot: any

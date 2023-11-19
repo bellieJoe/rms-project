@@ -6,7 +6,7 @@ export default class extends BaseSchema {
   public async up () {
     this.schema.alterTable(this.tableName, (table) => {
       table.foreign("order_id").references("id").inTable("orders");
-      table.foreign("order_status_id").references("id").inTable("order_statuses");
+      // table.foreign("order_status_id").references("id").inTable("order_statuses");
     })
   }
 

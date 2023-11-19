@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorHandlerService } from './error-handler.service';
 import { Router, RouterLink } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { AddToCartData, AddUserData } from '../interfaces/form-inputs'
+import { AddToCartData, AddUserData, PlaceOrderData } from '../interfaces/form-inputs'
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 axios.defaults.withCredentials = true;
@@ -81,5 +81,10 @@ export class MenuService {
   }
   clearCart(){
     localStorage.removeItem('cart')
+  }
+  
+  async placeOrderPOS(data: PlaceOrderData){
+    const res = await axios.post(`${environment.apiUrl}menu/place-order-pos`, data)
+    return res
   }
 }
