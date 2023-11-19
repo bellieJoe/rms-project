@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="products-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Orders</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only" name="filter"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="Pending" [scrollable]="true">
+      <ion-segment-button value="Pending">
+        <ion-label>Pending<ion-badge color="medium" mode="ios">0</ion-badge></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Processing">
+        <ion-label>Processing<ion-badge color="warning" mode="ios">0</ion-badge></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="In Delivery">
+        <ion-label>In Delivery<ion-badge color="secondary" mode="ios">0</ion-badge></ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Completed">
+        <ion-label>Completed<ion-badge color="primary" mode="ios">0</ion-badge></ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed"  pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <app-grid-wrapper>
+
+  </app-grid-wrapper>
+</ion-content>

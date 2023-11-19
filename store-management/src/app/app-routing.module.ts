@@ -49,7 +49,11 @@ const routes: Routes = [
   {
     path: 'menu',
     loadChildren: () => import('./products/menu/menu.module').then( m => m.MenuPageModule)
+  },  {
+    path: 'orders',
+    loadChildren: () => import('./products/orders/orders.module').then( m => m.OrdersPageModule)
   },
+
 
 ];
 
