@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: OrdersPage
+  },
+  {
+    path: 'view',
+    loadChildren: () => import('./view/view.module').then( m => m.ViewPageModule)
+  },
+  {
+    path: 'view-items',
+    loadChildren: () => import('./view-items/view-items.module').then( m => m.ViewItemsPageModule)
   }
 ];
 

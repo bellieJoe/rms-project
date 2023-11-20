@@ -79,8 +79,8 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.get('', 'OrdersController.index')
-    Route.get('pending', 'OrdersController.getPending')
-    Route.get('processing', 'OrdersController.getProcessing')
+    Route.get('fetch-items', 'OrdersController.fetchItems')
+    Route.post('pos-completed', 'OrdersController.posMarkAsCompleted')
   }).prefix('/orders')
 
 }).prefix('/api')

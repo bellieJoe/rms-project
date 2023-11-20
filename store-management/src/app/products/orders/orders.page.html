@@ -21,10 +21,12 @@
           <ion-col size="6" class="pr-0"><ion-input fill="solid" type="date" label="End Date" labelPlacement="floating" formControlName="end_date"></ion-input></ion-col>
         </ion-row>
       </ion-grid>
-      <ion-button  color="primary" expand="block" type="submit">
-        <ion-icon slot="start" name="filter"></ion-icon>
-        Apply Filters
-      </ion-button>
+      <ion-menu-toggle menu="ordersFilterMenu">
+        <ion-button  color="primary" expand="block" type="submit">
+          <ion-icon slot="start" name="filter"></ion-icon>
+          Apply Filters
+        </ion-button>
+      </ion-menu-toggle>
     </form>
   </ion-content>
 </ion-menu>
@@ -58,20 +60,32 @@
         <ion-label>Order ID : {{filterChips.order_id}}</ion-label>
       </ion-chip>
       <ion-chip *ngIf="filterChips.start_date"  outline="true" style="border-radius: 3px">
-        <ion-label>From {{filterChips.start_date}}</ion-label>
+        <ion-label>From {{filterChips.start_date | date:'MMM d, y'}}</ion-label>
       </ion-chip>
       <ion-chip *ngIf="filterChips.end_date"  outline="true" style="border-radius: 3px">
-        <ion-label>To {{filterChips.end_date}}</ion-label>
+        <ion-label>To {{filterChips.end_date | date:'MMM d, y'}}</ion-label>
       </ion-chip>
     </ng-container>
-    <ng-container *ngFor="let order of orders">
-      <ion-item>
-        <ion-label>
-          <ion-label><ion-note>Order ID : {{order.id}}</ion-note></ion-label>
-          {{order.date_ordered}}
-        </ion-label>
-      </ion-item>
-    </ng-container>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Orders</ion-label>
+      </ion-list-header>
+      <ng-container *ngFor="let order of orders">
+        <ion-item button (click)="viewOrder(order)">
+          <ion-icon name="basket" slot="start" size="large"></ion-icon>
+          <ion-label>
+            <ion-label>
+              <ion-note>Order ID : {{order.id}}</ion-note>
+            </ion-label>
+            <ion-label>{{order.date_ordered | date:'MMM d, y h:mm a'}}</ion-label>
+            <ion-label *ngIf="order.is_pos">Ordered through POS</ion-label>
+            <ion-label *ngIf="!order.is_pos">Ordered By</ion-label>
+            <ion-label color="{{ order.status == 'Pending' ? 'medium' : (order.status == 'Completed' ? 'primary' : 'warning') }}">{{ order.status }}</ion-label>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <p class="text-center" *ngIf="orders.length <= 0"><ion-note>No Orders found</ion-note></p>
+    </ion-list>
 
   </app-grid-wrapper>
 </ion-content>

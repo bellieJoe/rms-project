@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import {Location} from '@angular/common'
+import html2canvas from "html2canvas";
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -37,5 +38,20 @@ export class HelperService {
     this.location.back()
   }
 
-  
+  print(): void {
+    window.print();
+  }
+
+  saveAsImage(elementId: string, fileName: string): void {
+    const element = document.getElementById(elementId);
+
+    if (element) {
+      html2canvas(element).then((canvas) => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = fileName + '.png';
+        link.click();
+      });
+    }
+  }
 }

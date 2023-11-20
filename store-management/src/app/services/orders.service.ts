@@ -27,4 +27,16 @@ export class OrdersService {
     })
     return res
   }
+
+  async posMarkAsCompleted(order_id : number) {
+    const res = await axios.post(`${environment.apiUrl}orders/pos-completed`, {
+      order_id : order_id
+    })
+    return res
+  }
+
+  async fetchItems(order_id : number) {
+    const res = await axios.get(`${environment.apiUrl}orders/fetch-items?order_id=${order_id}`)
+    return res
+  }
 }

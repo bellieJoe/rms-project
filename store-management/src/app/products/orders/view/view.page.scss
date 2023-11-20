@@ -1,0 +1,29 @@
+/* styles.css */
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    #contentToPrint, #contentToPrint * {
+      visibility: visible;
+    }
+    #contentToPrint {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+/* styles.css */
+@media print {
+    body * {
+      visibility: hidden;
+    }
+    #contentToPrint, #contentToPrint * {
+      visibility: visible;
+    }
+    #contentToPrint {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+    

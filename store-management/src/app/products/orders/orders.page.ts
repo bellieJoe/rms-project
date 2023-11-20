@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { FetchOrdersData } from 'src/app/interfaces/form-inputs';
 import { HelperService } from 'src/app/services/helper.service';
@@ -16,7 +17,8 @@ export class OrdersPage implements OnInit {
     private fb : FormBuilder,
     private ordersService : OrdersService,
     private helperService : HelperService,
-    private loadingCtrl : LoadingController
+    private loadingCtrl : LoadingController,
+    private router : Router
   ) { }
 
   page : number = 1
@@ -83,10 +85,16 @@ export class OrdersPage implements OnInit {
   }
 
   async ordersFilterFormSubmit(){
-    console.log(this.ordersFilterForm.value.status)
-    console.log(this.start_date!.value)
-    console.log(this.end_date!.value)
-    console.log(this.order_id!.value)
+    const loader = await this.loadingCtrl.create({
+      message: 'Loading orders',
+      spinner: 'lines',
+      backdropDismiss: false
+    })
+    await loader.present()
+    this.page = 1
+    this.setFilterChips()
+    this.orders = await this.fetchOrders()
+    await loader.dismiss()
   }
 
   setFilterChips(){
@@ -99,5 +107,13 @@ export class OrdersPage implements OnInit {
   async refresh(ev : any){
     await this.ngOnInit()
     ev.detail.complete()
+  }
+
+  async viewOrder(order:any){
+    this.router.navigate(['/orders/view'], {
+      state: {
+        order : order
+      }
+    })
   }
 }
