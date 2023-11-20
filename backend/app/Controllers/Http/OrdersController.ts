@@ -13,22 +13,27 @@ export default class OrdersController {
 
     async index({request}) {
         const orders = Order.query()
-        if(request.input('status') && request.input('status') != 'All'){
+        const order_id = request.input('order_id')
+        const page = request.input('page')
+        const status = request.input('status')
+        const start_date = request.input('start_date')
+        const end_date = request.input('end_date')
+        if(status && status != 'All'){
             await orders.where('status', request.input('status'))
         }
-        if(request.input('order_id')){
+        if(order_id){
             await orders.where('order_id', request.input('order_id'))
         }   
-        if(request.input('start_date') && request.input('end_date')){
+        if(start_date && end_date){
             await orders.whereBetween('date_ordered', [request.input('start_date'), request.input('end_date')])
         }
-        else if(!request.input('start_date') && request.input('end_date')){
-            await orders.whereRaw(`date_ordered > ${request.input('end_date')}`)
+        else if(!start_date && end_date){
+            await orders.whereRaw(`date_ordered <= '${request.input('end_date')}'`)
         }
-        else if(request.input('start_date') && !request.input('end_date')){
-            await orders.whereRaw(`date_ordered > ${request.input('start_date')}`)
+        else if(start_date && !end_date){
+            await orders.whereRaw(`date_ordered >= '${request.input('start_date')}'`)
         }
-        await orders.paginate(request.input('page'), 2)
+        await orders.paginate(page, 30)
         return orders
     }
 }

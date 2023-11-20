@@ -22,7 +22,9 @@ export class OrdersService {
   constructor() { }
 
   async fetchOrders(data:FetchOrdersData) {
-    const res = await axios.get(`${environment.apiUrl}menu/init`)
+    const res = await axios.get(`${environment.apiUrl}orders`, {
+      params: data
+    })
     return res
   }
 }

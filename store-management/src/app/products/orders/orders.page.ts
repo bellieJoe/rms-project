@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { LoadingController } from '@ionic/angular';
+import { FetchOrdersData } from 'src/app/interfaces/form-inputs';
+import { HelperService } from 'src/app/services/helper.service';
+import { OrdersService } from 'src/app/services/orders.service';
 
 @Component({
   selector: 'app-orders',
@@ -9,20 +13,17 @@ import { FormBuilder } from '@angular/forms';
 export class OrdersPage implements OnInit {
 
   constructor(
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private ordersService : OrdersService,
+    private helperService : HelperService,
+    private loadingCtrl : LoadingController
   ) { }
 
-  ngOnInit() {
-    this.setFilterChips()
-  }
-  
-  ionViewDidEnter(){
-    console.log(this.status!.value)
-  }
-
+  page : number = 1
+  orders : any = []
   ordersFilterForm = this.fb.group({
     order_id : [''],
-    status : ['Pending'],
+    status : ['Processing'],
     start_date : [''],
     end_date : ['']
   })
@@ -33,17 +34,51 @@ export class OrdersPage implements OnInit {
     start_date: null,
     end_date: null,
   }
+
+  async ngOnInit() {
+    const loader = await this.loadingCtrl.create({
+      message: "Preparing Orders",
+      spinner: 'lines',
+      backdropDismiss: false
+    })
+    await loader.present()
+    this.page = 1
+    this.setFilterChips()
+    this.orders = await this.fetchOrders()
+    await loader.dismiss()
+  }
   
-  public get order_id() {
+  ionViewDidEnter(){
+    console.log(this.status!.value)
+  }
+
+  async fetchOrders(){
+    const data : FetchOrdersData = {
+      order_id : this.order_id!.value,
+      status: this.status!.value,
+      start_date: this.start_date!.value,
+      end_date: this.end_date!.value,
+      page: this.page
+    }
+    try {
+      const res = await this.ordersService.fetchOrders(data)
+      return res.data
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+  public get order_id() : any {
     return this.ordersFilterForm.get('order_id')
   }
-  public get status() {
+  public get status() : any {
     return this.ordersFilterForm.get('status')
   }
-  public get start_date() {
+  public get start_date() : any {
     return this.ordersFilterForm.get('start_date')
   }
-  public get end_date() {
+  public get end_date() : any {
     return this.ordersFilterForm.get('end_date')
   }
 
@@ -62,6 +97,7 @@ export class OrdersPage implements OnInit {
   }
 
   async refresh(ev : any){
+    await this.ngOnInit()
     ev.detail.complete()
   }
 }

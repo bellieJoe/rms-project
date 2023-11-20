@@ -66,9 +66,9 @@ export interface PlaceOrderData{
 }
 
 export interface FetchOrdersData{
-    order_id : number
+    order_id? : number
     status : number
-    start_date : string
-    end_date : string
-    page : string
+    start_date? : string
+    end_date? : string
+    page? : number
 }

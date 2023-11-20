@@ -43,22 +43,6 @@
       </ion-menu-toggle>
     </ion-buttons>
   </ion-toolbar>
-  <!-- <ion-toolbar>
-    <ion-segment value="Pending" [scrollable]="true">
-      <ion-segment-button value="Pending">
-        <ion-label>Pending<ion-badge color="medium" mode="ios">0</ion-badge></ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Processing">
-        <ion-label>Processing<ion-badge color="warning" mode="ios">0</ion-badge></ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="In Delivery">
-        <ion-label>In Delivery<ion-badge color="secondary" mode="ios">0</ion-badge></ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="Completed">
-        <ion-label>Completed<ion-badge color="primary" mode="ios">0</ion-badge></ion-label>
-      </ion-segment-button>
-    </ion-segment>
-  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true" id="ordersPage">
@@ -79,6 +63,14 @@
       <ion-chip *ngIf="filterChips.end_date"  outline="true" style="border-radius: 3px">
         <ion-label>To {{filterChips.end_date}}</ion-label>
       </ion-chip>
+    </ng-container>
+    <ng-container *ngFor="let order of orders">
+      <ion-item>
+        <ion-label>
+          <ion-label><ion-note>Order ID : {{order.id}}</ion-note></ion-label>
+          {{order.date_ordered}}
+        </ion-label>
+      </ion-item>
     </ng-container>
 
   </app-grid-wrapper>
