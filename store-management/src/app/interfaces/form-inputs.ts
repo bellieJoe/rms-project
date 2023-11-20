@@ -1,3 +1,4 @@
+
 export interface AddUserData{
     name: string
     contactNumber: string
@@ -62,4 +63,12 @@ export interface PlaceOrderData{
     notes? : string
     user_id : number
     delivery_type_id? : number
+}
+
+export interface FetchOrdersData{
+    order_id : number
+    status : number
+    start_date : string
+    end_date : string
+    page : string
 }

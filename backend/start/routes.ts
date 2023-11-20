@@ -77,4 +77,10 @@ Route.group(()=>{
     Route.post('place-order-pos', 'MenusController.placeOrderPOS')
   }).prefix('/menu')
 
+  Route.group(()=>{
+    Route.get('', 'OrdersController.index')
+    Route.get('pending', 'OrdersController.getPending')
+    Route.get('processing', 'OrdersController.getProcessing')
+  }).prefix('/orders')
+
 }).prefix('/api')

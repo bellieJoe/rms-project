@@ -1,3 +1,34 @@
+<ion-menu contentId="ordersPage" menuId="ordersFilterMenu" side="end" type="overlay">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title><i class="fa-solid fa-filter mr-1"></i>Filter</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <form [formGroup]="ordersFilterForm" (ngSubmit)="ordersFilterFormSubmit()">
+      <ion-input fill="solid" type="number" label="Order ID" labelPlacement="floating" formControlName="order_id"></ion-input>
+      <ion-select value="Pending" fill="solid" label="Order Status" labelPlacement="floating" formControlName="status">
+        <ion-select-option value="All">All</ion-select-option>
+        <ion-select-option value="Pending">Pending</ion-select-option>
+        <ion-select-option value="Processing">Processing</ion-select-option>
+        <ion-select-option value="In Delivery">In Delivery</ion-select-option>
+        <ion-select-option value="Canceled">Canceled</ion-select-option>
+        <ion-select-option value="Completed">Completed</ion-select-option>
+      </ion-select>
+      <ion-grid fixed class="p-0">
+        <ion-row>
+          <ion-col size="6" class="pl-0"><ion-input fill="solid" type="date" label="Start Date" labelPlacement="floating" formControlName="start_date"></ion-input></ion-col>
+          <ion-col size="6" class="pr-0"><ion-input fill="solid" type="date" label="End Date" labelPlacement="floating" formControlName="end_date"></ion-input></ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button  color="primary" expand="block" type="submit">
+        <ion-icon slot="start" name="filter"></ion-icon>
+        Apply Filters
+      </ion-button>
+    </form>
+  </ion-content>
+</ion-menu>
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -5,12 +36,14 @@
     </ion-buttons>
     <ion-title>Orders</ion-title>
     <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon slot="icon-only" name="filter"></ion-icon>
-      </ion-button>
+      <ion-menu-toggle menu="ordersFilterMenu">
+        <ion-button>
+          <ion-icon slot="icon-only" name="filter"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-segment value="Pending" [scrollable]="true">
       <ion-segment-button value="Pending">
         <ion-label>Pending<ion-badge color="medium" mode="ios">0</ion-badge></ion-label>
@@ -25,14 +58,28 @@
         <ion-label>Completed<ion-badge color="primary" mode="ios">0</ion-badge></ion-label>
       </ion-segment-button>
     </ion-segment>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-refresher slot="fixed"  pullFactor="0.8" pullMin="60" pullMax="120">
+<ion-content [fullscreen]="true" id="ordersPage">
+  <ion-refresher slot="fixed"  pullFactor="0.8" pullMin="60" pullMax="120" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <app-grid-wrapper>
+    <ng-container >
+      <ion-chip *ngIf="filterChips.status"  outline="true" mode="md" style="border-radius: 3px">
+        <ion-label>Order Status: {{filterChips.status}}</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="filterChips.order_id"  outline="true" style="border-radius: 3px">
+        <ion-label>Order ID : {{filterChips.order_id}}</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="filterChips.start_date"  outline="true" style="border-radius: 3px">
+        <ion-label>From {{filterChips.start_date}}</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="filterChips.end_date"  outline="true" style="border-radius: 3px">
+        <ion-label>To {{filterChips.end_date}}</ion-label>
+      </ion-chip>
+    </ng-container>
 
   </app-grid-wrapper>
 </ion-content>
