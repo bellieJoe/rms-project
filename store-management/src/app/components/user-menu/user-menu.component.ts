@@ -16,6 +16,11 @@ export class UserMenuComponent  implements OnInit {
 
   menus = [
     {
+      text: 'Dashboard',
+      route: '/home',
+      icon: 'grid-outline'
+    },
+    {
       text: 'Users',
       route: '/users',
       icon: 'person-outline'
@@ -25,11 +30,7 @@ export class UserMenuComponent  implements OnInit {
       route: '/user-access',
       icon: 'lock-closed-outline'
     },
-    {
-      text: 'Dashboard',
-      route: '/home',
-      icon: 'grid-outline'
-    },
+    
   ]
 
   closeMenu() {

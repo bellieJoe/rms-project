@@ -67,6 +67,29 @@ export default class UsersController {
         })
     }
 
+    async signup({request, response}){
+        await Database.transaction(async (trx)=>{
+            const user = await User.create({
+                email: request.input('email'),
+                password: await Hash.make(request.input('password'))
+            })
+            user.useTransaction(trx)
+            await user.related('userProfile').create({
+                name: request.input('name'),
+                contactNumber: request.input('contactNumber')
+            })
+            await user.load('userProfile')
+            user.useTransaction(trx)
+            MailController.sendEmail(
+                'emails/welcome', 
+                {
+                    name: user.userProfile.name,
+                },
+                user.email
+            )
+        })
+    }
+
     async emailInUsed({request, response}){
         const user = await User.findBy('email', request.params('email').email)
         if(!user){

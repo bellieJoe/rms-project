@@ -30,7 +30,7 @@ export class ReceiptPage implements OnInit {
     this.helperService.print();
   }
 
-  saveAsImage(): void {
+  async saveAsImage() {
     this.helperService.saveAsImage('contentToPrint', 'outputImage');
   }
 

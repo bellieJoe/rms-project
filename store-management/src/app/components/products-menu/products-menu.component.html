@@ -1,48 +1,41 @@
-<ion-menu  menuId="products-menu" contentId="user-content" color="primary" swipeGesture="false" >
+<ion-menu type="overlay" menuId="products-menu" contentId="user-content" color="primary" swipeGesture="false" >
   <ion-header [translucent]="true">
-    <ion-toolbar color="primary">
+    <ion-toolbar >
       <ion-title class="font-weight-bold">Product Management</ion-title>
       <ion-button slot="end" fill="clear">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-toolbar>
   </ion-header>
-  <ion-content color="primary">
+  <ion-content>
     <!-- <ion-list class="p-0 m-0" color="primary"> -->
       
       <ng-container *ngFor="let menu of menus">
         <ion-menu-toggle menu="products-menu">
-          <ion-item color="primary" button  routerLink="{{ menu.route }}" lines="none" details="none" >
+          <ion-item button  routerLink="{{ menu.route }}" lines="none" details="none" routerLinkActive="selected">
             <ion-icon  slot="start" name="{{ menu.icon }}"></ion-icon>
             <ion-label >{{ menu.text }}</ion-label>
           </ion-item >
         </ion-menu-toggle>
       </ng-container>
-      <ion-accordion-group >
-        <ion-accordion value="first" color="primary">
-          <ion-item slot="header" color="light" color="primary">
-            <ion-icon slot="start" name="reader-outline"></ion-icon>
-            <ion-label>Menu</ion-label>
+      <ion-list>
+        <ion-list-header>Menu</ion-list-header>
+        <ion-menu-toggle menu="products-menu" auto>
+          <ion-item  lines="none" [routerLink]="['/menu']" routerLinkActive="selected">
+            <ion-icon slot="start" name="radio-button-off-outline"></ion-icon>
+            <ion-label>P.O.S.</ion-label>
           </ion-item>
-          <div slot="content" color="primary" >
-            <ion-menu-toggle menu="products-menu">
-              <ion-item color="primary" [routerLink]="['/menu']" >
-                <ion-icon slot="start" name="radio-button-off-outline"></ion-icon>
-                <ion-label>P.O.S.</ion-label>
-              </ion-item>
-            </ion-menu-toggle>  
-            <ion-menu-toggle menu="products-menu">
-              <ion-item color="primary" [routerLink]="['/orders']" >
-                <ion-icon slot="start" name="radio-button-off-outline"></ion-icon>
-                <ion-label>Orders</ion-label>
-              </ion-item>
-            </ion-menu-toggle>  
-          </div>
-        </ion-accordion>
-      </ion-accordion-group>
-
-      <br>
-      <app-menu-logout class="py-3"></app-menu-logout>
+        </ion-menu-toggle>  
+        <ion-menu-toggle menu="products-menu">
+          <ion-item  lines="none" [routerLink]="['/orders']" routerLinkActive="selected">
+            <ion-icon slot="start" name="radio-button-off-outline"></ion-icon>
+            <ion-label>Orders</ion-label>
+          </ion-item>
+        </ion-menu-toggle>  
+      </ion-list>
+      <ion-list>
+        <app-menu-logout class="py-3"></app-menu-logout>
+      </ion-list>
     <!-- </ion-list> -->
   </ion-content>
 </ion-menu>
