@@ -1,7 +1,10 @@
 /* styles.css */
 @media print {
+    ion-header{
+      display: none;
+    }
     body * {
-      visibility: hidden;
+      visibility: hidden !important;
     }
     #contentToPrint, #contentToPrint * {
       visibility: visible;
@@ -12,18 +15,3 @@
       top: 0;
     }
   }
-/* styles.css */
-@media print {
-    body * {
-      visibility: hidden;
-    }
-    #contentToPrint, #contentToPrint * {
-      visibility: visible;
-    }
-    #contentToPrint {
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-  }
-    

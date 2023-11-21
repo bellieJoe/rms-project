@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Receipt</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="print()">
+        <ion-icon slot="icon-only" name="print" ></ion-icon>
+      </ion-button>
+      <ion-button (click)="saveAsImage()">
+        <ion-icon slot="icon-only" name="download" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="contentToPrint" >
+  <app-grid-wrapper>
+    <h1 class="font-weight-bold text-center">OFFICIAL RECEIPT</h1>
+    <p class="mb-0 order-details">Order ID : {{  order.id  }}</p>
+    <p class="mb-0 order-details">Date Ordered : {{order.date_ordered | date:'MMM d, y h:mm a'}}</p>
+    <p class="mb-0 order-details">Through : {{ order.is_pos ? 'POS' : 'Online'}}</p>
+    <p class="mb-0 order-details">Created By : {{ order.user.userProfile.name }}</p>
+    <br>
+    <br>
+
+    <table>
+      <thead>
+        <tr>
+          <th class="px-2">Item</th>
+          <th class="px-2">Qty</th>
+          <th class="px-2">Price</th>
+          <th class="px-2">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of items">
+          <td class="px-2">{{ i.order_snapshot.product_item.name }}({{ i.order_snapshot.variant.name }})</td>
+          <td class="px-2">{{ i.order_snapshot.quantity }}</td>
+          <td class="px-2">{{ i.order_snapshot.variant.price | currency:'PHP' }}</td>
+          <td class="px-2">{{ (i.order_snapshot.variant.price * i.order_snapshot.quantity) | currency:'PHP' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+
+    <p class="mb-0"><span class="font-weight-bold">Total : {{ total | currency:'PHP' }}</span></p>
+  </app-grid-wrapper>
+</ion-content>

@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Victor+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,700&display=swap');
+*{
+    font-family: 'Victor Mono', monospace !important;
+}
+@media print {
+    ion-header{
+      display: none;
+    }
+    body * {
+      visibility: hidden !important;
+    }
+    #contentToPrint, #contentToPrint * {
+      visibility: visible;
+    }
+    #contentToPrint {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+  ion-content{
+    --background: white !important;
+    --color: black;
+  }
+  .oreder-details { 
+    font-size: large;
+  }

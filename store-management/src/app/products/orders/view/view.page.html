@@ -46,13 +46,9 @@
           <ion-label>Mark as In Delivery</ion-label>
         </ion-item>
       </ng-container>
-      <ion-item button (click)="print()">
-        <ion-icon slot="start" name="print"></ion-icon>
-        <ion-label>Print Order Receipt</ion-label>
-      </ion-item>
-      <ion-item button (click)="saveAsImage()">
-        <ion-icon slot="start" name="print"></ion-icon>
-        <ion-label>Save Receipt</ion-label>
+      <ion-item button (click)="viewReceipt()">
+        <ion-icon slot="start" name="receipt"></ion-icon>
+        <ion-label>Generate Reciept</ion-label>
       </ion-item>
       <ion-item button  (click)="viewItems()">
         <ion-icon slot="start" name="list"></ion-icon>

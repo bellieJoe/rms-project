@@ -65,4 +65,12 @@ export class ViewPage implements OnInit {
     this.helperService.saveAsImage('contentToPrint', 'outputImage');
   }
 
+  viewReceipt(){
+    this.router.navigate(['/orders/receipt'], {
+      state: {
+        order : this.order
+      }
+    })
+  }
+
 }
