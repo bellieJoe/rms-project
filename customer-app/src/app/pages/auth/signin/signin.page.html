@@ -1,13 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>signin</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Sign In</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">signin</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <app-grid-wrapper>
+    <form [formGroup]="signinForm" (ngSubmit)="submitSigninForm()">
+      <ion-input type="text" label="Email" labelPlacement="floating" fill="solid" formControlName="email"></ion-input>
+      <br>
+      <ion-input type="password" label="Password" labelPlacement="floating" fill="solid" formControlName="password"></ion-input>
+      <br>
+      <ion-button expand="block" color="primary" type="submit" [disabled]="signinForm.invalid">
+        Sign In
+      </ion-button>
+    </form>
+  </app-grid-wrapper>
 </ion-content>
