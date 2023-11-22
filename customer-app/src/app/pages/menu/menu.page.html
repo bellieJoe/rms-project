@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <br>
+  <app-grid-wrapper>
+    <h1 class="text-center py-3 font-weight-bold" style="font-size: 35px; line-height: 1.5;">
+      <ion-label color="primary" class="mr-2"><i class="fa-solid fa-utensils mr-2"></i> Savor.</ion-label>
+      <ion-label color="dark" class="mr-2"><i class="fa-solid fa-computer-mouse mr-2"></i>Click.</ion-label>
+      <ion-label color="primary"><i class="fa-solid fa-face-smile-beam mr-2"></i>Enjoy.</ion-label>
+    </h1>
+
+    <ion-segment #categorySegment color="primary" value="{{ selectedCategory }}" [scrollable]="true"  (ionChange)="categorySelect($event)">
+      <ion-segment-button class="p-2" *ngFor="let m of menu" value="{{ m.id }}"  >
+        <ion-label>{{ m.name }}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-grid fixed>
+      <ion-row class="ion-align-items-center">
+        <ng-container *ngFor="let item of products">
+          <ion-col class="p-0 " size-sm="6" size-md="3" size-lg="2" >
+            <app-menu-product-card [item]="item" (onAddCart)="addToCart($event)"></app-menu-product-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+  </app-grid-wrapper>
+
+</ion-content>

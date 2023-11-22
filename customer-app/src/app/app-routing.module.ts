@@ -1,11 +1,22 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'signup',
-    pathMatch: 'full'
+    component: TabsComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'menu',
+      },
+      {
+        path: 'menu',
+        loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+      }
+    ]
   },
   {
     path: 'folder/:id',
@@ -22,7 +33,9 @@ const routes: Routes = [
   {
     path: 'signin',
     loadChildren: () => import('./pages/auth/signin/signin.module').then( m => m.SigninPageModule)
-  }
+  },
+  
+
 
 ];
 
