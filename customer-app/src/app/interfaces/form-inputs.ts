@@ -59,7 +59,8 @@ export interface AddToCartData{
 
 export interface PlaceOrderData{
     items : AddToCartData[]
-    table_no: number
+    table_no?: number
+    address?: string
     notes? : string
     user_id : number
     delivery_type_id? : number

@@ -13,6 +13,8 @@ export default class Order extends BaseModel {
   @column()
   notes: string
   @column()
+  address: string
+  @column()
   modeOfPaymentId: number
   @column()
   userId: number

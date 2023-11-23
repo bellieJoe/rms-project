@@ -15,7 +15,11 @@ const routes: Routes = [
       {
         path: 'menu',
         loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
-      }
+      },
+      {
+        path: 'cart',
+        loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+      },
     ]
   },
   {
@@ -34,6 +38,8 @@ const routes: Routes = [
     path: 'signin',
     loadChildren: () => import('./pages/auth/signin/signin.module').then( m => m.SigninPageModule)
   },
+  
+
   
 
 

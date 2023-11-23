@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Database from "@ioc:Adonis/Lucid/Database";
+import DeliveryType from "App/Models/DeliveryType";
 import Order from "App/Models/Order";
 import OrderItem from "App/Models/OrderItem";
 import OrderStatusHistory from "App/Models/OrderStatusHistory";
@@ -47,6 +48,32 @@ export default class MenusController {
         })
     }
 
+    async placeOrderOnline({request}){
+        await Database.transaction(async (trx)=>{
+            const items = request.input('items')
+            
+            const order = await Order.create({
+                dateOrdered: DateTime.local(),
+                notes: request.input('notes'),
+                userId: request.input('user_id'),
+                deliveryTypeId: request.input('delivery_type_id'),
+                address: request.input('address'),
+                isPos: false,
+                status: 'Processing'
+            })
+            order.useTransaction(trx)
+            const cleanOrderItems = this.cleanOrderItemsData(request.input('items'), order.id)
+            const orderItems = await OrderItem.createMany([...cleanOrderItems])
+            order.useTransaction(trx)
+            await OrderStatusHistory.create({
+                status: 'Processing',
+                orderId: order.id,
+                notes: 'Order created using POS',
+            })
+            order.useTransaction(trx)
+        })
+    }
+
     private cleanOrderItemsData(data: any, order_id:number){
         const cleanData  = data.map((val:any)=>{
             return {
@@ -58,5 +85,10 @@ export default class MenusController {
             }
         })
         return cleanData
+    }
+
+    async getDeliveryTypes({request}) {
+        const delivery_types = DeliveryType.all()
+        return delivery_types
     }
 }

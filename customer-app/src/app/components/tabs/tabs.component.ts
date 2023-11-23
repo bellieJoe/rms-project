@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-tabs',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+    public menuService : MenuService
+  ) { }
 
-  ngOnInit() {}
+  cartCount : any
+
+  ngOnInit() {
+    this.cartCount = this.menuService.countCart()
+  }
 
 }

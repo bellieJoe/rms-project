@@ -4,9 +4,9 @@
       <ion-icon name="apps-sharp"></ion-icon>
       Menu
     </ion-tab-button>
-    <ion-tab-button >
+    <ion-tab-button tab="cart">
       <ion-icon name="cart-sharp"></ion-icon>
-      Cart <ion-badge color="primary" mode="ios">42</ion-badge>
+      Cart <ion-badge color="danger" mode="ios">{{ menuService.cartCount }}</ion-badge>
     </ion-tab-button>
     <ion-tab-button >
       <ion-icon name="basket-sharp"></ion-icon>

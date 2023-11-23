@@ -76,6 +76,8 @@ Route.group(()=>{
   Route.group(()=>{
     Route.get('init', 'MenusController.init')
     Route.post('place-order-pos', 'MenusController.placeOrderPOS')
+    Route.post('place-order-online', 'MenusController.placeOrderOnline')
+    Route.get('get-delivery-types', 'MenusController.getDeliveryTypes')
   }).prefix('/menu')
 
   Route.group(()=>{
@@ -83,5 +85,6 @@ Route.group(()=>{
     Route.get('fetch-items', 'OrdersController.fetchItems')
     Route.post('pos-completed', 'OrdersController.posMarkAsCompleted')
   }).prefix('/orders')
+  
 
 }).prefix('/api')

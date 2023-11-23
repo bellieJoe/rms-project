@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('qr_id', 1000).notNullable()
       table.dateTime('date_ordered').notNullable()
       table.string('notes', 5000)
+      table.string('address', 10000)
       table.integer('table_no').unsigned().nullable()
       table.integer('mode_of_payment_id').unsigned().nullable()
       table.integer('user_id').unsigned().nullable()

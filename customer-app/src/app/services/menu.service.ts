@@ -20,6 +20,8 @@ export class MenuService {
     private errorHandler : ErrorHandlerService
   ) { }
 
+  cartCount:any = 0
+
   async initializeMenu(){
     try {
       const res = await axios.get(`${environment.apiUrl}menu/init`)
@@ -62,6 +64,7 @@ export class MenuService {
       )
     }
     this.setCart(cart)
+    this.countCart()
     console.log(this.getCart())
   }
 
@@ -75,7 +78,8 @@ export class MenuService {
 
   countCart(){
     const cart = this.getCart()
-    return cart ? cart.length : 0
+    this.cartCount = cart ? cart.length : 0
+    return cart ? cart.length : 0;
   }
   clearCart(){
     localStorage.removeItem('cart')
@@ -83,6 +87,16 @@ export class MenuService {
   
   async placeOrderPOS(data: PlaceOrderData){
     const res = await axios.post(`${environment.apiUrl}menu/place-order-pos`, data)
+    return res
+  }
+
+  async placeOrderOnline(data: PlaceOrderData){
+    const res = await axios.post(`${environment.apiUrl}menu/place-order-online`, data)
+    return res
+  }
+
+  async getDeliveryTypes(){
+    const res = await axios.get(`${environment.apiUrl}menu/get-delivery-types`)
     return res
   }
 }

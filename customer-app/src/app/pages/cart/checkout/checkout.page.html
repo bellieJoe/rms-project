@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title><i class="fa-solid fa-bag-shopping mr-1"></i>Checkout</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-list>
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Order Items</ion-label>
+        </ion-item-divider>
+        <ng-container *ngFor="let i of checkout">
+          <ion-item>
+            <ion-thumbnail slot="start">
+              <img src="{{ i.product_item.imageData }}" />
+            </ion-thumbnail>
+            <ion-label>
+              <ion-label>{{ i.product_item.name }}</ion-label>
+              <ion-note>Variation: {{ i.variant.name }}</ion-note><br>
+              <ion-note>{{ i.variant.price | currency:'PHP' }}</ion-note>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-item-group>
+
+      <ion-item-group>
+        <ion-item-divider>
+          <ion-label>Other Details</ion-label>
+        </ion-item-divider>
+        <ion-select #deliveryMode (ionChange)="onSelectDelivery()" class="mb-2" fill="solid" label="Delivery Mode" labelPlacement="floating" placeholder="Select Delivery Mode">
+          <ng-container *ngFor="let i of delivery_types">
+            <ion-select-option  value="{{ i.id }}">{{ i.name }}</ion-select-option>
+          </ng-container>
+        </ion-select>
+        <ion-input *ngIf="selectedDelivery == 1" #address fill="solid" label="Address" labelPlacement="floating" type="text" placeholder="Enter Delivery Address"></ion-input>
+        <ion-textarea #notesInput fill="solid" label="Notes" labelPlacement="floating"></ion-textarea>
+      </ion-item-group>
+    </ion-list>
+
+    <ion-button expand="block" fill="solid" color="primary" (click)="placeOrder()">
+      <ion-icon slot="start" name="card"></ion-icon>
+      Place Order
+    </ion-button>
+  </app-grid-wrapper>
+</ion-content>
