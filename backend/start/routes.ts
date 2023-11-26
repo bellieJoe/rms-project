@@ -82,8 +82,10 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.get('', 'OrdersController.index')
+    Route.get('customer-orders', 'OrdersController.customerOrders')
     Route.get('fetch-items', 'OrdersController.fetchItems')
     Route.post('pos-completed', 'OrdersController.posMarkAsCompleted')
+    Route.post('customer-cancel', 'OrdersController.customerCancel')
   }).prefix('/orders')
   
 

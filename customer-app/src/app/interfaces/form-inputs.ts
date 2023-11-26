@@ -71,5 +71,11 @@ export interface FetchOrdersData{
     status : number
     start_date? : string
     end_date? : string
-    page? : number
+    page? : number,
+    user_id : number
+}
+
+export interface CancelOrderData {
+    order_id : number
+    reason : string
 }

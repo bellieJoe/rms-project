@@ -1,0 +1,24 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Order Items</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper >
+    <ng-container *ngFor="let item of items">
+      <ion-item>
+        <ion-icon slot="start" name="fast-food" size="large"></ion-icon>
+        <ion-label>
+          <ion-label>{{ item.order_snapshot.product_item.name }}</ion-label>
+          <ion-label>Variation : {{ item.order_snapshot.variant.name }}</ion-label>
+          <ion-label>Quantity : {{ item.order_snapshot.quantity  }}</ion-label>
+          <ion-label>{{ item.order_snapshot.variant.price | currency:'PHP' }}</ion-label>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </app-grid-wrapper>
+</ion-content>

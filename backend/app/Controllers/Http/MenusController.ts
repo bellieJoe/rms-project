@@ -59,7 +59,7 @@ export default class MenusController {
                 deliveryTypeId: request.input('delivery_type_id'),
                 address: request.input('address'),
                 isPos: false,
-                status: 'Processing'
+                status: 'Pending'
             })
             order.useTransaction(trx)
             const cleanOrderItems = this.cleanOrderItemsData(request.input('items'), order.id)
