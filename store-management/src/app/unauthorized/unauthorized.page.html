@@ -1,0 +1,14 @@
+
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-grid-wrapper>
+    <img src="./../../assets/images/unauthorized.jpg" alt="">
+    <ion-label color="medium">
+      <p class="text-center warning-text">Oops! It seems you are not allowed to go to this page.</p>
+    </ion-label>
+    <ion-button [routerLink]="['/home']"  color="primary">
+      <ion-icon slot="start" name="home"></ion-icon>
+      Return to Home
+    </ion-button>
+  </app-grid-wrapper>
+</ion-content>

@@ -44,6 +44,30 @@ export default class UsersController {
         return user;
     }
 
+    async signinEmployee({request, response}){
+        var user : any  = await User.findBy("email", request.input("email"))
+        if(!user){
+            return await response.notFound({error: "Account not found"})
+        }
+
+        if(!(await Hash.verify(user.password, request.input('password')))){
+            return await response.unauthorized({error: "Invalid Password"})
+        }
+
+        await user.load('userProfile')
+        await user?.load('employee', (q)=>{
+            q.where('is_active', 1)
+            q.preload('serviceRecords', (q)=>{
+                q.where('is_active', 1)
+            })
+        })
+
+        if(!user.employee){
+            return await response.unauthorized({error: "Unauthorized Access"})
+        }
+        return user;
+    }
+
     async addUser({request, response}){
         await Database.transaction(async (trx)=>{
             const user = await User.create({
@@ -101,6 +125,12 @@ export default class UsersController {
     async test({request}){
         const user = await User.findBy('email', 'admin@email.com')
         await user?.load('userProfile')
+        await user?.load('employee', (q)=>{
+            q.where('is_active', 1)
+            q.preload('serviceRecords', (q)=>{
+                q.where('is_active', 1)
+            })
+        })
         return user;
     }
 

@@ -1,10 +1,11 @@
 import { DateTime } from 'luxon'
-import { BaseModel, HasOne, column, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasOne, column, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
 import UserProfile from './UserProfile';
+import Employee from './Employee';
 
 export default class User extends BaseModel {
   public static table = "users";
-  
+
   @column({ isPrimary: true })
   public id: number
 
@@ -23,4 +24,7 @@ export default class User extends BaseModel {
   // relationships
   @hasOne(()=>UserProfile)
   public userProfile: HasOne<typeof UserProfile>
+
+  @hasOne(()=>Employee)
+  public employee : HasOne<typeof Employee>
 }

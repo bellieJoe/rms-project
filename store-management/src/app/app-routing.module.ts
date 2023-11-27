@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { GuestGuard } from './guards/guest.guard';
 import { AuthGuard } from './guards/auth.guard';
+import { PrivilegeL1Guard } from './guards/privilege-l1.guard';
 
 const routes: Routes = [
   {
@@ -27,36 +28,47 @@ const routes: Routes = [
   {
     path: 'user-access',
     loadChildren: () => import('./users/user-access/user-access.module').then( m => m.UserAccessPageModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, PrivilegeL1Guard]
   },
-  {
-    path: 'signup',
-    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule),
-    canActivate: [GuestGuard]
-  },
+  // {
+  //   path: 'signup',
+  //   loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule),
+  //   canActivate: [GuestGuard]
+  // },
   {
     path: 'users',
-    loadChildren: () => import('./users/users/users.module').then( m => m.UsersPageModule)
+    loadChildren: () => import('./users/users/users.module').then( m => m.UsersPageModule),
+    canActivate: [AuthGuard, PrivilegeL1Guard]
   },
   {
     path: 'products',
-    loadChildren: () => import('./products/products/products.module').then( m => m.ProductsPageModule)
+    loadChildren: () => import('./products/products/products.module').then( m => m.ProductsPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'product-category',
-    loadChildren: () => import('./products/product-category/product-category.module').then( m => m.ProductCategoryPageModule)
+    loadChildren: () => import('./products/product-category/product-category.module').then( m => m.ProductCategoryPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'menu',
-    loadChildren: () => import('./products/menu/menu.module').then( m => m.MenuPageModule)
-  },  {
+    loadChildren: () => import('./products/menu/menu.module').then( m => m.MenuPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'orders',
-    loadChildren: () => import('./products/orders/orders.module').then( m => m.OrdersPageModule)
+    loadChildren: () => import('./products/orders/orders.module').then( m => m.OrdersPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'employees',
-    loadChildren: () => import('./employees/employees.module').then( m => m.EmployeesPageModule)
+    loadChildren: () => import('./employees/employees.module').then( m => m.EmployeesPageModule),
+    canActivate: [AuthGuard]
+  },  {
+    path: 'unauthorized',
+    loadChildren: () => import('./unauthorized/unauthorized.module').then( m => m.UnauthorizedPageModule)
   },
+
 
 
 ];

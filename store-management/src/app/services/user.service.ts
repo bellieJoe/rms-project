@@ -39,7 +39,7 @@ export class UserService {
     )
     try {
       await loader.present()
-      const res = await axios.post(`${environment.apiUrl}users/signin`, data)
+      const res = await axios.post(`${environment.apiUrl}users/signin-employee`, data)
       this.router.navigate(['/home'])
       console.log(res.data)
       await localStorage.setItem('user', JSON.stringify(res.data))
@@ -51,8 +51,8 @@ export class UserService {
     }
   }
 
-  async getAuth(){
-    const _auth : any = await localStorage.getItem('user')
+  getAuth(){
+    const _auth : any = localStorage.getItem('user')
     const auth = JSON.parse(_auth)
     return auth
   }

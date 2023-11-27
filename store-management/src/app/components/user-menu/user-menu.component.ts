@@ -25,11 +25,11 @@ export class UserMenuComponent  implements OnInit {
       route: '/users',
       icon: 'person-outline'
     },
-    {
-      text: 'Users Access',
-      route: '/user-access',
-      icon: 'lock-closed-outline'
-    },
+    // {
+    //   text: 'Users Access',
+    //   route: '/user-access',
+    //   icon: 'lock-closed-outline'
+    // },
     
   ]
 

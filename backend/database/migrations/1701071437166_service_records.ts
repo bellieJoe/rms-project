@@ -7,6 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.integer('employee_id').unsigned().notNullable();
+      table.string('position', 100).notNullable();
       table.date('from');
       table.date('to');
       table.double('per_day_salary');

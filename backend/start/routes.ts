@@ -32,10 +32,11 @@ Route.group(()=>{
     Route.get('search-by-name', 'UsersController.searchByName'); 
     Route.get('register', 'UsersController.register'); 
     Route.post('signin', 'UsersController.signin'); 
+    Route.post('signin-employee', 'UsersController.signinEmployee'); 
     Route.post('add-user', 'UsersController.addUser'); 
     Route.post('signup', 'UsersController.signup'); 
     Route.get('email-inused/:email', 'UsersController.emailInUsed'); 
-    Route.get('test', 'UsersController.index'); 
+    Route.get('test', 'UsersController.test'); 
     Route.put('edit-profile', 'UsersController.editProfile'); 
   }).prefix('/users')
 
