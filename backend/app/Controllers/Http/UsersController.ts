@@ -104,6 +104,16 @@ export default class UsersController {
         return user;
     }
 
+    async editProfile({request}){
+        const userProfile = await UserProfile.query().where('user_id', request.input('user_id')).first()
+        userProfile!.name = request.input('name')
+        userProfile!.contactNumber = request.input('contact_number')
+        await userProfile?.save()
+        const user = await User.find(request.input('user_id'))
+        await user?.load('userProfile')
+        return user
+    }
+
     
 
 }

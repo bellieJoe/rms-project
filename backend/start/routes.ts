@@ -36,6 +36,7 @@ Route.group(()=>{
     Route.post('signup', 'UsersController.signup'); 
     Route.get('email-inused/:email', 'UsersController.emailInUsed'); 
     Route.get('test', 'UsersController.index'); 
+    Route.put('edit-profile', 'UsersController.editProfile'); 
   }).prefix('/users')
 
   Route.group(()=>{

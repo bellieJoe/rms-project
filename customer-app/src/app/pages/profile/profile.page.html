@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-item>
+      <ion-label>
+        <ion-note>Name</ion-note>
+        <ion-label>{{ user.userProfile?.name }}</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-note>Email</ion-note>
+        <ion-label>{{ user.email }}</ion-label>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-note>Contact Number</ion-note>
+        <ion-label>{{ user.userProfile?.contact_number }}</ion-label>
+      </ion-label>
+    </ion-item>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Actions</ion-label>
+      </ion-list-header>
+      <ion-item button (click)="editProfile()">
+        <ion-icon slot="start" name="create"></ion-icon>
+        <ion-label>Edit</ion-label>
+      </ion-item>
+    </ion-list>
+  </app-grid-wrapper>
+</ion-content>

@@ -79,3 +79,9 @@ export interface CancelOrderData {
     order_id : number
     reason : string
 }
+
+export interface EditUserProfileData {
+    user_id : number
+    name : string
+    contact_number : string
+}

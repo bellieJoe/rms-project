@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
-import { AddUserData } from '../interfaces/form-inputs';
+import { AddUserData, EditUserProfileData } from '../interfaces/form-inputs';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ErrorHandlerService } from './error-handler.service';
@@ -93,5 +93,11 @@ export class UserService {
     const _auth : any = await localStorage.getItem('user')
     const auth = JSON.parse(_auth)
     return auth
+  }
+
+  async editProfile(data:EditUserProfileData){
+    // edit-profile
+    const res = await axios.put(`${environment.apiUrl}users/edit-profile`, data)
+    return res
   }
 }

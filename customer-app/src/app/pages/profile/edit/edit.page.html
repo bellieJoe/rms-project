@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="editProfileForm" (ngSubmit)="submitEditProfileForm()">
+      <ion-input type="text" label="Name" labelPlacement="floating" fill="solid" formControlName="name"></ion-input>
+      <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Name is required</app-input-err-msg>
+      <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Length exceeds 100 characters</app-input-err-msg>
+
+      <ion-input maxLength="11" type="text" label="Contact Number" placeholder="09XXXXXXXXX" labelPlacement="floating" fill="solid" formControlName="contact_number"></ion-input>
+      <app-input-err-msg *ngIf="contact_number?.hasError('required') && contact_number?.touched">Contact Number is required</app-input-err-msg>
+      <app-input-err-msg *ngIf="contact_number?.hasError('maxlength') && contact_number?.touched">Length exceeds 11 characters</app-input-err-msg>
+      <app-input-err-msg *ngIf="contact_number?.hasError('minlength') && contact_number?.touched">Length must be exactly 11 characters</app-input-err-msg>
+      <app-input-err-msg *ngIf="contact_number?.hasError('pattern') && contact_number?.touched">Contact Number should start with 09</app-input-err-msg>
+
+      <ion-button expand="block" color="primary" type="submit" [disabled]="editProfileForm.invalid">
+        <ion-icon slot="start" name="save"></ion-icon>
+        Save
+      </ion-button>
+    </form>
+  </app-grid-wrapper>
+</ion-content>

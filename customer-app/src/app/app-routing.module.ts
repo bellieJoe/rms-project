@@ -24,6 +24,10 @@ const routes: Routes = [
         path: 'orders',
         loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+      },
     ]
   },
   {
@@ -42,6 +46,8 @@ const routes: Routes = [
     path: 'signin',
     loadChildren: () => import('./pages/auth/signin/signin.module').then( m => m.SigninPageModule)
   },
+  
+
   
 
   
