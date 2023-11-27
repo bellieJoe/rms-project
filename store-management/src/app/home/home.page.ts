@@ -38,10 +38,10 @@ export class HomePage {
       image: '../../assets/images/inventory.jpg'
     },
     {
-      title: "Payroll",
+      title: "Employee Portal",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/payroll',
+      route: '/employees',
       image: '../../assets/images/employee.jpg'
     },
 
