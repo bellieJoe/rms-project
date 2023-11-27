@@ -24,7 +24,7 @@ export class MenuService {
 
   async initializeMenu(){
     try {
-      const res = await axios.get(`${environment.apiUrl}menu/init`)
+      const res = await axios.get(`${environment.apiUrl}menu/init-online`)
       console.log(res.data)
       return res.data
     } catch (error) {

@@ -14,13 +14,29 @@ export default class MenusController {
         const categories = await ProductCategory.query()
         .preload('productItems', (q) => {
             q.where('in_menu', 1)
+            .where('is_archived', 0)
             q.preload('productVariants', (q) => {
                 q.where('in_menu', 1)
+                .where('is_archived', 0)
             })
-            .where('is_archived', 0)
         })
         .where('is_archived', 0)
-        return categories
+        return this.finalizeMenu(categories)
+    }
+
+    async initOnline () {
+        const categories = await ProductCategory.query()
+        .where('is_archived', 0)
+        .preload('productItems', (q) => {
+            q.where('in_menu', 1)
+            .where('is_archived', 0)
+            q.preload('productVariants', (q) => {
+                q.where('in_menu', 1)
+                .where('online_availability', 1)
+                .where('is_archived', 0)
+            })
+        })
+        return this.finalizeMenu(categories)
     }
 
     async placeOrderPOS({request}){
@@ -90,5 +106,15 @@ export default class MenusController {
     async getDeliveryTypes({request}) {
         const delivery_types = DeliveryType.all()
         return delivery_types
+    }
+
+    finalizeMenu(categories : any){
+        return categories.map((category:any, i:number)=>{
+            category.productItems = category.productItems.filter((item:any, j:number)=>{
+                return item.productVariants.length > 0 ? true : false
+            })
+            return category;
+        })
+        
     }
 }
