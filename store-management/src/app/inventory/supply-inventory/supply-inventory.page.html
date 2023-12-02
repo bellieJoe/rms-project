@@ -8,5 +8,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/supply-inventory/create']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

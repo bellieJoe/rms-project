@@ -72,3 +72,9 @@ export interface FetchOrdersData{
     end_date? : string
     page? : number
 }
+
+export interface AddSupplyItemData {
+    name : string
+    critical_level : number
+    specifications : string
+}

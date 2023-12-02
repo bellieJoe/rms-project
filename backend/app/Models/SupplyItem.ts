@@ -7,8 +7,8 @@ export default class SupplyItem extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
-  supplyCategoryId: number
+  // @column()
+  // supplyCategoryId: number
   @column()
   critical_level: number
   @column()

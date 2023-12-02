@@ -90,6 +90,10 @@ Route.group(()=>{
     Route.post('pos-completed', 'OrdersController.posMarkAsCompleted')
     Route.post('customer-cancel', 'OrdersController.customerCancel')
   }).prefix('/orders')
+
+  Route.group(()=>{
+    Route.post('store-supply-item', 'SupplyItemsController.store')
+  }).prefix('/inventory')
   
 
 }).prefix('/api')

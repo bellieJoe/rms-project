@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: SupplyInventoryPage
+  },
+  {
+    path: 'create',
+    loadChildren: () => import('./create/create.module').then( m => m.CreatePageModule)
   }
 ];
 
