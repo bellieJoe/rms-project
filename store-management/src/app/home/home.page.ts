@@ -34,7 +34,7 @@ export class HomePage {
       title: "Inventory",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/inventory',
+      route: '/supply-inventory',
       image: '../../assets/images/inventory.jpg'
     },
     {

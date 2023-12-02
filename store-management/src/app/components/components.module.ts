@@ -18,6 +18,7 @@ import { LySliderModule } from '@alyle/ui/slider';
 import { LyButtonModule } from '@alyle/ui/button';
 import { ProductItemListComponent } from './product-item-list/product-item-list.component';
 import { MenuProductCardComponent } from './menu-product-card/menu-product-card.component';
+import { InventoryMenuComponent } from './inventory-menu/inventory-menu.component';
 
 @NgModule({
   
@@ -42,7 +43,8 @@ import { MenuProductCardComponent } from './menu-product-card/menu-product-card.
     ProducCategoryListComponent,
     ImageCropperComponent,
     ProductItemListComponent,
-    MenuProductCardComponent
+    MenuProductCardComponent,
+    InventoryMenuComponent
   ],
   exports: [
     MenuLogoutComponent, 
@@ -55,7 +57,8 @@ import { MenuProductCardComponent } from './menu-product-card/menu-product-card.
     ProducCategoryListComponent,
     ImageCropperComponent,
     ProductItemListComponent,
-    MenuProductCardComponent
+    MenuProductCardComponent,
+    InventoryMenuComponent
   ],
   providers: []
 })

@@ -9,7 +9,7 @@ export default class SupplyStock extends BaseModel {
   public id: number
 
   @column()
-  supplyItemVariantId: number
+  supplyItemId: number
   @column()
   batchNo: string
   @column()

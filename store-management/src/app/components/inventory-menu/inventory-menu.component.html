@@ -1,0 +1,28 @@
+<ion-menu type="overlay" menuId="inventory-menu" contentId="user-content" color="primary" swipeGesture="false" >
+  <ion-header [translucent]="true">
+    <ion-toolbar >
+      <ion-title class="font-weight-bold">Inventory</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-menu-toggle menu="inventory-menu" auto>
+      <ion-item  lines="none" [routerLink]="['/home']" routerLinkActive="selected">
+        <ion-icon slot="start" name="arrow-back"></ion-icon>
+        <ion-label>Back to Dashboard</ion-label>
+      </ion-item>
+    </ion-menu-toggle>  
+
+    <ion-list>
+      <ion-list-header>Supply Inventory</ion-list-header>
+      <ion-menu-toggle menu="inventory-menu" auto>
+        <ion-item  lines="none" [routerLink]="['/supply-inventory']" routerLinkActive="selected">
+          <ion-icon slot="start" name="caret-forward"></ion-icon>
+          <ion-label>Items</ion-label>
+        </ion-item>
+      </ion-menu-toggle>  
+    </ion-list>
+    <ion-list>
+      <app-menu-logout class="py-3"></app-menu-logout>
+    </ion-list>
+  </ion-content>
+</ion-menu>

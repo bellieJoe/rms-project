@@ -13,6 +13,10 @@ export default class extends BaseSeeder {
       name: "Admin",
       contactNumber: '09493131426'
     })
+    await user.related('employee').create({
+      isActive: true,
+      privilegeLevel: 1,
+    })
 
   }
 }
