@@ -10,4 +10,15 @@ export default class SupplyItemsController {
             critical_level: request.input('critical_level'),
         })
     }
+
+    async index({request}){
+        const _products = await SupplyItem.query()
+        .paginate(request.input('page'), 20)
+        return _products.all();
+    }
+
+    async searchByName({request}){
+        const items = await SupplyItem.query().where('supply_name', 'like', `%${request.input('keyword')}%`)
+        return items;
+    }
 }

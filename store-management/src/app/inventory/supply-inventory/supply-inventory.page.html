@@ -5,9 +5,36 @@
     </ion-buttons>
     <ion-title>Supply Inventory</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Search Name" (ionClear)="inventoryService.fetchSupplyItems()"   (ionChange)="searchItemtByName($event)" ></ion-searchbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullFactor="0.8" pullMin="60" pullMax="120" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-grid-wrapper >
+    <ion-list>
+      <ion-item-sliding *ngFor="let i of inventoryService.supplyItems">
+        <ion-item details="none">
+          <ion-label>{{ i.supply_name }}</ion-label>
+          <ion-icon slot="end" name="chevron-back" size="small"></ion-icon>
+          <ion-item-options side="end">
+            <ion-item-option color="primary" >Edit</ion-item-option>
+            <ion-item-option color="primary" >View</ion-item-option>
+          </ion-item-options>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+  </app-grid-wrapper>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button [routerLink]="['/supply-inventory/create']" >
       <ion-icon name="add"></ion-icon>

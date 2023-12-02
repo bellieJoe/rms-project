@@ -93,6 +93,8 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.post('store-supply-item', 'SupplyItemsController.store')
+    Route.get('supply-items', 'SupplyItemsController.index')
+    Route.get('search-supply-items-by-name', 'SupplyItemsController.searchByName')
   }).prefix('/inventory')
   
 

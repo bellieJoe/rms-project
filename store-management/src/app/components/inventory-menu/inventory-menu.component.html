@@ -20,6 +20,12 @@
           <ion-label>Items</ion-label>
         </ion-item>
       </ion-menu-toggle>  
+      <ion-menu-toggle menu="inventory-menu" auto>
+        <ion-item  lines="none" [routerLink]="['/home']" routerLinkActive="selected">
+          <ion-icon slot="start" name="arrow-back"></ion-icon>
+          <ion-label>Back to Dashboard</ion-label>
+        </ion-item>
+      </ion-menu-toggle>  
     </ion-list>
     <ion-list>
       <app-menu-logout class="py-3"></app-menu-logout>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-grid-wrapper',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class GridWrapperComponent  implements OnInit {
 
   constructor() { }
+
+  @Input() padding : boolean = false
 
   ngOnInit() {}
 
