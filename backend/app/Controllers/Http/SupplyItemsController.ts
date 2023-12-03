@@ -41,4 +41,10 @@ export default class SupplyItemsController {
         })
         return stock
     }
+
+    async getSupplyStocksBySupplyItemId({request}){
+        const supply_item_id = request.input('supply_item_id')
+        const _stocks = SupplyStock.query().where('supply_item_id', supply_item_id)
+        return _stocks;
+    }
 }

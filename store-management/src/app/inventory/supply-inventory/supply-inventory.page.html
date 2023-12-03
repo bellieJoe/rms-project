@@ -59,11 +59,61 @@
             <ion-icon slot="start" name="add"></ion-icon>
             <ion-label>Add Stock</ion-label>
           </ion-item>
+          <ion-item button (click)="viewStocks(selectedSupplyItem)">
+            <ion-icon slot="start" name="eye"></ion-icon>
+            <ion-label>View Stocks</ion-label>
+          </ion-item>
           <ion-item button>
             <ion-icon slot="start" name="archive" color="danger"></ion-icon>
             <ion-label color="danger">Archive</ion-label>
           </ion-item>
         </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal #viewStocksModal [initialBreakpoint]="0.8" [breakpoints]="[0, 8, 1]">
+    <ng-template>
+      <ion-content>
+        <app-skeleton-loader *ngIf="stocks.length <= 0"></app-skeleton-loader>
+        <!-- <ion-list>
+          <ion-item>
+            <ion-label>
+              <ion-note>Supply Name</ion-note>
+              <ion-label>{{ selectedSupplyItem.supply_name }}</ion-label>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-note>Critical Level</ion-note>
+              <ion-label>{{ selectedSupplyItem.critical_level }}</ion-label>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-note>Specifications</ion-note>
+              <ion-label class="multiline">{{ selectedSupplyItem.specifications }}</ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Actions</ion-label>
+          </ion-list-header>
+          <ion-item button (click)="editSupplyItem(selectedSupplyItem)">
+            <ion-icon slot="start" name="create" ></ion-icon>
+            <ion-label>Edit</ion-label>
+          </ion-item>
+          <ion-item button (click)="addStock(selectedSupplyItem)">
+            <ion-icon slot="start" name="add"></ion-icon>
+            <ion-label>Add Stock</ion-label>
+          </ion-item>
+          <ion-item button>
+            <ion-icon slot="start" name="archive" color="danger"></ion-icon>
+            <ion-label color="danger">Archive</ion-label>
+          </ion-item>
+        </ion-list> -->
       </ion-content>
     </ng-template>
   </ion-modal>

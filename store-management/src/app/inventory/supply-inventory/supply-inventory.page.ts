@@ -1,7 +1,7 @@
 import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { IonModal } from '@ionic/angular/common';
+import { IonModal, ModalController } from '@ionic/angular/common';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -16,10 +16,13 @@ export class SupplyInventoryPage implements OnInit {
     public inventoryService : InventoryService,
     private loadingCtrl : LoadingController,
     private errorHandler : ErrorHandlerService,
-    private router : Router
+    private router : Router,
+    private modalCtrl : ModalController
   ) { }
 
+  stocks : any = []
   @ViewChild('viewDetailsModal') detailsModal!: IonModal;
+  @ViewChild('viewStocksModal') stocksModal!: IonModal;
   selectedSupplyItem : any
 
   async ngOnInit() {
@@ -102,6 +105,11 @@ export class SupplyInventoryPage implements OnInit {
       }
     })
     console.log(item)
+  }
+
+  async viewStocks(supply_item: any){
+    await this.modalCtrl.dismiss()
+    await this.stocksModal.present()
   }
 
 }
