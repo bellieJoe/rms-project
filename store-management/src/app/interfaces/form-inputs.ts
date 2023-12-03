@@ -78,3 +78,10 @@ export interface AddSupplyItemData {
     critical_level : number
     specifications : string
 }
+
+export interface EditSupplyItemData {
+    id: number
+    name : string
+    critical_level : number
+    specifications : string
+}

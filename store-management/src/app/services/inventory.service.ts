@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AddSupplyItemData } from '../interfaces/form-inputs';
+import { AddSupplyItemData, EditSupplyItemData } from '../interfaces/form-inputs';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { ErrorHandler } from 'ionicons/dist/types/stencil-public-runtime';
@@ -25,6 +25,11 @@ export class InventoryService {
 
   async storeSupplyItem(data : AddSupplyItemData){
     const res = await axios.post(`${environment.apiUrl}inventory/store-supply-item`, data)
+    return res
+  }
+
+  async updateSupplyItem(data : EditSupplyItemData){
+    const res = await axios.put(`${environment.apiUrl}inventory/edit-supply-item`, data)
     return res
   }
 

@@ -17,18 +17,56 @@
 
   <app-grid-wrapper >
     <ion-list>
-      <ion-item-sliding *ngFor="let i of inventoryService.supplyItems">
-        <ion-item details="none">
-          <ion-label>{{ i.supply_name }}</ion-label>
-          <ion-icon slot="end" name="chevron-back" size="small"></ion-icon>
-          <ion-item-options side="end">
-            <ion-item-option color="primary" >Edit</ion-item-option>
-            <ion-item-option color="primary" >View</ion-item-option>
-          </ion-item-options>
-        </ion-item>
-      </ion-item-sliding>
+      <ion-item *ngFor="let i of inventoryService.supplyItems" button details="none" (click)="viewDetails(i)">
+        <ion-label>{{ i.supply_name }}</ion-label>
+      </ion-item>
     </ion-list>
   </app-grid-wrapper>
+
+  <ion-modal #viewDetailsModal [initialBreakpoint]="0.8" [breakpoints]="[0, 8, 1]">
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              <ion-note>Supply Name</ion-note>
+              <ion-label>{{ selectedSupplyItem.supply_name }}</ion-label>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-note>Critical Level</ion-note>
+              <ion-label>{{ selectedSupplyItem.critical_level }}</ion-label>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-note>Specifications</ion-note>
+              <ion-label class="multiline">{{ selectedSupplyItem.specifications }}</ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <br>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Actions</ion-label>
+          </ion-list-header>
+          <ion-item button (click)="editSupplyItem(selectedSupplyItem)">
+            <ion-icon slot="start" name="create" ></ion-icon>
+            <ion-label>Edit</ion-label>
+          </ion-item>
+          <ion-item button>
+            <ion-icon slot="start" name="add"></ion-icon>
+            <ion-label>Add Stock</ion-label>
+          </ion-item>
+          <ion-item button>
+            <ion-icon slot="start" name="archive" color="danger"></ion-icon>
+            <ion-label color="danger">Archive</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
   <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
     <ion-infinite-scroll-content></ion-infinite-scroll-content>

@@ -11,6 +11,15 @@ export default class SupplyItemsController {
         })
     }
 
+    async edit ({request}) {
+        const item = await SupplyItem.find(request.input('id'))
+        item!.supplyName = request.input('name')
+        item!.critical_level = request.input('critical_level')
+        item!.specifications = request.input('specifications')
+        await item?.save()
+        return item
+    }
+
     async index({request}){
         const _products = await SupplyItem.query()
         .paginate(request.input('page'), 20)

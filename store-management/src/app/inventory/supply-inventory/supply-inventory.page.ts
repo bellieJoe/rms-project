@@ -1,5 +1,7 @@
-import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular/common';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -13,8 +15,12 @@ export class SupplyInventoryPage implements OnInit {
   constructor(
     public inventoryService : InventoryService,
     private loadingCtrl : LoadingController,
-    private errorHandler : ErrorHandlerService
+    private errorHandler : ErrorHandlerService,
+    private router : Router
   ) { }
+
+  @ViewChild('viewDetailsModal') detailsModal!: IonModal;
+  selectedSupplyItem : any
 
   async ngOnInit() {
     const loader = await this.loadingCtrl.create({
@@ -28,7 +34,6 @@ export class SupplyInventoryPage implements OnInit {
     await this.inventoryService.fetchSupplyItems()
     await loader.dismiss()
   }
-
 
   async refresh(event : any){
     this.inventoryService.page = 1
@@ -72,6 +77,21 @@ export class SupplyInventoryPage implements OnInit {
       await loader.dismiss()
       this.errorHandler.handleError(error)
     }
+  }
+
+  async viewDetails(i:any){
+    this.selectedSupplyItem = i
+    await this.detailsModal.present()
+  }
+
+  async editSupplyItem(item:any){
+    await this.detailsModal.dismiss()
+    this.router.navigate(['/supply-inventory/edit'], {
+      state: {
+        supply_item : this.selectedSupplyItem
+      }
+    })
+    console.log(item)
   }
 
 }

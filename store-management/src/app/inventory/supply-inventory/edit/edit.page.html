@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="editSupplyInventoryForm" (ngSubmit)="editSupplyInventoryForm_submit()">
+      <ion-input formControlName="name" fill="solid" label="Name" labelPlacement="floating" type="text" maxlength="1000" required></ion-input>
+      <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Name is required</app-input-err-msg>
+
+      <ion-input formControlName="critical_level" fill="solid" label="Critical Level" labelPlacement="floating" type="number" min="1" required></ion-input>
+      <app-input-err-msg *ngIf="critical_level?.hasError('required') && critical_level?.touched">Critical Level is required</app-input-err-msg>
+
+      <ion-textarea formControlName="specifications" fill="solid" label="Specifications" labelPlacement="floating" maxlength="20000" auto-grow required></ion-textarea>
+      <app-input-err-msg *ngIf="specifications?.hasError('required') && specifications?.touched">Specifications is required</app-input-err-msg>
+
+      <ion-button expand='block' color="primary" type="submit" [disabled]="editSupplyInventoryForm.invalid">
+        <ion-icon slot="start" name="save"></ion-icon>
+        Save Item
+      </ion-button>
+    </form>
+  </app-grid-wrapper>
+</ion-content>
