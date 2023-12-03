@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import SupplyItem from "App/Models/SupplyItem";
+import SupplyStock from "App/Models/SupplyStock";
 
 export default class SupplyItemsController {
     async store ({request}) {
@@ -29,5 +30,15 @@ export default class SupplyItemsController {
     async searchByName({request}){
         const items = await SupplyItem.query().where('supply_name', 'like', `%${request.input('keyword')}%`)
         return items;
+    }
+
+    async addSupplyStocks({request}){
+        const stock = SupplyStock.create({
+            supplyItemId : request.input('supply_item_id'),
+            batchNo : request.input('batch_no'),
+            stockAmount : request.input('stock_amount'),
+            expirationDate: request.input('expiration_date'),
+        })
+        return stock
     }
 }
