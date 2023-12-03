@@ -94,4 +94,14 @@ export class SupplyInventoryPage implements OnInit {
     console.log(item)
   }
 
+  async addStock(item:any){
+    await this.detailsModal.dismiss()
+    this.router.navigate(['/supply-inventory/add-stock'], {
+      state: {
+        supply_item : this.selectedSupplyItem
+      }
+    })
+    console.log(item)
+  }
+
 }

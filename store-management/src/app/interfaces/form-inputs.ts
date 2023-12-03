@@ -85,3 +85,10 @@ export interface EditSupplyItemData {
     critical_level : number
     specifications : string
 }
+
+export interface AddSUpplyStocksData {
+    supply_item_id: number
+    stock_amount : number
+    expiration_date? : string
+    batch_no : string
+}

@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Stock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="addSupplyItemStockForm" (ngSubmit)="addSupplyItemStockForm_submit()">
+      <ion-input fill="solid"  type="text" label="Batch Number" labelPlacement="floating" value="{{ batch_no!.value }}" [readonly]="true" required></ion-input>
+      <app-input-err-msg *ngIf="batch_no?.hasError('required') && batch_no?.touched">Batch Nunmber is required</app-input-err-msg>
+
+      <ion-input fill="solid"  type="number" label="Amount" labelPlacement="floating" formControlName="stock_amount" required min="1"></ion-input>
+      <app-input-err-msg *ngIf="stock_amount?.hasError('required') && stock_amount?.touched">Stock Amount is required</app-input-err-msg>
+
+      <ion-checkbox (ionChange)="expirationDate_ticked($event)" labelPlacement="end">This has no Expiration</ion-checkbox>
+      <ion-input *ngIf="showExpirationDate" fill="solid" type="date" label="Expiration Date" labelPlacement="floating" min="{{ today }}" formControlName="expiration_date"></ion-input>
+
+      <ion-button expand="block" color="primary" type="submit" [disabled]="addSupplyItemStockForm.invalid">
+        Add Stock
+      </ion-button>
+    </form>
+  </app-grid-wrapper>
+</ion-content>
