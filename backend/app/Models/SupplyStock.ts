@@ -1,6 +1,7 @@
 
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, HasMany, column, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import SupplyTransRecord from './SupplyTransRecord';
 
 export default class SupplyStock extends BaseModel {
   static table = "supply_stocks";
@@ -23,4 +24,9 @@ export default class SupplyStock extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(()=>SupplyTransRecord)
+  public supplyTransRecords : HasMany<typeof SupplyTransRecord>
+
+  public remaining? : number
 }

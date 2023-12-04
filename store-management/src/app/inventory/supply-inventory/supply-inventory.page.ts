@@ -21,6 +21,7 @@ export class SupplyInventoryPage implements OnInit {
   ) { }
 
   stocks : any = []
+  stocksLoader : boolean = true;
   @ViewChild('viewDetailsModal') detailsModal!: IonModal;
   @ViewChild('viewStocksModal') stocksModal!: IonModal;
   selectedSupplyItem : any
@@ -110,6 +111,16 @@ export class SupplyInventoryPage implements OnInit {
   async viewStocks(supply_item: any){
     await this.modalCtrl.dismiss()
     await this.stocksModal.present()
+    this.stocksLoader = true
+    this.stocks = []
+    try {
+      const res = await this.inventoryService.getSupplyStocksBySupplyItemId(this.selectedSupplyItem.id)
+      this.stocks = res.data
+      this.stocksLoader = false
+    } catch (error) {
+      this.stocksLoader = false
+      this.errorHandler.handleError(error)
+    }
   }
 
 }

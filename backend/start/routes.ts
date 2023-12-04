@@ -92,7 +92,7 @@ Route.group(()=>{
   }).prefix('/orders')
 
   Route.group(()=>{
-  Route.post('store-supply-item', 'SupplyItemsController.store')
+    Route.post('store-supply-item', 'SupplyItemsController.store')
     Route.post('add-supply-stocks', 'SupplyItemsController.addSupplyStocks')
     Route.put('edit-supply-item', 'SupplyItemsController.edit')
     Route.get('supply-items', 'SupplyItemsController.index')

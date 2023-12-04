@@ -72,48 +72,50 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal #viewStocksModal [initialBreakpoint]="0.8" [breakpoints]="[0, 8, 1]">
+  <ion-modal #viewStocksModal [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 1]">
     <ng-template>
       <ion-content>
-        <app-skeleton-loader *ngIf="stocks.length <= 0"></app-skeleton-loader>
-        <!-- <ion-list>
-          <ion-item>
-            <ion-label>
-              <ion-note>Supply Name</ion-note>
-              <ion-label>{{ selectedSupplyItem.supply_name }}</ion-label>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <ion-note>Critical Level</ion-note>
-              <ion-label>{{ selectedSupplyItem.critical_level }}</ion-label>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <ion-note>Specifications</ion-note>
-              <ion-label class="multiline">{{ selectedSupplyItem.specifications }}</ion-label>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-        <br>
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Actions</ion-label>
-          </ion-list-header>
-          <ion-item button (click)="editSupplyItem(selectedSupplyItem)">
-            <ion-icon slot="start" name="create" ></ion-icon>
-            <ion-label>Edit</ion-label>
-          </ion-item>
-          <ion-item button (click)="addStock(selectedSupplyItem)">
-            <ion-icon slot="start" name="add"></ion-icon>
-            <ion-label>Add Stock</ion-label>
-          </ion-item>
-          <ion-item button>
-            <ion-icon slot="start" name="archive" color="danger"></ion-icon>
-            <ion-label color="danger">Archive</ion-label>
-          </ion-item>
-        </ion-list> -->
+        <app-skeleton-loader *ngIf="stocksLoader"></app-skeleton-loader>
+        <ion-note *ngIf="!stocksLoader && stocks.length <= 0">
+          <p class="text-center py-3">No Stocks found</p>
+        </ion-note>
+        <ng-container *ngIf="!stocksLoader && stocks.length > 0 ">
+          <ion-list>
+            <ion-item>
+              <ion-label>
+                <ion-note>Supply Name</ion-note>
+                <ion-label>{{ selectedSupplyItem.supply_name }}</ion-label>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <ion-note>Critical Level</ion-note>
+                <ion-label>{{ selectedSupplyItem.critical_level }}</ion-label>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <ion-note>Specifications</ion-note>
+                <ion-label class="multiline">{{ selectedSupplyItem.specifications }}</ion-label>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-list-header>
+              <ion-label>Stocks</ion-label>
+              <ion-button><ion-icon slot="start" name="print"></ion-icon>Print</ion-button>
+            </ion-list-header>
+            <ion-item *ngFor="let stock of stocks">
+              <ion-label>
+                <ion-label>Batch No.: {{ stock.batch_no }}</ion-label>
+                <ion-note *ngIf="stock.expiration_date">Will Expire on {{ stock.expiration_date | date:'mediumDate' }}<br></ion-note>
+                <ion-note>Amount Added: {{ stock.stock_amount }}</ion-note><br>
+                <ion-note>Amount Remaining: {{ stock.remaining }}</ion-note><br>
+                <ion-note>Amount Consumed: {{ stock.amountConsumed }}</ion-note><br>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-container>
       </ion-content>
     </ng-template>
   </ion-modal>

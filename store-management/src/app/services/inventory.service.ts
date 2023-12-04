@@ -57,4 +57,9 @@ export class InventoryService {
     return res;
   }
 
+  async getSupplyStocksBySupplyItemId(supply_item_id:number){
+    const res = await axios.get(`${environment.apiUrl}inventory/supply-stocks-by-supply-item-id?supply_item_id=${supply_item_id}`)
+    return res;
+  }
+
 }

@@ -44,7 +44,19 @@ export default class SupplyItemsController {
 
     async getSupplyStocksBySupplyItemId({request}){
         const supply_item_id = request.input('supply_item_id')
-        const _stocks = SupplyStock.query().where('supply_item_id', supply_item_id)
-        return _stocks;
+        let _stocks : any = SupplyStock.query().where('supply_item_id', supply_item_id)
+        await _stocks.preload('supplyTransRecords')
+        let stocks = await _stocks
+        stocks = stocks.map(stock=>{
+            const _stock = stock.serialize();
+            _stock.remaining = stock.stockAmount;
+            _stock.amountConsumed = 0;
+            stock.supplyTransRecords.forEach(rec=>{
+                _stock.amountConsumed += rec.amount
+            })
+            _stock.remaining = stock.stockAmount - _stock.amountConsumed
+            return _stock;
+        })
+        return stocks;
     }
 }
