@@ -20,10 +20,13 @@
           <ion-label>Items</ion-label>
         </ion-item>
       </ion-menu-toggle>  
+    </ion-list>
+    <ion-list>
+      <ion-list-header>Equipment Inventory</ion-list-header>
       <ion-menu-toggle menu="inventory-menu" auto>
-        <ion-item  lines="none" [routerLink]="['/home']" routerLinkActive="selected">
-          <ion-icon slot="start" name="arrow-back"></ion-icon>
-          <ion-label>Back to Dashboard</ion-label>
+        <ion-item  lines="none" [routerLink]="['/equipment-inventory']" routerLinkActive="selected">
+          <ion-icon slot="start" name="caret-forward"></ion-icon>
+          <ion-label>Items</ion-label>
         </ion-item>
       </ion-menu-toggle>  
     </ion-list>

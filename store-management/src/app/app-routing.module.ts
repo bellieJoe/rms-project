@@ -67,6 +67,14 @@ const routes: Routes = [
     path: 'supply-inventory',
     loadChildren: () => import('./inventory/supply-inventory/supply-inventory.module').then( m => m.SupplyInventoryPageModule)
   },
+  {
+    path: 'equipment-inventory',
+    loadChildren: () => import('./inventory/equipment-inventory/equipment-inventory.module').then( m => m.EquipmentInventoryPageModule)
+  },
+  {
+    path: 'barcode-reader',
+    loadChildren: () => import('./barcode-reader/barcode-reader.module').then( m => m.BarcodeReaderPageModule)
+  },
 
 
 

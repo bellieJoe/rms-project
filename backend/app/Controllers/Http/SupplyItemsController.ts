@@ -24,6 +24,7 @@ export default class SupplyItemsController {
     async index({request}){
         const _products = await SupplyItem.query()
         .paginate(request.input('page'), 20)
+        
         return _products.all();
     }
 

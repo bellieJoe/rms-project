@@ -14,6 +14,11 @@
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullFactor="0.8" pullMin="60" pullMax="120" >
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/supply-inventory/create']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
   <app-grid-wrapper >
     <ion-list>
@@ -22,6 +27,10 @@
       </ion-item>
     </ion-list>
   </app-grid-wrapper>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
   <ion-modal #viewDetailsModal [initialBreakpoint]="0.8" [breakpoints]="[0, 8, 1]">
     <ng-template>
@@ -120,14 +129,4 @@
     </ng-template>
   </ion-modal>
 
-  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
-
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button [routerLink]="['/supply-inventory/create']" >
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>

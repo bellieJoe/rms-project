@@ -27,7 +27,7 @@ export class AddVariantPage implements OnInit {
   phase : number = 1
 
   addProductVariantForm = this.fb.group({
-    product_item_id: null,
+    product_item_id: [''],
     name : ['', [Validators.required, Validators.maxLength(1000)]],
     price : ['', [Validators.required]],
     description : ['', [Validators.required, Validators.maxLength(5000)]],
@@ -76,7 +76,7 @@ export class AddVariantPage implements OnInit {
     try {
       await loader.present()
       const res = await this.productVariantService.addVariant({
-        product_item_id: this.addProductVariantForm.value.product_item_id!,
+        product_item_id: parseInt(this.addProductVariantForm.value.product_item_id!),
         description: this.addProductVariantForm.value.description!,
         name: this.addProductVariantForm.value.name!,
         price: Number(this.addProductVariantForm.value.price!),

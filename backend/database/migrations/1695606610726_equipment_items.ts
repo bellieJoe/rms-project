@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string("name", 1000).notNullable();
       table.string("equipment_no", 1000).notNullable();
       table.integer("equipment_status_id").unsigned().notNullable();
-      table.integer("equipment_category_id").unsigned().notNullable();
+      table.integer("equipment_category_id").unsigned().nullable();
       table.string("description", 5000).nullable();
       table.string("batch_no", 1000).nullable();
       table.datetime("date_added").notNullable();
