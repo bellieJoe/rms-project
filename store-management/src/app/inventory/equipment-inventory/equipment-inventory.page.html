@@ -6,14 +6,73 @@
     <ion-title>Equipment Inventory</ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar placeholder="Search Name" ></ion-searchbar>
+    <ion-searchbar placeholder="Search Name" (ionClear)="inventoryService.fetchEquipmentItem()"   (ionChange)="searchItemtByName($event)" ></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button>
-    <ion-icon name="add"></ion-icon>
-  </ion-fab-button>
- </ion-fab>
+  <ion-refresher slot="fixed" (ionRefresh)="refresh($event)" pullFactor="0.8" pullMin="60" pullMax="120" >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-grid-wrapper >
+    <ion-list>
+      <ion-item *ngFor="let i of inventoryService.equipmentItems" button details="none" (click)="viewDetails(i)">
+        <ion-label>{{ i.name }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </app-grid-wrapper>
+
+  <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-modal #viewDetailsModal [initialBreakpoint]="0.8" [breakpoints]="[0, 8, 1]">
+    <ng-template>
+      <ion-content>
+        <ion-list>
+          <ion-item>
+            <ion-label>
+              <ion-note>Equipment Name</ion-note>
+              <ion-label>{{ selectedEquipmentItem.name }}</ion-label>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <ion-note>Specifications</ion-note>
+              <ion-label class="multiline">{{ selectedEquipmentItem.specifications }}</ion-label>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+        <br>
+        <!-- <ion-list>
+          <ion-list-header>
+            <ion-label>Actions</ion-label>
+          </ion-list-header>
+          <ion-item button (click)="editSupplyItem(selectedSupplyItem)">
+            <ion-icon slot="start" name="create" ></ion-icon>
+            <ion-label>Edit</ion-label>
+          </ion-item>
+          <ion-item button (click)="addStock(selectedSupplyItem)">
+            <ion-icon slot="start" name="add"></ion-icon>
+            <ion-label>Add Stock</ion-label>
+          </ion-item>
+          <ion-item button (click)="viewStocks(selectedSupplyItem)">
+            <ion-icon slot="start" name="eye"></ion-icon>
+            <ion-label>View Stocks</ion-label>
+          </ion-item>
+          <ion-item button>
+            <ion-icon slot="start" name="archive" color="danger"></ion-icon>
+            <ion-label color="danger">Archive</ion-label>
+          </ion-item>
+        </ion-list> -->
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/equipment-inventory/create']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -47,6 +47,7 @@ export default class SupplyItem extends BaseModel {
   //   return "Needs restocking"
   // }
 
+  // unfinished
   async acquireStatus(){
     const stocks = await SupplyStock.query().where('supply_item_id', this.id)
     return stocks

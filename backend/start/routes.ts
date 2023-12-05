@@ -98,6 +98,11 @@ Route.group(()=>{
     Route.get('supply-items', 'SupplyItemsController.index')
     Route.get('supply-stocks-by-supply-item-id', 'SupplyItemsController.getSupplyStocksBySupplyItemId')
     Route.get('search-supply-items-by-name', 'SupplyItemsController.searchByName')
+    Route.group(()=>{
+      Route.post('', 'EquipmentItemsController.store')
+      Route.get('', 'EquipmentItemsController.index')
+      Route.get('search-items-by-name', 'EquipmentItemsController.searchItemsByName')
+    }).prefix('equipments')
   }).prefix('/inventory')
   
 

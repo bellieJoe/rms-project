@@ -10,15 +10,18 @@ export default class EquipmentItem extends BaseModel {
   @column()
   name: string
   @column()
-  equipmentNo: string
-  @column()
-  equipmentStatusId: number
-  @column()
-  equipmentCategoryId: number
+  specifications: string
   @column()
   description: string
-  @column()
-  bacthNo: string
+  // @column()
+  // equipmentNo: string
+  // @column()
+  // equipmentStatusId: number
+  // @column()
+  // equipmentCategoryId: number
+
+  // @column()
+  // bacthNo: string
 
   @column.dateTime()
   dateAdded: DateTime

@@ -24,11 +24,13 @@ export default class SupplyItemsController {
     async index({request}){
         const _items = await SupplyItem.query()
         .paginate(request.input('page'), 20)
+        if(_items.all().length <= 0){
+            return _items.all()
+        }
         let _res : any = []
         await new Promise((resolve)=>{
             _items.all().forEach(async(item, i)=>{
-                item.status = await item.acquireStatus()
-                console.log(item.serialize())
+                item.status = await item.acquireStatus() 
                 _res.push(item)
                 if(_items.all().length == (i+1)){
                     resolve(null)
