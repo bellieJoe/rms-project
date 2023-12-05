@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Equipment Item</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="editEquipmentInventoryForm" (ngSubmit)="editEquipmentInventoryForm_submit()">
+      <ion-input formControlName="name" fill="solid" label="Name" labelPlacement="floating" type="text" maxlength="1000" required></ion-input>
+      <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Name is required</app-input-err-msg>
+
+      <ion-textarea formControlName="specifications" fill="solid" label="Specifications" labelPlacement="floating" maxlength="20000" auto-grow required></ion-textarea>
+      <app-input-err-msg *ngIf="specifications?.hasError('required') && specifications?.touched">Specifications is required</app-input-err-msg>
+
+      <ion-button expand='block' color="primary" type="submit" [disabled]="editEquipmentInventoryForm.invalid">
+        <ion-icon slot="start" name="save"></ion-icon>
+        Save Item
+      </ion-button>
+    </form>
+  </app-grid-wrapper>
+</ion-content>

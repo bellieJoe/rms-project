@@ -20,4 +20,12 @@ export default class EquipmentItemsController {
         const items = await EquipmentItem.query().where('name', 'like', `%${request.input('keyword')}%`)
         return items;
     }
+
+    async editItem({request}){
+        const item = await EquipmentItem.find(request.input('id'))
+        item!.name = request.input('name')
+        item!.specifications = request.input('specifications')
+        await item?.save()
+        return item
+    }
 }

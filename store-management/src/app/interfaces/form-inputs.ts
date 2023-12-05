@@ -90,6 +90,12 @@ export interface EditSupplyItemData {
     specifications : string
 }
 
+export interface EditEquipmentItemData {
+    id: number
+    name : string
+    specifications : string
+}
+
 export interface AddSUpplyStocksData {
     supply_item_id: number
     stock_amount : number

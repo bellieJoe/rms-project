@@ -85,4 +85,14 @@ export class EquipmentInventoryPage implements OnInit {
     }
   }
 
+  async editEquipmentItem(item:any){
+    await this.detailsModal.dismiss()
+    this.router.navigate(['/equipment-inventory/edit'], {
+      state: {
+        equipment_item : this.selectedEquipmentItem
+      }
+    })
+    console.log(item)
+  }
+
 }

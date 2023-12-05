@@ -102,6 +102,7 @@ Route.group(()=>{
       Route.post('', 'EquipmentItemsController.store')
       Route.get('', 'EquipmentItemsController.index')
       Route.get('search-items-by-name', 'EquipmentItemsController.searchItemsByName')
+      Route.put('edit-item', 'EquipmentItemsController.editItem')
     }).prefix('equipments')
   }).prefix('/inventory')
   

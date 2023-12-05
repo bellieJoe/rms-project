@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AddEquipmentItemData, AddSUpplyStocksData, AddSupplyItemData, EditSupplyItemData } from '../interfaces/form-inputs';
+import { AddEquipmentItemData, AddSUpplyStocksData, AddSupplyItemData, EditEquipmentItemData, EditSupplyItemData } from '../interfaces/form-inputs';
 import axios from 'axios';
 import { environment } from 'src/environments/environment';
 import { ErrorHandler } from 'ionicons/dist/types/stencil-public-runtime';
@@ -86,6 +86,11 @@ export class InventoryService {
   async searchEquipmentItemByName(keyword:number){
     const res = await axios.get(`${environment.apiUrl}inventory/equipments/search-items-by-name?keyword=${keyword}`)
     return res;
+  }
+
+  async updateEquipmentItem(data : EditEquipmentItemData){
+    const res = await axios.put(`${environment.apiUrl}inventory/equipments/edit-item`, data)
+    return res
   }
 
 }
