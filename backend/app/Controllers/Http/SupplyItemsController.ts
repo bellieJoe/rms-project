@@ -22,10 +22,21 @@ export default class SupplyItemsController {
     }
 
     async index({request}){
-        const _products = await SupplyItem.query()
+        const _items = await SupplyItem.query()
         .paginate(request.input('page'), 20)
-        
-        return _products.all();
+        let _res : any = []
+        await new Promise((resolve)=>{
+            _items.all().forEach(async(item, i)=>{
+                item.status = await item.acquireStatus()
+                console.log(item.serialize())
+                _res.push(item)
+                if(_items.all().length == (i+1)){
+                    resolve(null)
+                }
+            })
+        })
+        console.log("second")
+        return _res;
     }
 
     async searchByName({request}){
