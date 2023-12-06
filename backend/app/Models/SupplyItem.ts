@@ -20,8 +20,12 @@ export default class SupplyItem extends BaseModel {
   description: string
   @column()
   isArchived: boolean
+
+  // additional columns
   @column()
   status : any
+  @column()
+  stock_details : any
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -49,7 +53,16 @@ export default class SupplyItem extends BaseModel {
 
   // unfinished
   async acquireStatus(){
-    const stocks = await SupplyStock.query().where('supply_item_id', this.id)
-    return stocks
+    const stocks = await SupplyStock.query().where('supply_item_id', this.id).preload('supplyTransRecords')
+    let _stock_total = 0
+    const _stock_ids : any = []
+    stocks.forEach((stock,i)=>{
+      let _stock_amnt = stock.stockAmount
+      stock.supplyTransRecords.forEach((trx, i)=>{
+        _stock_amnt -= trx.amount
+      })
+      _stock_total += _stock_amnt
+    })
+    return this.critical_level >= _stock_total ? 'LOW STOCK' : 'IN STOCK'
   }
 }
