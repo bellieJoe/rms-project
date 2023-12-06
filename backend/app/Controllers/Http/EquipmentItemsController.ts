@@ -37,7 +37,7 @@ export default class EquipmentItemsController {
             equipment_item_id : request.input('equipment_item_id'),
             batch_no : request.input('batch_no'),
             amount : request.input('amount'),
-            date_added : request.input('date_added'),
+            date_added :  DateTime.now().toFormat('y-f-d'),
             equipmentStatus : request.input('equipment_status'),
         }
         for (let i = 1; i <= inputs.amount; i++) {
@@ -51,5 +51,12 @@ export default class EquipmentItemsController {
         }
         const _stocks = await EquipmentStock.createMany([..._stocks_data])
         return _stocks
+    }
+
+    async stocks({request}){
+        const batch_no = request.input('batch_no')
+        const eq_stock_no = request.input('eq_stock_no')
+        const equipment_name = request.input('equipment_name')
+        const equipment_status = request.input('equipment_status')
     }
 }

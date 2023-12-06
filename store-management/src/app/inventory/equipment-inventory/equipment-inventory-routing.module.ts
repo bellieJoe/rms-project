@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'add-stock',
     loadChildren: () => import('./add-stock/add-stock.module').then( m => m.AddStockPageModule)
+  },
+  {
+    path: 'view-stocks',
+    loadChildren: () => import('./view-stocks/view-stocks.module').then( m => m.ViewStocksPageModule)
   }
 ];
 

@@ -104,5 +104,13 @@ export class EquipmentInventoryPage implements OnInit {
     })
   }
 
+  async viewStocks(equipment_item: any){
+    this.modalCtrl.dismiss()
+    this.router.navigate(['/equipment-inventory/view-stocks'], {
+      state: {
+        equipment_item : equipment_item
+      }
+    })
+  }
+
 }
-// "insert into `equipment_stocks` (`batch_no`, `created_at`, `date_added`, `eq_stock_no`, `equipment_item_id`, `equipment_status`, `updated_at`) values ('BN-1701790166921-1', '2023-12-05 23:29:30', '12/5/2023, 11:29 PM-5-Y', 'BN-1701790166921-1-EN-1701790170835-2', 1, '12/5/2023, 11:29 PM-5-Y', '2023-12-05 23:29:30') - Duplicate entry '' for key 'equipment_stocks_equipment_status_unique'"

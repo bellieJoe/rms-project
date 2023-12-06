@@ -57,8 +57,8 @@ export class AddStockPage implements OnInit {
       equipment_item_id: this.equipment_item.id,
       batch_no: this.batch_no!.value!,
       amount : parseInt(this.amount!.value!),
-      date_added: this.date_added?.value!,
-      equipment_status: this.equipment_status?.value!
+      date_added: DateTime.now().toFormat('y-f-d'),
+      equipment_status: 'STOCK'
     }
     const loader = await this.loadingCtrl.create({
       message: "Saving Equipment Stock",
