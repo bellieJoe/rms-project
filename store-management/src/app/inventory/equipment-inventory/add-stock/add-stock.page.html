@@ -1,0 +1,25 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Stock</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="addEquipmentItemStockForm" (ngSubmit)="addEquipmentItemStockForm_submit()">
+      <ion-input fill="solid"  type="text" label="Equipment Item" labelPlacement="floating" value="{{ equipment_item.name }}" [readonly]="true" required></ion-input>
+      <ion-input fill="solid"  type="text" label="Batch Number" labelPlacement="floating" value="{{ batch_no!.value }}" [readonly]="true" required></ion-input>
+      <app-input-err-msg *ngIf="batch_no?.hasError('required') && batch_no?.touched">Batch Nunmber is required</app-input-err-msg>
+
+      <ion-input fill="solid"  type="number" label="Amount" labelPlacement="floating" formControlName="amount" required min="1"></ion-input>
+      <app-input-err-msg *ngIf="amount?.hasError('required') && amount?.touched">Stock Amount is required</app-input-err-msg>
+
+      <ion-button expand="block" color="primary" type="submit" [disabled]="addEquipmentItemStockForm.invalid">
+        Add Stock
+      </ion-button>
+    </form>
+  </app-grid-wrapper>
+</ion-content>

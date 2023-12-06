@@ -85,3 +85,11 @@ export interface EditUserProfileData {
     name : string
     contact_number : string
 }
+
+export interface AddEquipmentStockData {
+    equipment_item_id : number
+    batch_no : string
+    amount : number
+    date_added : string
+    equipmentStatus : string
+}

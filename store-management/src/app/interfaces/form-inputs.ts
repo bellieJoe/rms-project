@@ -102,3 +102,11 @@ export interface AddSUpplyStocksData {
     expiration_date? : string
     batch_no : string
 }
+
+export interface AddEquipmentStocksData {
+    equipment_item_id: number
+    amount : number
+    date_added : string
+    batch_no : string
+    equipment_status : string
+}
