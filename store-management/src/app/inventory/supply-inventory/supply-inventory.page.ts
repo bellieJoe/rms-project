@@ -3,8 +3,10 @@ import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular/common';
+import { AddSupplyTransData } from 'src/app/interfaces/form-inputs';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-supply-inventory',
@@ -20,7 +22,8 @@ export class SupplyInventoryPage implements OnInit {
     private errorHandler : ErrorHandlerService,
     private alertCtrl : AlertController,
     private router : Router,
-    private modalCtrl : ModalController
+    private modalCtrl : ModalController,
+    private userService : UserService
   ) { }
 
   stockSegmentValue = 1
@@ -157,7 +160,24 @@ export class SupplyInventoryPage implements OnInit {
               _toast.present()
               return
             }
-            
+            const successToast = await this.toastCtrl.create({
+              message: "Stock successfully pulled",
+              icon: 'checkmark-circle',
+              duration: 1000
+            })
+            const data : AddSupplyTransData = {
+              care_of: this.userService.getAuth().id,
+              amount: ev.amount,
+              supply_stock_id: stock.id
+            }
+            try {
+              const res = await this.inventoryService.addSupplyTrans(data)
+              await this.modalCtrl.dismiss()
+              this.ionViewDidEnter()
+              await successToast.present()
+            } catch (error) {
+              this.errorHandler.handleError(error)
+            }
           }
         }
       ]

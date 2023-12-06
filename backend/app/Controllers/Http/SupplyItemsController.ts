@@ -2,6 +2,7 @@
 
 import SupplyItem from "App/Models/SupplyItem";
 import SupplyStock from "App/Models/SupplyStock";
+import SupplyTransRecord from "App/Models/SupplyTransRecord";
 
 export default class SupplyItemsController {
     async store ({request}) {
@@ -74,5 +75,19 @@ export default class SupplyItemsController {
             return _stock;
         })
         return stocks;
+    }
+
+    async addSupplyTrans({request}){
+        const amount = request.input('amount')
+        const care_of = request.input('care_of')
+        const trans_type = 'issued'
+        const supply_stock_id = request.input('supply_stock_id')
+        const _trans = await SupplyTransRecord.create({
+            amount: amount,
+            careOf: care_of,
+            transType: trans_type,
+            supplyStockId: supply_stock_id
+        })
+        return _trans;
     }
 }

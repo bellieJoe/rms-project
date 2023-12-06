@@ -110,3 +110,9 @@ export interface AddEquipmentStocksData {
     batch_no : string
     equipment_status : string
 }
+
+export interface AddSupplyTransData {
+    care_of : number
+    amount : number 
+    supply_stock_id : number
+}

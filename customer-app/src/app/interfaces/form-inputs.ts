@@ -93,3 +93,4 @@ export interface AddEquipmentStockData {
     date_added : string
     equipmentStatus : string
 }
+
