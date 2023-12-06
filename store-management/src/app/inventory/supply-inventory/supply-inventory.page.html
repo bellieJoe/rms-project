@@ -22,6 +22,7 @@
 
   <app-grid-wrapper >
     <ion-list>
+      <ion-label color="medium" *ngIf="inventoryService.supplyItems.length <= 0"><p class="text-center">No Items Found</p></ion-label>
       <ion-item *ngFor="let i of inventoryService.supplyItems" button details="none" (click)="viewDetails(i)">
         <ion-label>{{ i.supply_name }}</ion-label>
         <ion-label slot="end"
@@ -85,7 +86,7 @@
     </ng-template>
   </ion-modal>
 
-  <ion-modal #viewStocksModal [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 1]">
+  <ion-modal #viewStocksModal [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
     <ng-template>
       <ion-content>
         <app-skeleton-loader *ngIf="stocksLoader"></app-skeleton-loader>
@@ -113,20 +114,43 @@
               </ion-label>
             </ion-item>
           </ion-list>
+          <br>
           <ion-list>
             <ion-list-header>
               <ion-label>Stocks</ion-label>
               <ion-button><ion-icon slot="start" name="print"></ion-icon>Print</ion-button>
             </ion-list-header>
-            <ion-item *ngFor="let stock of stocks">
-              <ion-label>
-                <ion-label>Batch No.: {{ stock.batch_no }}</ion-label>
-                <ion-note *ngIf="stock.expiration_date">Will Expire on {{ stock.expiration_date | date:'mediumDate' }}<br></ion-note>
-                <ion-note>Amount Added: {{ stock.stock_amount }}</ion-note><br>
-                <ion-note>Amount Remaining: {{ stock.remaining }}</ion-note><br>
-                <ion-note>Amount Consumed: {{ stock.amountConsumed }}</ion-note><br>
-              </ion-label>
-            </ion-item>
+            <ion-segment value="1" (ionChange)="stockSegment_change($event)">
+              <ion-segment-button value="1">
+                <ion-label>In Stock</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="0">
+                <ion-label>Depleted</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+            <ng-container *ngFor="let stock of stocks">
+              <ion-item *ngIf="stockSegmentValue == 0 && stock.remaining <= 0">
+                <ion-label>
+                  <ion-label>Batch No.: {{ stock.batch_no }}</ion-label>
+                  <ion-note *ngIf="stock.expiration_date">Will Expire on {{ stock.expiration_date | date:'mediumDate' }}<br></ion-note>
+                  <ion-note>Amount Added: {{ stock.stock_amount }}</ion-note><br>
+                  <ion-note color="danger">Depleted</ion-note><br>
+                </ion-label>
+              </ion-item>
+              <ion-item-sliding *ngIf="stockSegmentValue == 1 && stock.remaining > 0">
+                <ion-item>
+                  <ion-label>
+                    <ion-label>Batch No.: {{ stock.batch_no }}</ion-label>
+                    <ion-note *ngIf="stock.expiration_date">Will Expire on {{ stock.expiration_date | date:'mediumDate' }}<br></ion-note>
+                    <ion-note>Amount Added: {{ stock.stock_amount }}</ion-note><br>
+                    <ion-note>{{ stock.remaining }} Remaining</ion-note><br>
+                  </ion-label>
+                </ion-item>
+                <ion-item-options side="end">
+                  <ion-item-option color="primary" (click)="pullSupplyStock(stock)">Pull</ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+            </ng-container>
           </ion-list>
         </ng-container>
       </ion-content>

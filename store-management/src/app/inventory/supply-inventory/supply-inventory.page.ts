@@ -1,7 +1,8 @@
+import { color } from '@alyle/ui/color';
 import { Component, ErrorHandler, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
-import { IonModal, ModalController } from '@ionic/angular/common';
+import { AlertController, IonModal, ModalController, ToastController } from '@ionic/angular/common';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 
@@ -14,12 +15,15 @@ export class SupplyInventoryPage implements OnInit {
 
   constructor(
     public inventoryService : InventoryService,
+    private toastCtrl : ToastController,
     private loadingCtrl : LoadingController,
     private errorHandler : ErrorHandlerService,
+    private alertCtrl : AlertController,
     private router : Router,
     private modalCtrl : ModalController
   ) { }
 
+  stockSegmentValue = 1
   stocks : any = []
   stocksLoader : boolean = true;
   @ViewChild('viewDetailsModal') detailsModal!: IonModal;
@@ -121,6 +125,44 @@ export class SupplyInventoryPage implements OnInit {
       this.stocksLoader = false
       this.errorHandler.handleError(error)
     }
+  }
+
+  async stockSegment_change(event:any){
+    this.stockSegmentValue = event.detail.value
+  }
+
+  async pullSupplyStock(stock:any){
+    console.log(stock)
+    const alert = await this.alertCtrl.create({
+      message: 'Pull Request',
+      inputs: [
+        {
+          type: "number",
+          placeholder: "Enter Amount",
+          max: stock.remaining,
+          name: 'amount'
+        }
+      ],
+      buttons: [
+        {
+          text: 'PULL',
+          handler: async (ev)=>{
+            if(!ev.amount || ev.amount > stock.remaining || ev.amount <= 0){
+              const _toast = await this.toastCtrl.create({
+                message: 'Invalid Amount',
+                icon: 'warning',
+                color: 'danger',
+                duration: 700
+              })
+              _toast.present()
+              return
+            }
+            
+          }
+        }
+      ]
+    })
+    await alert.present()
   }
 
 }
