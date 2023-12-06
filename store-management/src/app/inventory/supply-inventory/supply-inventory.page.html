@@ -24,6 +24,10 @@
     <ion-list>
       <ion-item *ngFor="let i of inventoryService.supplyItems" button details="none" (click)="viewDetails(i)">
         <ion-label>{{ i.supply_name }}</ion-label>
+        <ion-label slot="end"
+          color="{{i.stock_details.status == 'NO STOCK' ? 'medium' : (i.stock_details.status == 'LOW STOCK' ? 'danger' : '') }}">
+          {{ i.stock_details.status }}
+        </ion-label>
       </ion-item>
     </ion-list>
   </app-grid-wrapper>

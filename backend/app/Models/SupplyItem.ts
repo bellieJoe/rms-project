@@ -54,8 +54,13 @@ export default class SupplyItem extends BaseModel {
   // unfinished
   async acquireStatus(){
     const stocks = await SupplyStock.query().where('supply_item_id', this.id).preload('supplyTransRecords')
+    if(stocks.length <= 0){
+      return {
+        stocks_remaining: 0,
+        status: 'NO STOCK',
+      }
+    }
     let _stock_total = 0
-    const _stock_ids : any = []
     stocks.forEach((stock,i)=>{
       let _stock_amnt = stock.stockAmount
       stock.supplyTransRecords.forEach((trx, i)=>{
@@ -63,6 +68,9 @@ export default class SupplyItem extends BaseModel {
       })
       _stock_total += _stock_amnt
     })
-    return this.critical_level >= _stock_total ? 'LOW STOCK' : 'IN STOCK'
+    return {
+      stocks_remaining: _stock_total,
+      status: this.critical_level >= _stock_total ? 'LOW STOCK' : 'IN STOCK'
+    }
   }
 }
