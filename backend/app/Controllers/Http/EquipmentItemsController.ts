@@ -2,6 +2,7 @@
 
 import EquipmentItem from "App/Models/EquipmentItem";
 import EquipmentStock from "App/Models/EquipmentStock";
+import Equipment from "Database/seeders/Equipment";
 import { DateTime } from "luxon";
 
 export default class EquipmentItemsController {
@@ -58,5 +59,31 @@ export default class EquipmentItemsController {
         const eq_stock_no = request.input('eq_stock_no')
         const equipment_name = request.input('equipment_name')
         const equipment_status = request.input('equipment_status')
+        const _stocks_query = EquipmentStock.query()
+        if(batch_no){
+            _stocks_query.where('batch_no', batch_no)
+        }
+        if(equipment_status){
+            _stocks_query.where('equipment_status', equipment_status)
+        }
+        if(eq_stock_no){
+            _stocks_query.where('eq_stock_no', eq_stock_no)
+        }
+        if(equipment_name){
+            const _eq_items_id = (await EquipmentItem.query().select('id').where('name', 'like', `%${equipment_name}%`)).map((item)=>{
+                return item.id
+            })
+            _stocks_query.whereIn('equipment_item_id',[..._eq_items_id])
+        }
+        return await _stocks_query
+    }
+
+    async changeStockStatus({request}){
+        const equipment_stock_id = request.input('equipment_stock_id')
+        const equipment_status = request.input('equipment_status')
+        const _stock = await EquipmentStock.find(equipment_stock_id)
+        _stock!.equipmentStatus = equipment_status
+        await _stock?.save()
+        return _stock
     }
 }

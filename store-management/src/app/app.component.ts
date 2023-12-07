@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeVariables, ThemeRef, lyl, StyleRenderer } from '@alyle/ui';
+import { MapService } from './services/map.service';
 
 const STYLES = (theme: ThemeVariables, ref: ThemeRef) => {
   const __ = ref.selectorsOf(STYLES);
@@ -28,10 +29,12 @@ const STYLES = (theme: ThemeVariables, ref: ThemeRef) => {
 export class AppComponent implements OnInit {
   readonly classes = this.sRenderer.renderSheet(STYLES, true);
 
-  constructor(readonly sRenderer: StyleRenderer) {}
+  constructor(
+    readonly sRenderer: StyleRenderer,
+    private mapService : MapService
+    ) {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    console.log(await this.mapService.getCoordinates("Poras, Boac, Marinduque"))
   }
-
-  
 }
