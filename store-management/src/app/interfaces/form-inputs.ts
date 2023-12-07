@@ -116,3 +116,16 @@ export interface AddSupplyTransData {
     amount : number 
     supply_stock_id : number
 }
+
+export interface EquipmentStocksFilterFormData {
+    equipment_name: string
+    equipment_item_id: any
+    batch_no: string
+    eq_stock_no: string
+    equipment_status: string
+}
+
+export interface ChangeEquipmentStocksStatusData {
+    equipment_stock_id: any
+    equipment_status: string
+}

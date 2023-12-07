@@ -6,7 +6,7 @@
   </ion-header>
   <ion-content class="ion-padding">
     <form [formGroup]="filterForm" (ngSubmit)="filterForm_submit()">
-      <ion-input formControlName="equipment_name" type="text" label="Equipment Item Name" fill="solid" labelPlacement="floating"></ion-input>
+      <!-- <ion-input formControlName="equipment_name" type="text" label="Equipment Item Name" fill="solid" labelPlacement="floating"></ion-input> -->
       <ion-input formControlName="batch_no" type="text" label="Batch Number" fill="solid" labelPlacement="floating"></ion-input>
       <ion-input formControlName="eq_stock_no" type="text" label="Equipment Number" fill="solid" labelPlacement="floating"></ion-input>
       <ion-select formControlName="equipment_status" label="Equipment Status" value="STOCK" multiple="false" labelPlacement="floating" fill="solid">
@@ -17,7 +17,7 @@
       </ion-select>
       <br>
       <ion-button expand="block" color="primary" type="submit" [disabled]="filterForm.invalid">
-        Login
+        Filter
       </ion-button>
     </form>
   </ion-content>
@@ -33,12 +33,62 @@
         <ion-icon name="filter" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>{{ equipment_item.name }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" id="equipment_stocks_page">
-  <app-grid-wrapper>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  
+  <app-grid-wrapper>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Stocks</ion-label>
+      </ion-list-header>
+      <ng-container *ngFor="let stock of stocks">
+        <ion-item (click)="viewDetails(stock)">
+          <ion-label>
+            {{stock.eq_stock_no}} <br>
+            <ion-note>{{stock.batch_no}}</ion-note><br>
+            <ion-note>{{stock.equipment_status}}</ion-note>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-list>
   </app-grid-wrapper>
+
+  <ion-modal #view_details_modal [initialBreakpoint]=".6" [breakpoints]="[0, 0.5, .9]">
+    <ng-template >
+      <ion-content class="ion-padding">
+        <ion-item lines="none" details="none">
+          <ion-label>
+            <p>
+              Equipment Stock Number: <br>
+              {{stock.eq_stock_no}}
+            </p>
+            <p>Batch Number: <br>{{stock.batch_no}}</p>
+            <p>Status: <br>{{stock.equipment_status}}</p>
+          </ion-label>
+        </ion-item>
+        <br>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Actions</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-icon slot="start" name="pricetag"></ion-icon>
+            <ion-select value="{{stock.equipment_status}}" multiple="false" placeholder="Select Status" label="Change Status" (ionChange)="changeStatus($event)">
+              <ion-select-option value="STOCK">Stock</ion-select-option>
+              <ion-select-option value="CONDEMNED">Condemned</ion-select-option>
+              <ion-select-option value="LOST">Lost</ion-select-option>
+              <ion-select-option value="IN_USE">In Use</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
