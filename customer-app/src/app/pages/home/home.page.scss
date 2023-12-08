@@ -27,3 +27,7 @@ body{
     z-index: -2;
     // cursor: crosshair in !important;
   }
+
+  canvas{
+    mix-blend-mode: multiply !important;
+  }
