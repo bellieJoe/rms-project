@@ -94,3 +94,7 @@ export interface AddEquipmentStockData {
     equipmentStatus : string
 }
 
+export interface Coordinates{
+    long: string
+    lat: string
+}

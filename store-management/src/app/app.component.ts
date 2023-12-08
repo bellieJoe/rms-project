@@ -35,6 +35,6 @@ export class AppComponent implements OnInit {
     ) {}
 
   async ngOnInit() {
-    console.log(await this.mapService.getCoordinates("Poras, Boac, Marinduque"))
+    await this.mapService.test()
   }
 }

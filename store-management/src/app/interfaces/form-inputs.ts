@@ -129,3 +129,8 @@ export interface ChangeEquipmentStocksStatusData {
     equipment_stock_id: any
     equipment_status: string
 }
+
+export interface Coordinates{
+    long: string
+    lat: string
+}
