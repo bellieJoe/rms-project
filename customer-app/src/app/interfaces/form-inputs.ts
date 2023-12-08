@@ -1,3 +1,4 @@
+import { NumberSymbol } from "@angular/common"
 
 export interface AddUserData{
     name: string
@@ -63,7 +64,9 @@ export interface PlaceOrderData{
     address?: string
     notes? : string
     user_id : number
-    delivery_type_id? : number
+    delivery_type_id? : NumberSymbol,
+    location : Coordinates,
+    delivery_charge: number
 }
 
 export interface FetchOrdersData{

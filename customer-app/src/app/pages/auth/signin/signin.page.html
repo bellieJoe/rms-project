@@ -11,7 +11,7 @@
   <app-grid-wrapper>
     <form [formGroup]="signinForm" (ngSubmit)="submitSigninForm()">
       <ion-input type="text" label="Email" labelPlacement="floating" fill="solid" formControlName="email"></ion-input>
-      <br>
+      <!-- <br> -->
       <ion-input type="password" label="Password" labelPlacement="floating" fill="solid" formControlName="password"></ion-input>
       <br>
       <ion-button expand="block" color="primary" type="submit" [disabled]="signinForm.invalid">

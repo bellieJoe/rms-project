@@ -67,7 +67,7 @@ export default class MenusController {
     async placeOrderOnline({request}){
         await Database.transaction(async (trx)=>{
             const items = request.input('items')
-            
+            console.log(request)
             const order = await Order.create({
                 dateOrdered: DateTime.local(),
                 notes: request.input('notes'),
@@ -75,7 +75,9 @@ export default class MenusController {
                 deliveryTypeId: request.input('delivery_type_id'),
                 address: request.input('address'),
                 isPos: false,
-                status: 'Pending'
+                status: 'Pending',
+                location: request.input('location'),
+                deliveryCharge: request.input('delivery_charge'),
             })
             order.useTransaction(trx)
             const cleanOrderItems = this.cleanOrderItemsData(request.input('items'), order.id)

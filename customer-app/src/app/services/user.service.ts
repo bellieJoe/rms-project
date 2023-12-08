@@ -59,7 +59,7 @@ export class UserService {
 
     await loader.dismiss();
 
-    this.router.navigate(['/signin'])
+    this.router.navigate(['/home'])
   }
 
   isAuth() : boolean {
@@ -78,7 +78,7 @@ export class UserService {
     try {
       await loader.present()
       const res = await axios.post(`${environment.apiUrl}users/signin`, data)
-      this.router.navigate(['/home'])
+      this.router.navigate(['/menu'])
       console.log(res.data)
       await localStorage.setItem('user', JSON.stringify(res.data))
       await loader.dismiss()

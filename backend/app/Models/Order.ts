@@ -28,6 +28,8 @@ export default class Order extends BaseModel {
   tableNo: number
   @column()
   deliveryCharge: number
+  @column()
+  location: any
 
   @column.dateTime()
   dateOrdered: DateTime

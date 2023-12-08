@@ -1,5 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,24 +13,24 @@
       <ion-input type="text" label="Name" labelPlacement="floating" fill="solid" formControlName="name"></ion-input>
       <app-input-err-msg *ngIf="name?.hasError('required') && name?.touched">Name is required</app-input-err-msg>
       <app-input-err-msg *ngIf="name?.hasError('maxlength') && name?.touched">Length exceeds 100 characters</app-input-err-msg>
-      <br>
+      <!-- <br> -->
 
       <ion-input type="email" label="Email" labelPlacement="floating" fill="solid" formControlName="email"></ion-input>
       <app-input-err-msg *ngIf="email?.hasError('required') && email?.touched">Email is required</app-input-err-msg>
       <app-input-err-msg *ngIf="email?.hasError('email') && email?.touched">Email is invalid</app-input-err-msg>
       <app-input-err-msg *ngIf="email?.hasError('emailInUse') && email?.touched">Email is already used</app-input-err-msg>
-      <br>
+      <!-- <br> -->
 
       <ion-input label="Contact Number" type="text" maxLength="11" minLength="11" labelPlacement="floating" fill="solid" placeholder="09XXXXXXXXX" formControlName="contact_number"></ion-input>
       <app-input-err-msg *ngIf="contact_number?.hasError('required') && contact_number?.touched">Contact Number is required</app-input-err-msg>
       <app-input-err-msg *ngIf="(contact_number?.hasError('maxlength') || contact_number?.hasError('minlength')) && contact_number?.touched">Length must be 11 characters</app-input-err-msg>
-      <br>
+      <!-- <br> -->
 
       <ion-input type="password" label="Password" labelPlacement="floating" fill="solid" formControlName="password"></ion-input>
       <app-input-err-msg *ngIf="password?.hasError('required') && password?.touched">Password is required</app-input-err-msg>
       <app-input-err-msg *ngIf="password?.hasError('minlength') && password?.touched">Length must be minimum if 8 characters</app-input-err-msg>
       <app-input-err-msg *ngIf="signupForm.errors?.['passwordMismatch'] && password?.touched">Password doesn't match</app-input-err-msg>
-      <br>
+      <!-- <br> -->
 
       <ion-input type="password" label="Re-Enter Password" labelPlacement="floating" fill="solid" formControlName="password_confirmation"></ion-input>
       <br>
@@ -36,4 +39,5 @@
       </ion-button>
     </form>
   </app-grid-wrapper>
+
 </ion-content>

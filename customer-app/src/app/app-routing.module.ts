@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,19 +15,23 @@ const routes: Routes = [
       },
       {
         path: 'menu',
-        loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+        loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'cart',
-        loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule)
+        loadChildren: () => import('./pages/cart/cart.module').then( m => m.CartPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'orders',
-        loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
+        loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule),
+        canActivate: [AuthGuard]
       },
       {
         path: 'profile',
-        loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+        loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule),
+        canActivate: [AuthGuard]
       },
     ]
   },

@@ -107,6 +107,8 @@ export class CheckoutPage implements OnInit {
       notes: this.notesInput.el.value,
       user_id : await (await this.userService.getAuth()).id,
       delivery_type_id: this.selectedDelivery,
+      location: this.location,
+      delivery_charge: this.deliveryCharge
     }
     console.log(this.checkout)
     _items = []

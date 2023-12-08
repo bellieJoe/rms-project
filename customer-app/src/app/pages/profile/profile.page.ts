@@ -27,4 +27,8 @@ export class ProfilePage implements OnInit {
     this.router.navigate(['/profile/edit'])
   }
 
+  async logout(){
+    this.userService.logout()
+  }
+
 }
