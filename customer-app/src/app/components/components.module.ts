@@ -7,6 +7,10 @@ import { InputErrMsgComponent } from './input-err-msg/input-err-msg.component';
 import { GridWrapperComponent } from './grid-wrapper/grid-wrapper.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { MenuProductCardComponent } from './menu-product-card/menu-product-card.component';
+import { AddressSelectorComponent } from './address-selector/address-selector.component';
+import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
+import { CoordinateSelectorComponent } from './coordinate-selector/coordinate-selector.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   
@@ -16,18 +20,25 @@ import { MenuProductCardComponent } from './menu-product-card/menu-product-card.
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
+    LeafletModule
   ],
   declarations: [
     GridWrapperComponent,
     InputErrMsgComponent,
     TabsComponent,
-    MenuProductCardComponent
+    MenuProductCardComponent,
+    AddressSelectorComponent,
+    SkeletonLoaderComponent,
+    CoordinateSelectorComponent
   ],
   exports: [
     InputErrMsgComponent,
     GridWrapperComponent,
     TabsComponent,
-    MenuProductCardComponent
+    MenuProductCardComponent,
+    AddressSelectorComponent,
+    SkeletonLoaderComponent,
+    CoordinateSelectorComponent
   ],
   providers: []
 })

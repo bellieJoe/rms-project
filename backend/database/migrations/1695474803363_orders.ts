@@ -16,6 +16,7 @@ export default class extends BaseSchema {
       table.boolean('is_pos').notNullable().defaultTo(false)
       table.enum('status', ['Pending', 'Canceled', 'Processing', 'In Delivery', 'Completed'])
       table.integer('delivery_type_id').unsigned().nullable()
+      table.integer('delivery_charge').nullable()
       table.timestamps()
     })
   }

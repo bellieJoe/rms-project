@@ -9,10 +9,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { MaskitoModule } from '@maskito/angular';
 import { ComponentsModule } from './components/components.module';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, MaskitoModule, IonicModule.forRoot(), AppRoutingModule ],
+  imports: [BrowserModule, MaskitoModule, IonicModule.forRoot(),LeafletModule, AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy}, TabsComponent],
   bootstrap: [AppComponent],
 })

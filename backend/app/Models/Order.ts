@@ -26,6 +26,8 @@ export default class Order extends BaseModel {
   status: string
   @column()
   tableNo: number
+  @column()
+  deliveryCharge: number
 
   @column.dateTime()
   dateOrdered: DateTime

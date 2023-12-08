@@ -37,14 +37,43 @@
             <ion-select-option  value="{{ i.id }}">{{ i.name }}</ion-select-option>
           </ng-container>
         </ion-select>
-        <ion-input *ngIf="selectedDelivery == 1" #address fill="solid" label="Address" labelPlacement="floating" type="text" placeholder="Enter Delivery Address"></ion-input>
+        <ion-input value="{{ 'latitude: ' +  location.lat + ', longitude: ' + location.long }}"  readonly *ngIf="selectedDelivery == 3" #address fill="solid" type="text" label="Pick Location" labelPlacement="floating" placeholder="Select Delivery Address" (click)="selectCoordinates()"></ion-input>
+        <ion-input [value]="deliveryCharge" readonly *ngIf="selectedDelivery == 3" #address fill="solid" type="text" label="Delivery Charge" labelPlacement="floating" ></ion-input>
         <ion-textarea #notesInput fill="solid" label="Notes" labelPlacement="floating"></ion-textarea>
       </ion-item-group>
     </ion-list>
+
+
 
     <ion-button expand="block" fill="solid" color="primary" (click)="placeOrder()">
       <ion-icon slot="start" name="card"></ion-icon>
       Place Order
     </ion-button>
   </app-grid-wrapper>
+
+  <!-- <ion-modal #address_selector [initialBreakpoint]=".9" [breakpoints]="[0, 0.5, 0.9]">
+    <ng-template >
+      <ion-content>
+        <app-address-selector (onAddressSelect)="address_selected($event)"></app-address-selector>
+      </ion-content>
+    </ng-template>
+  </ion-modal> -->
+
+  <ion-modal #map_modal [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
+    <ng-template >
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeMapModal()">
+              Close
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <app-coordinate-selector (onMapSelect)="coordinates_selected($event)"></app-coordinate-selector>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+  
 </ion-content>

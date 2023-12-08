@@ -1,0 +1,17 @@
+
+<ion-content class="ion-padding">
+  <!-- <app-skeleton-loader></app-skeleton-loader> -->
+  <ion-toolbar>
+    <ion-searchbar placeholder="Enter Address or Landmark"  [debounce]="250" (ionInput)="searchChange($event)"></ion-searchbar>
+  </ion-toolbar>
+  <ion-list>
+    <p *ngIf="addresses.length <= 0" class="p-3">
+      <ion-note>No Results Found</ion-note>
+    </p>
+    <ng-container *ngFor="let address of addresses">
+      <ion-item button (click)="selectAddress(address.display_name)">
+        <ion-label><p style="text-wrap: wrap;">{{ address.display_name }}</p></ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

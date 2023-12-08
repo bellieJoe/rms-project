@@ -48,6 +48,16 @@ export class MapService {
     }
   }
 
+  async compunteDistanceByCoordinates(start:Coordinates,end:Coordinates){
+    try {
+      const _res = await fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${this.OPEN_ROUTER_SERVICE_KEY}&start=${start.long},${start.lat}&end=${end.long},${end.lat}`)
+      const res = await _res.json()
+      return res.features[0].properties.segments[0]
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
+  }
+
   async getAddressSuggestion(q:string){
     try {
       const _res = await fetch(`https://nominatim.openstreetmap.org/search?q=${q}&format=json`)
@@ -61,6 +71,17 @@ export class MapService {
     const res = await this.getAddressSuggestion('bantad')
     console.log(res)
   }
+
+  computeDeliveryCharge(duration: number){
+    const durInMin = duration / 60
+    if(durInMin <= 5){
+      return 25
+    }
+
+    return Math.floor(((durInMin - 5) * 5 ) + 25)
+  }
+
+  // {lat: 13.445129645583702, lng: 121.82986567866539}
   
 }
 
