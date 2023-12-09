@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Icon, icon, latLng, Map, MapOptions, Marker, marker, Point, Polygon, tileLayer } from 'leaflet';
+import { circle, Icon, icon, latLng, Map, MapOptions, Marker, marker, Point, Polygon, tileLayer } from 'leaflet';
+import { AppSettingsService } from 'src/app/services/app-settings.service';
 
 @Component({
   selector: 'app-coordinate-selector',
@@ -8,7 +9,9 @@ import { Icon, icon, latLng, Map, MapOptions, Marker, marker, Point, Polygon, ti
 })
 export class CoordinateSelectorComponent  implements OnInit {
 
-  constructor() {
+  constructor(
+    private appSettingsService : AppSettingsService
+  ) {
     this.mapOptions = {
       layers: [
         tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
@@ -22,6 +25,7 @@ export class CoordinateSelectorComponent  implements OnInit {
     setTimeout(() => {
       this.isDisplayed = true
     }, 900);
+
   }
   isDisplayed : boolean = false
   @Output() onMapSelect = new EventEmitter<any>
@@ -36,6 +40,13 @@ export class CoordinateSelectorComponent  implements OnInit {
   onMapReady(map: Map) {
     this.map = map;
     this.map.on('click', this.onMapClick.bind(this));
+    circle(latLng(parseFloat(this.appSettingsService.appSettings.json_store_location.lat),parseFloat(this.appSettingsService.appSettings.json_store_location.long)), {
+      color: '#1a5bc4',
+      fillColor: '#84b1fa',
+      fillOpacity: 0.5,
+      radius: this.appSettingsService.appSettings.delivery_radius_m,
+    })
+    .addTo(this.map)
   }
 
   onMapClick(e:any) {

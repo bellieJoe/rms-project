@@ -2,7 +2,7 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="row align-items-center h-100 ">
+  <div class="row align-items-center justify-content-center h-100 ">
     <div class="box row " >
         <ion-img class="cover_photo"  [src]="cover_photo"></ion-img>
         <br>
@@ -15,8 +15,7 @@
         <ion-button *ngIf="userService.isAuth()" expand="block" [routerLink]="['/menu']">
           Go to Menu
         </ion-button>
-      </div>
+    </div>
   </div>
-  <canvas id="c"></canvas>
  
 </ion-content>

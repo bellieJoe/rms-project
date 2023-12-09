@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
-import { Icon, icon, LatLng, latLng, LatLngBoundsExpression, LatLngExpression, Map, MapOptions, Marker, marker, Point, Polygon, polyline, tileLayer } from 'leaflet';
+import { circle, Icon, icon, LatLng, latLng, LatLngBoundsExpression, LatLngExpression, Map, MapOptions, Marker, marker, Point, Polygon, polyline, tileLayer } from 'leaflet';
 import { Coordinates } from 'src/app/interfaces/form-inputs';
+import { AppSettingsService } from 'src/app/services/app-settings.service';
 import { MapService } from 'src/app/services/map.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class DirectionViewerComponent  implements OnInit {
 
 
   constructor(
-    private mapService : MapService
+    private mapService : MapService,
+    private appSettingsService : AppSettingsService
   ) {
     
    }
@@ -42,6 +44,7 @@ export class DirectionViewerComponent  implements OnInit {
     setTimeout(() => {
       this.isDisplayed = true
     }, 900);
+    await this.appSettingsService.fetch()
   }
 
   
@@ -51,6 +54,12 @@ export class DirectionViewerComponent  implements OnInit {
     this.map.on('click', this.onMapClick.bind(this));
     await this.initDirections()
     this.map.flyTo(latLng(parseFloat(this.start.lat), parseFloat(this.start.long)))
+    circle(latLng(parseFloat(this.appSettingsService.appSettings.json_store_location.lat),parseFloat(this.appSettingsService.appSettings.json_store_location.long)), {
+      fillColor: '#84b1fa',
+      fillOpacity: 0.1,
+      radius: this.appSettingsService.appSettings.delivery_radius_m,
+    })
+    .addTo(this.map)
   }
 
   onMapClick(e:any) {

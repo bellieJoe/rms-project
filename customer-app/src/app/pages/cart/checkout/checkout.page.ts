@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController, IonInput, IonSelect, IonTextarea, LoadingController, ToastController } from '@ionic/angular';
 import { IonModal, ModalController } from '@ionic/angular/common';
 import { Coordinates, PlaceOrderData } from 'src/app/interfaces/form-inputs';
+import { AppSettingsService } from 'src/app/services/app-settings.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { MapService } from 'src/app/services/map.service';
@@ -27,6 +28,7 @@ export class CheckoutPage implements OnInit {
     private router : Router,
     private modalCtrl : ModalController,
     private mapService : MapService,
+    private appSettingsService : AppSettingsService
     
   ) { 
     
@@ -55,13 +57,13 @@ export class CheckoutPage implements OnInit {
   }
 
   async ngOnInit() {
-    
     this.checkout = this.helperService.getRouterNavState().checkout
     try {
       this.delivery_types = (await this.menuService.getDeliveryTypes()).data
     } catch (error) {
       this.errorHandler.handleError(error)
     }
+    await this.appSettingsService.fetch()
   }
 
   async placeOrder(){
@@ -91,8 +93,6 @@ export class CheckoutPage implements OnInit {
       console.log(error)
       this.errorHandler.handleError(error)
     }
-    
-
   }
 
   async prepareData(){
@@ -150,16 +150,17 @@ export class CheckoutPage implements OnInit {
   async coordinates_selected(coordinates:any){
     const toast = await this.toastCtrl.create({
       message: "Coordinates changed",
-      duration: 700
+      duration: 700,
+      color: 'success'
     })
     this.location.lat = coordinates.lat
     this.location.long = coordinates.lng
     const start : Coordinates = {
-      lat: '13.445129645583702',
-      long: '121.82986567866539'
+      lat: this.appSettingsService.appSettings.json_store_location.lat,
+      long: this.appSettingsService.appSettings.json_store_location.long
     }
     const duration = await this.mapService.compunteDistanceByCoordinates(start, this.location)
-    this.deliveryCharge = this.mapService.computeDeliveryCharge(duration.duration)
+    this.deliveryCharge = await this.mapService.computeDeliveryCharge(duration.duration)
     toast.present()
   }
 
