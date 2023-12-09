@@ -75,6 +75,14 @@ const routes: Routes = [
     path: 'barcode-reader',
     loadChildren: () => import('./barcode-reader/barcode-reader.module').then( m => m.BarcodeReaderPageModule)
   },
+  {
+    path: 'employees',
+    loadChildren: () => import('./employees/employees/employees.module').then( m => m.EmployeesPageModule)
+  },
+  {
+    path: 'app-settings',
+    loadChildren: () => import('./app-settings/app-settings.module').then( m => m.AppSettingsPageModule)
+  },
 
 
 

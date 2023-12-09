@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>App Settings</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [disabled]="edit_app_settings_form.invalid" (click)="update()">
+        Save
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="edit_app_settings_form" >
+      <ion-list>
+        <ion-list-header>
+          <ion-label><i class="fa-solid fa-truck mr-1"></i>Delivery</ion-label>
+        </ion-list-header>
+        <ion-input type="number" fill="solid" formControlName="deliveryRadiusM" label="Max Delivery Radius in meters:"></ion-input>
+        <ion-input type="number" fill="solid" formControlName="deliveryCharge" label="Minimum Delivery Charge:"></ion-input>
+        <ion-input type="number" fill="solid" formControlName="normalDeliveryDurationM" label="Normal Delivery Duration:"></ion-input>
+        <ion-input type="number" fill="solid" formControlName="deliveryExcessChargePerMinute" label="Excess Charge per Minute:"></ion-input>
+        <ion-item button (click)="selectCoordinates()">
+          <ion-label >
+            Store Location <br>
+            <ion-note>{{ storeLocationString }}</ion-note>
+          </ion-label>
+        </ion-item>
+        <!-- <ion-input type="number" fill="solid" label="Store Location" value="{{ storeLocationString }}" readonly></ion-input> -->
+      </ion-list>
+    </form>
+  </app-grid-wrapper>
+
+  <ion-modal #coordinate_selector_modal  [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
+    <ng-template >
+      <ion-content>
+        <app-coordinate-selector [storeLocation]="storeLocation?.value" (onMapSelect)="setCoordinates($event)"></app-coordinate-selector>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

@@ -22,6 +22,7 @@ import { InventoryMenuComponent } from './inventory-menu/inventory-menu.componen
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
 import { DirectionViewerComponent } from './direction-viewer/direction-viewer.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { CoordinateSelectorComponent } from './coordinate-selector/coordinate-selector.component';
 
 @NgModule({
   
@@ -50,7 +51,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     MenuProductCardComponent,
     InventoryMenuComponent,
     SkeletonLoaderComponent,
-    DirectionViewerComponent
+    DirectionViewerComponent,
+    CoordinateSelectorComponent
   ],
   exports: [
     MenuLogoutComponent, 
@@ -66,7 +68,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     MenuProductCardComponent,
     InventoryMenuComponent,
     SkeletonLoaderComponent,
-    DirectionViewerComponent
+    DirectionViewerComponent,
+    CoordinateSelectorComponent
   ],
   providers: []
 })

@@ -18,14 +18,11 @@ export class DirectionViewerComponent  implements OnInit {
    }
 
 
-  async ngOnInit() {
-    setTimeout(() => {
-      this.isDisplayed = true
-    }, 900);
-  }
+  
 
   isDisplayed : boolean = false
-  @Input() location : any
+  @Input() end : any
+  @Input() start : any
   @Output() onMapSelect = new EventEmitter<any>
   map!: Map
   mapOptions: MapOptions = {
@@ -38,14 +35,22 @@ export class DirectionViewerComponent  implements OnInit {
   }
   tappedCoordinates: { lat: number, lng: number } = {lat: 0, lng: 0}
   directionPL = polyline([])
+
+  async ngOnInit() {
+    console.log(parseFloat(this.start.lat))
+    console.log(parseFloat(this.start.long))
+    setTimeout(() => {
+      this.isDisplayed = true
+    }, 900);
+  }
+
   
   async onMapReady(map: Map) {
     
     this.map = map;
     this.map.on('click', this.onMapClick.bind(this));
     await this.initDirections()
-    this.map.flyTo(latLng(13.4449707, 121.8299243))
-    console.log("ok")
+    this.map.flyTo(latLng(parseFloat(this.start.lat), parseFloat(this.start.long)))
   }
 
   onMapClick(e:any) {
@@ -59,8 +64,8 @@ export class DirectionViewerComponent  implements OnInit {
 
   async initDirections(){
     let directions : any  = []
-    const start : LatLng  = latLng(13.4449707, 121.8299243)
-    const end : LatLng  = latLng(this.location.lat, this.location.long)
+    const start : LatLng  = latLng(parseFloat(this.start.lat), parseFloat(this.start.long))
+    const end : LatLng  = latLng(this.end.lat, this.end.long)
     const directionsArr = await this.mapService.generateDirection(start, end)
     directionsArr.forEach((val:any) => {
       directions.push({

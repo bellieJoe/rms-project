@@ -3,6 +3,7 @@ import { RefresherCustomEvent } from '@ionic/angular';
 
 import { DataService, Message } from '../services/data.service';
 import { UserService } from '../services/user.service';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,8 @@ import { UserService } from '../services/user.service';
 export class HomePage {
 
   constructor(
-    private userService : UserService
+    private userService : UserService,
+    private router : Router
   ) {}
 
   items : any = [
@@ -52,9 +54,14 @@ export class HomePage {
       text: 'Profile',
       role: 'destructive',
       icon: 'person-outline',
-      data: {
-        action: 'delete',
-      },
+      
+    },
+    {
+      text: 'App Settings',
+      icon: 'options',
+      handler: async () => {
+        this.router.navigate(['/app-settings'])
+      }
     },
     {
       text: 'Logout',

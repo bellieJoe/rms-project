@@ -1,0 +1,5 @@
+<div *ngIf="isDisplayed" style="height: 100%;"
+  leaflet 
+  [leafletOptions]="mapOptions"
+  (leafletMapReady)="onMapReady($event)">
+</div>

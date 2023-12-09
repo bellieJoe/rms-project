@@ -112,6 +112,13 @@ Route.group(()=>{
       Route.put('change-stock-status', 'EquipmentItemsController.changeStockStatus')
     }).prefix('equipments')
   }).prefix('/inventory')
+
+  Route.group(()=>{
+    Route.get('', 'AppSettingsController.index')
+    Route.post('', 'AppSettingsController.update')
+  }).prefix('app-settings')
   
 
 }).prefix('/api')
+
+// "update `app_settings` set `delivery_radius_m` = 2000, `store_location` = {"lat":"13.4449707","long":"121.8299243"}, `updated_at` = '2023-12-09 16:01:25' where `id` = 1 - Unknown column 'long' in 'field list'"

@@ -134,3 +134,12 @@ export interface Coordinates{
     long: string
     lat: string
 }
+
+export interface EditAppSettingsData{
+    id : number
+    delivery_radius_m : number
+    delivery_excess_charge_per_minute : number
+    delivery_charge : number
+    normal_delivery_duration_m : number
+    store_location : Coordinates
+}

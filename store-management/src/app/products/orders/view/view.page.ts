@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { AlertController, IonModal } from '@ionic/angular/common';
+import { AppSettingsPage } from 'src/app/app-settings/app-settings.page';
+import { AppSettingsService } from 'src/app/services/app-settings.service';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { OrdersService } from 'src/app/services/orders.service';
@@ -21,15 +23,19 @@ export class ViewPage implements OnInit {
     private toastCtrl : ToastController,
     private orderService : OrdersService,
     private alertCtrl : AlertController,
+    private appSettingsService : AppSettingsService
   ) { }
 
   order : any
   location : any = {}
+  storeLocation : any = {}
+  appSettings : any = {}
   @ViewChild('directionViewer') directionViewerModal! : IonModal
 
   async ngOnInit() {
     this.order = this.helperService.getRouterNavState().order
     this.location = JSON.parse(this.order.location)
+    this.appSettings = await this.appSettingsService.fetch()
   }
 
   async posMarkAsCompleted(){
