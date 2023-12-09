@@ -12,10 +12,10 @@ export default class ServiceRecord extends BaseModel {
   position : string
 
   @column()
-  from : DateTime
+  from : string
 
   @column()
-  to : DateTime
+  to : string
 
   @column()
   perDaySalary : number

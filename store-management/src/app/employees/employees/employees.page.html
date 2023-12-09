@@ -1,13 +1,52 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>employees</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="employee-portal-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Employees</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">employees</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-grid-wrapper>
+    <ion-list>
+      <p class="text-center" *ngIf="employees.lenght <= 0">
+        <ion-note>No Employees Found</ion-note>
+      </p>
+      <ng-container *ngFor="let emp of employees">
+        <ion-item (click)="employee_clicked(emp)">
+          <ion-label>
+            {{ emp.user.userProfile.name }} <br>
+            <ion-note>{{ emp.serviceRecords[0].position }}</ion-note>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </app-grid-wrapper>
+
+  <ion-modal #view_employee_details_modal [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
+    <ng-template >
+      <ion-content>
+        <ion-item>
+          <ion-label>
+            {{ selectedEmployee.user.userProfile.name }} <br>
+            <ion-note>Email: {{ selectedEmployee.user.email  }}</ion-note><br>
+            <ion-note>Position: {{ selectedEmployee.serviceRecords[0].position  }}</ion-note><br>
+            <ion-note>Date Started : {{ selectedEmployee.serviceRecords[0].from | date:'mediumDate'  }}</ion-note><br>
+            <ion-note>Salary : {{ selectedEmployee.serviceRecords[0].per_day_salary | currency:'PHP'  }} /day</ion-note>
+          </ion-label>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button [routerLink]="['/employees/add']" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

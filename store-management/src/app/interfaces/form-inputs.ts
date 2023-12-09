@@ -143,3 +143,9 @@ export interface EditAppSettingsData{
     normal_delivery_duration_m : number
     store_location : Coordinates
 }
+
+export interface AddEmployeeData{
+    user_id: number
+    position: string
+    per_day_salary: number
+}

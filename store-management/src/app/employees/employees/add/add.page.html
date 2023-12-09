@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Add Employee</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="add_employee_form" (ngSubmit)="add_employee_form__submit()">
+      <ion-input value="{{ selectedUser.userProfile?.name }}" type="text" label="User" labelPlacement="floating" fill="solid" readonly (click)="selectUser()"></ion-input>
+      <ion-input type="text" label="Position" labelPlacement="floating" fill="solid" formControlName="position"></ion-input>
+      <ion-input type="number" label="Salary per Day" labelPlacement="floating" fill="solid" formControlName="per_day_salary"></ion-input>
+      <ion-button expand="block" color="primary" type="submit" [disabled]="add_employee_form.invalid">
+        Add Employee
+      </ion-button> 
+    </form>
+  </app-grid-wrapper>
+
+  <ion-modal #user_selector_modal [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-searchbar placeholder="Search User" (ionInput)="searchUser($event)" [debounce]="250"></ion-searchbar>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ng-container *ngIf="users.length <= 0">
+            <p class="text-center"><ion-note>No Users Found</ion-note></p>
+          </ng-container>
+          <ng-container *ngFor="let i of users">
+            <ion-item button (click)="userSelected(i)">
+              <ion-label>
+                {{ i.userProfile.name }} <br>
+                <ion-note>{{ i.email }}</ion-note>
+              </ion-label>
+            </ion-item>
+          </ng-container>
+        </ion-list>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

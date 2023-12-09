@@ -104,7 +104,7 @@ export class UserService {
     return res;
   }
 
-  async searchUserByName(keyword:number){
+  async searchUserByName(keyword:any){
     const res = await axios.get(`${environment.apiUrl}users/search-by-name?keyword=${keyword}`)
     return res;
   }

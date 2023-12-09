@@ -117,6 +117,12 @@ Route.group(()=>{
     Route.get('', 'AppSettingsController.index')
     Route.post('', 'AppSettingsController.update')
   }).prefix('app-settings')
+
+  Route.group(()=>{
+    Route.post('', 'EmployeesController.store')
+    Route.get('', 'EmployeesController.index')
+    Route.get('test', 'EmployeesController.test')
+  }).prefix('employees')
   
 
 }).prefix('/api')
