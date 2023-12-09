@@ -89,6 +89,9 @@ Route.group(()=>{
     Route.get('fetch-items', 'OrdersController.fetchItems')
     Route.post('pos-completed', 'OrdersController.posMarkAsCompleted')
     Route.post('customer-cancel', 'OrdersController.customerCancel')
+    Route.put('store-cancel', 'OrdersController.storeCancel')
+    Route.put('store-process', 'OrdersController.storeProcess')
+    Route.put('mark-as-delivery', 'OrdersController.markAsDelivery')
   }).prefix('/orders')
 
   Route.group(()=>{

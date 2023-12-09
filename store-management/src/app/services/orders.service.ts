@@ -39,4 +39,19 @@ export class OrdersService {
     const res = await axios.get(`${environment.apiUrl}orders/fetch-items?order_id=${order_id}`)
     return res
   }
+
+  async cancelOrder(order_id : number) {
+    const res = await axios.put(`${environment.apiUrl}orders/store-cancel?order_id=${order_id}`)
+    return res
+  }
+
+  async processOrder(order_id : number) {
+    const res = await axios.put(`${environment.apiUrl}orders/store-process?order_id=${order_id}`)
+    return res
+  }
+
+  async markAsDelivery(order_id : number) {
+    const res = await axios.put(`${environment.apiUrl}orders/mark-as-delivery?order_id=${order_id}`)
+    return res
+  }
 }

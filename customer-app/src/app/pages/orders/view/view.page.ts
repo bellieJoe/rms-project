@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertButton, LoadingController, ToastController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular/common';
 import { CancelOrderData } from 'src/app/interfaces/form-inputs';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { HelperService } from 'src/app/services/helper.service';
@@ -24,6 +25,7 @@ export class ViewPage implements OnInit {
   ) { }
 
   order : any
+  
 
   public cancelAlertButtons : AlertButton[] = [
     {
@@ -104,4 +106,6 @@ export class ViewPage implements OnInit {
       state: this.order
     })
   }
+
+  
 }

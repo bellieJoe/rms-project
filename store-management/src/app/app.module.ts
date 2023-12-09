@@ -14,6 +14,7 @@ import { LyHammerGestureConfig, LY_THEME, LY_THEME_NAME, StyleRenderer, LyTheme2
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MinimaLight, MinimaDeepDark, MinimaDark } from '@alyle/ui/themes/minima';
 import { color } from '@alyle/ui/color';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 /**
@@ -50,7 +51,7 @@ export class CustomMinimaDark implements PartialThemeVariables {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, ComponentsModule, BrowserAnimationsModule],
+  imports: [BrowserModule, IonicModule.forRoot(),LeafletModule, AppRoutingModule, ComponentsModule, BrowserAnimationsModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }, 

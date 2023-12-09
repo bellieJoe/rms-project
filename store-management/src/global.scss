@@ -29,6 +29,8 @@
 // ... or 
 @import "~@ng-select/ng-select/themes/material.theme.css";
 
+@import '~leaflet/dist/leaflet.css';
+
 @media (prefers-color-scheme: dark) {
     :root {
       /* Dark mode variables go here */

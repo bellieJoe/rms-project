@@ -18,8 +18,12 @@ export class CoordinateSelectorComponent  implements OnInit {
     };
    }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    setTimeout(() => {
+      this.isDisplayed = true
+    }, 900);
+  }
+  isDisplayed : boolean = false
   @Output() onMapSelect = new EventEmitter<any>
   map!: Map
   mapOptions!: MapOptions

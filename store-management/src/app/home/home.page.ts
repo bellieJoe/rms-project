@@ -24,13 +24,13 @@ export class HomePage {
       image: '../../assets/images/users.jpg'
     },
     {
-      title: "Products",
+      title: "Store",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
       route: '/products',
       image: '../../assets/images/products.jpg'
     },
-    {
+  {
       title: "Inventory",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',

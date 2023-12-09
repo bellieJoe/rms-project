@@ -20,6 +20,8 @@ import { ProductItemListComponent } from './product-item-list/product-item-list.
 import { MenuProductCardComponent } from './menu-product-card/menu-product-card.component';
 import { InventoryMenuComponent } from './inventory-menu/inventory-menu.component';
 import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.component';
+import { DirectionViewerComponent } from './direction-viewer/direction-viewer.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   
@@ -32,6 +34,7 @@ import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.compo
     LyImageCropperModule,
     LySliderModule,
     LyButtonModule,
+    LeafletModule
   ],
   declarations: [
     MenuLogoutComponent, 
@@ -46,7 +49,8 @@ import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.compo
     ProductItemListComponent,
     MenuProductCardComponent,
     InventoryMenuComponent,
-    SkeletonLoaderComponent
+    SkeletonLoaderComponent,
+    DirectionViewerComponent
   ],
   exports: [
     MenuLogoutComponent, 
@@ -61,7 +65,8 @@ import { SkeletonLoaderComponent } from './skeleton-loader/skeleton-loader.compo
     ProductItemListComponent,
     MenuProductCardComponent,
     InventoryMenuComponent,
-    SkeletonLoaderComponent
+    SkeletonLoaderComponent,
+    DirectionViewerComponent
   ],
   providers: []
 })

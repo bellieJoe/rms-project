@@ -29,20 +29,24 @@
         </ion-item>
       </ng-container>
       <ng-container *ngIf="!order.is_pos">
-        <ion-item button details="none" *ngIf="order.status == 'In Delivery'">
+        <ion-item button details="none" *ngIf="order.status == 'In Delivery'" (click)="posMarkAsCompleted()">
           <ion-icon slot="start" name="checkmark-circle"></ion-icon>
           <ion-label>Mark as Completed</ion-label>
         </ion-item>
-        <ion-item button details="none" *ngIf="order.status == 'Pending'">
+        <ion-item button details="none" *ngIf="order.status == 'Pending'" (click)="processOrder()">
           <ion-icon slot="start" name="checkmark-circle"></ion-icon>
           <ion-label>Process Order</ion-label>
         </ion-item>
-        <ion-item button details="none" *ngIf="order.status == 'Pending'">
-          <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+        <ion-item button details="none" *ngIf="order.status == 'Pending'" (click)="cancelOrder()">
+          <ion-icon slot="start" name="stop-circle"></ion-icon>
           <ion-label>Cancel Order</ion-label>
         </ion-item>
-        <ion-item button details="none" lines="none" *ngIf="order.status == 'Processing'">
-          <ion-icon slot="start" name="checkmark-circle"></ion-icon>
+        <ion-item button details="none" (click)="viewLocation()">
+          <ion-icon slot="start" name="location"></ion-icon>
+          <ion-label>View Location</ion-label>
+        </ion-item>
+        <ion-item button details="none" lines="none" *ngIf="order.status == 'Processing'"(click)="markAsDelivery()">
+          <ion-icon slot="start" name="bicycle"></ion-icon>
           <ion-label>Mark as In Delivery</ion-label>
         </ion-item>
       </ng-container>
@@ -56,4 +60,12 @@
       </ion-item>
     </ion-list>
   </app-grid-wrapper>
+
+  <ion-modal #directionViewer [initialBreakpoint]="1" [breakpoints]="[0, 0.5, 1]">
+    <ng-template >
+      <ion-content>
+        <app-direction-viewer [location]="location"></app-direction-viewer>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>

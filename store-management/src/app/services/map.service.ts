@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import axios from 'axios';
 import { ErrorHandlerService } from './error-handler.service';
 import { Coordinates } from '../interfaces/form-inputs';
+import { LatLng } from 'leaflet';
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['Accept'] = 'application/json';
@@ -50,6 +51,16 @@ export class MapService {
       const _res = await fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${this.OPEN_ROUTER_SERVICE_KEY}&start=${start.long},${start.lat}&end=${end.long},${end.lat}`)
       const res = await _res.json()
       return res.features[0].properties.segments[0]
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
+  }
+
+  async generateDirection(start:LatLng, end:LatLng ){
+    try {
+      const _res = await fetch(`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${this.OPEN_ROUTER_SERVICE_KEY}&start=${start.lng},${start.lat}&end=${end.lng},${end.lat}`)
+      const res = await _res.json()
+      return res.features[0].geometry.coordinates
     } catch (error) {
       this.errorHandler.handleError(error)
     }

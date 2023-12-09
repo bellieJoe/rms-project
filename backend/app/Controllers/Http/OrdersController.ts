@@ -4,6 +4,7 @@ import Database from "@ioc:Adonis/Lucid/Database";
 import Order from "App/Models/Order";
 import OrderItem from "App/Models/OrderItem";
 import OrderStatusHistory from "App/Models/OrderStatusHistory";
+import { DateTime } from "luxon";
 
 export default class OrdersController {
     async getPending(){
@@ -112,5 +113,55 @@ export default class OrdersController {
         })
         return order
         
+    }
+
+    async storeCancel({request}){
+        await Database.transaction(async (trx)=>{
+            const order_id = request.input('order_id')
+            
+            const order = await Order.find(order_id)
+            order!.status = 'Canceled';
+            await order?.save()
+            order!.useTransaction(trx)
+            await OrderStatusHistory.create({
+                status: 'Canceled',
+                orderId: order_id,
+                notes: 'Order was canceled by the store',
+            })
+            order!.useTransaction(trx)
+        })
+    }
+
+    async storeProcess({request}){
+        await Database.transaction(async (trx)=>{
+            const order_id = request.input('order_id')
+            
+            const order = await Order.find(order_id)
+            order!.status = 'Processing';
+            await order?.save()
+            order!.useTransaction(trx)
+            await OrderStatusHistory.create({
+                status: 'Processing',
+                orderId: order_id,
+                notes: 'Store has processed the order',
+            })
+            order!.useTransaction(trx)
+        })
+    }
+    async markAsDelivery({request}){
+        await Database.transaction(async (trx)=>{
+            const order_id = request.input('order_id')
+            
+            const order = await Order.find(order_id)
+            order!.status = 'In Delivery';
+            await order?.save()
+            order!.useTransaction(trx)
+            await OrderStatusHistory.create({
+                status: 'In Delivery',
+                orderId: order_id,
+                notes: 'Store has marked the order as Reeady for Delivery',
+            })
+            order!.useTransaction(trx)
+        })
     }
 }
