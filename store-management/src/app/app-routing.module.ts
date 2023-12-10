@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'set-dtrs',
     loadChildren: () => import('./employees/set-dtrs/set-dtrs.module').then( m => m.SetDtrsPageModule)
   },
+  {
+    path: 'payrolls',
+    loadChildren: () => import('./employees/payrolls/payrolls.module').then( m => m.PayrollsPageModule)
+  },
 
 
 

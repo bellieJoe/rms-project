@@ -19,15 +19,23 @@
           <ion-label>Employee Dashboard</ion-label>
         </ion-item>
       </ion-menu-toggle>  
-      <ion-menu-toggle menu="inventory-menu" auto>
+      <ion-menu-toggle menu="employee-portal-menu" auto>
         <ion-item  lines="none" [routerLink]="['/employees']" routerLinkActive="selected">
           <ion-icon slot="start" name="people"></ion-icon>
           <ion-label>Employees</ion-label>
         </ion-item>
       </ion-menu-toggle>  
+      <ion-menu-toggle menu="employee-portal-menu" auto>
+        <ion-item  lines="none" [routerLink]="['/payrolls']" routerLinkActive="selected">
+          <ion-icon slot="start" name="receipt"></ion-icon>
+          <ion-label>Payrolls</ion-label>
+        </ion-item>
+      </ion-menu-toggle>  
     </ion-list>
     <ion-list>
-      <app-menu-logout class="py-3"></app-menu-logout>
+      <ion-menu-toggle menu="employee-portal-menu">
+        <app-menu-logout class="py-3"></app-menu-logout>
+      </ion-menu-toggle>
     </ion-list>
   </ion-content>
 </ion-menu>

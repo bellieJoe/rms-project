@@ -1,0 +1,100 @@
+<ion-menu #payroll_filter_menu contentId="payrolls_page" menuId="payroll_filter_menu" side="end" type="overlay">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title><i class="fa-solid fa-filter mr-1"></i>Filter</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <form [formGroup]="filter_payroll_form" (ngSubmit)="filter_payroll_form__submit()">
+      <ion-input fill="solid" type="date" label="Start Date" labelPlacement="floating" formControlName="from"></ion-input>
+      <ion-input fill="solid" type="date" label="End Date" labelPlacement="floating" formControlName="to"></ion-input>
+      <ion-button  color="primary" expand="block" type="submit" [disabled]="filter_payroll_form.invalid">
+        <ion-icon slot="start" name="filter"></ion-icon>
+        Apply Filters
+      </ion-button>
+    </form>
+  </ion-content>
+</ion-menu>
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="employee-portal-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Payrolls</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="viewFilterMenu()">
+        <ion-icon slot="icon-only" name="filter"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="payrolls_page">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.8" pullMin="60" pullMax="120">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-grid-wrapper>
+    <ion-list>
+      <p class="text-center" *ngIf="payrolls.length <= 0">
+        <ion-note>No Payrolls Found</ion-note>
+      </p>
+      <ng-container *ngFor="let payroll of payrolls">
+        <ion-item button (click)="viewPayrollDetails(payroll)">
+          <ion-label>
+            {{ payroll.employee.user.userProfile.name }}<br>
+            <ion-note>{{ payroll.from | date:'mediumDate' }} - {{ payroll.to | date:'mediumDate' }}</ion-note>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </app-grid-wrapper>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="apps"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="showGeneratePayroll()"><ion-icon name="receipt"></ion-icon></ion-fab-button>
+      <ion-fab-button ><ion-icon name="print"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
+
+<ion-modal #generatePayrollModal [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Generate Payroll</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <form [formGroup]="generate_payroll_form" (ngSubmit)="generate_payroll_form__submit()">
+        <ion-label >Select Dates</ion-label><br><br>
+        <ion-input fill="solid" type="date" label="Start Date" labelPlacement="floating" [max]="today" formControlName="from"></ion-input>
+        <ion-input fill="solid" type="date" label="End Date" labelPlacement="floating" [max]="today"  formControlName="to"></ion-input>
+        <ion-button expand="block" type="submit" [disabled]="generate_payroll_form.invalid">
+          Generate
+        </ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal #view_payroll_details_modal [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+  <ng-template>
+    <ion-content class="">
+     <ion-card>
+      <ion-card-content>
+        <ion-label color="primary">{{ selectedPayroll.employee.user.userProfile.name }}</ion-label><br>
+        <ion-label >{{ selectedPayroll.employee.serviceRecords[0].position }}</ion-label><br>
+        <ion-label >{{ selectedPayroll.from | date:'mediumDate' }} - {{ selectedPayroll.to | date:'mediumDate' }}</ion-label><br>
+        <ion-label >No. of Days worked : {{ selectedPayroll.days_worked}} days</ion-label><br>
+        <ion-label >Net Pay : {{ selectedPayroll.net_pay | currency:'PHP' }}</ion-label><br>
+      </ion-card-content>
+     </ion-card>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+

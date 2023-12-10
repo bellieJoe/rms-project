@@ -156,3 +156,7 @@ export interface AddDtrData{
     out: any    
     employee_id: number
 }
+export interface GeneratePayrollData {
+    from: any
+    to: any
+}
