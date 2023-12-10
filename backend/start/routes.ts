@@ -122,8 +122,13 @@ Route.group(()=>{
     Route.post('', 'EmployeesController.store')
     Route.get('', 'EmployeesController.index')
     Route.get('test', 'EmployeesController.test')
+    Route.post('end-employment', 'EmployeesController.endEmployment')
   }).prefix('employees')
   
+  Route.group(()=>{
+    Route.post('', 'DtrsController.store')
+    Route.get('get-by-date', 'DtrsController.getByDate')
+  }).prefix('dtrs')
 
 }).prefix('/api')
 

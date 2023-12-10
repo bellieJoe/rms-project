@@ -40,6 +40,19 @@
             <ion-note>Salary : {{ selectedEmployee.serviceRecords[0].per_day_salary | currency:'PHP'  }} /day</ion-note>
           </ion-label>
         </ion-item>
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Actions</ion-label>
+          </ion-list-header>
+          <ion-item button (click)="viewDtr()">
+            <ion-icon slot="start" name="calendar"></ion-icon>
+            <ion-label>DTR</ion-label>
+          </ion-item>
+          <ion-item button (click)="endEmployment()">
+            <ion-icon color="danger" slot="start" name="alert-circle"></ion-icon>
+            <ion-label color="danger">End Employment</ion-label>
+          </ion-item>
+        </ion-list>
       </ion-content>
     </ng-template>
   </ion-modal>

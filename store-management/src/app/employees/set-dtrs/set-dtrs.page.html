@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>View DTR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-card>
+      <ion-card-content>
+        <ion-label>
+          {{ employee.user.userProfile.name }} <br>
+          <ion-note>{{ employee.user.email }}</ion-note>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-datetime presentation="date" display-format="DD.MM.YYYY" (ionChange)="dateChanged($event)"></ion-datetime>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-label>Time Logs<span *ngIf="selectedDate"> - {{ selectedDate.toFormat('MMM d, y') }}</span></ion-label>
+        <ion-item>
+          <ion-label>In : </ion-label>
+          <ion-label slot="end">{{ dtr ? (dtr.in) : 'No Data' }}</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Out : </ion-label>
+          <ion-label slot="end">{{ dtr ? (dtr.out) : 'No Data' }}</ion-label>
+        </ion-item>
+        <ion-button *ngIf="selectedDate" expand="block" (click)="showUpdateDtr()">
+          Update Time Pair
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </app-grid-wrapper>
+
+  <ion-modal #update_dtr_modal [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5]">
+    <ng-template>
+      <ion-content>
+        <ion-card>
+          <ion-card-content>
+            <ion-label>
+              {{ employee.user.userProfile.name }} <br>
+              <ion-note>{{ employee.user.email }}</ion-note>
+            </ion-label>
+            <ion-label>{{ selectedDate.toFormat('MMM d, y') }}</ion-label>
+          </ion-card-content>
+        </ion-card>
+        <ion-card>
+          <ion-card-content>
+            <form [formGroup]="add_update_dtr_form" (ngSubmit)="add_update_dtr_form__submit()">
+              <ion-input type="time" label="In" labelPlacement="floating" fill="solid" formControlName="in"></ion-input>
+              <ion-input type="time" label="Out" labelPlacement="floating" fill="solid" formControlName="out"></ion-input>
+              <ion-button expand="block" color="primary" type="submit" [disabled]="add_update_dtr_form.invalid">
+                Update DTR
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

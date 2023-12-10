@@ -83,6 +83,10 @@ const routes: Routes = [
     path: 'app-settings',
     loadChildren: () => import('./app-settings/app-settings.module').then( m => m.AppSettingsPageModule)
   },
+  {
+    path: 'set-dtrs',
+    loadChildren: () => import('./employees/set-dtrs/set-dtrs.module').then( m => m.SetDtrsPageModule)
+  },
 
 
 

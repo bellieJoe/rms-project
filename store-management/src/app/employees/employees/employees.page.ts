@@ -63,4 +63,37 @@ export class EmployeesPage implements OnInit {
     await this.viewEmployeeDetailsModal.present()
   }
 
+  async endEmployment(){
+    const loader = await this.loadingCtrl.create({
+      message: "Updating Employment",
+      spinner: 'lines',
+      backdropDismiss: false
+    })
+    const toast = await this.toastCtrl.create({
+      message: "Employment Records was updated",
+      icon: 'checkmark-circle',
+      duration: 1000
+    })
+    try {
+      await loader.present()
+      await this.employeeService.endEmployment(this.selectedEmployee.id)
+      await loader.dismiss()
+      await toast.present()
+      await this.viewEmployeeDetailsModal.dismiss()
+      await this.ionViewDidEnter()
+    } catch (error) {
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
+    }
+  }
+
+  async viewDtr(){
+    await this.viewEmployeeDetailsModal.dismiss()
+    this.router.navigate(['/set-dtrs'], {
+      state: {
+        employee : this.selectedEmployee
+      }
+    })
+  }
+
 }

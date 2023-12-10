@@ -65,4 +65,15 @@ export default class EmployeesController {
         return _employees
     }
 
+    async endEmployment({request}){
+        const employee_id = request.input('employee_id')
+        const _emp = await Employee.find(employee_id)
+        _emp!.isActive = false
+        await _emp?.save()
+        const _service_record = await ServiceRecord.query().where('employee_id', employee_id).where('is_active', 1).first()
+        _service_record!.isActive = false
+        _service_record!.to = DateTime.now().toFormat('y-M-d')
+        _service_record?.save()
+    }
+
 }

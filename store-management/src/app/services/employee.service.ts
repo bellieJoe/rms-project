@@ -26,6 +26,12 @@ export class EmployeeService {
   async fetchEmployees(){
       const res = await axios.get(`${environment.apiUrl}employees`)
       return res
-    
+  }
+
+  async endEmployment(employee_id:any){
+    const res = await axios.post(`${environment.apiUrl}employees/end-employment`, {
+      employee_id: employee_id
+    })
+    return res
   }
 }

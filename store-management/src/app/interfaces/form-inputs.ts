@@ -149,3 +149,10 @@ export interface AddEmployeeData{
     position: string
     per_day_salary: number
 }
+
+export interface AddDtrData{
+    in : any
+    date : any
+    out: any    
+    employee_id: number
+}

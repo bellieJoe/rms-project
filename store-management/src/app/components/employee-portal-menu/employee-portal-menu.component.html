@@ -13,11 +13,16 @@
     </ion-menu-toggle>  
 
     <ion-list>
-      <ion-list-header>Supply Inventory</ion-list-header>
+      <ion-menu-toggle menu="employee-portal-menu" auto>
+        <ion-item  lines="none" >
+          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-label>Employee Dashboard</ion-label>
+        </ion-item>
+      </ion-menu-toggle>  
       <ion-menu-toggle menu="inventory-menu" auto>
-        <ion-item  lines="none" [routerLink]="['/supply-inventory']" routerLinkActive="selected">
-          <ion-icon slot="start" name="caret-forward"></ion-icon>
-          <ion-label>Items</ion-label>
+        <ion-item  lines="none" [routerLink]="['/employees']" routerLinkActive="selected">
+          <ion-icon slot="start" name="people"></ion-icon>
+          <ion-label>Employees</ion-label>
         </ion-item>
       </ion-menu-toggle>  
     </ion-list>
