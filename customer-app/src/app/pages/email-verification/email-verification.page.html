@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/home']" expand="block" fill="clear" shape="round">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Email Verification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <form [formGroup]="verify_email_form" (ngSubmit)="verify_email_form__submit()">
+      <ion-label>Enter Verification Code</ion-label>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="2">
+            <ion-input class="text-center" type="number" inputmode="numeric" fill="solid" max="9" maxlength="1" formControlName="0"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input class="text-center" type="number" inputmode="numeric" fill="solid" max="9" maxlength="1" formControlName="1"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input class="text-center" type="number" inputmode="numeric" fill="solid" max="9" maxlength="1" formControlName="2"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input class="text-center" type="number" inputmode="numeric" fill="solid" max="9" maxlength="1" formControlName="3"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input class="text-center" type="number" inputmode="numeric" fill="solid" max="9" maxlength="1" formControlName="4"></ion-input>
+          </ion-col>
+          <ion-col size="2">
+            <ion-input class="text-center" type="number" inputmode="numeric" fill="solid" max="9" maxlength="1" formControlName="5"></ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-button type="submit" expand="block" [disabled]="verify_email_form.invalid">
+        <ion-icon slot="start" name="checkmark-done"></ion-icon>
+        Verify Email
+      </ion-button>
+      <ion-button expand="block" fill="clear" (click)="sendCode()">
+        <ion-icon name="mail" slot="start"></ion-icon>
+        {{ verificationCode ? 'Resend Code' : 'Send Code' }}
+      </ion-button>
+    </form>
+    
+  </app-grid-wrapper>
+</ion-content>

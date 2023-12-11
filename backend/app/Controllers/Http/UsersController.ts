@@ -6,6 +6,7 @@ import UserProfile from "App/Models/UserProfile";
 
 import Database from '@ioc:Adonis/Lucid/Database';
 import MailController from './MailController';
+import { DateTime } from 'luxon';
 
 
 export default class UsersController {
@@ -140,6 +141,28 @@ export default class UsersController {
         userProfile!.contactNumber = request.input('contact_number')
         await userProfile?.save()
         const user = await User.find(request.input('user_id'))
+        await user?.load('userProfile')
+        return user
+    }
+
+    async sendVerificationEmail({request}){
+        const code = request.input('code')
+        const email = request.input('email')
+        MailController.sendEmail(
+            'emails/verification', 
+            {
+                code: code,
+            },
+            email
+        )
+        return 
+    }
+
+    async verifyEmail({request}){
+        const email = request.input('email')
+        const user = await User.query().where('email', email).first()
+        user!.emailVerifiedAt = DateTime.now().toFormat('y-M-d')
+        await user?.save()
         await user?.load('userProfile')
         return user
     }

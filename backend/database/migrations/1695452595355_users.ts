@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.increments('id')
       table.string('password', 5000).notNullable();
       table.string('email', 1000).notNullable()
+      table.date('email_verified_at').nullable()
       table.timestamps()
     })
   }

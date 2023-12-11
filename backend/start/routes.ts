@@ -28,6 +28,8 @@ Route.get('/', async () => {
 Route.group(()=>{
 
   Route.group(() => {
+    Route.post('send-verification-email', 'UsersController.sendVerificationEmail');
+    Route.post('verify-email', 'UsersController.verifyEmail');
     Route.get('', 'UsersController.index'); 
     Route.get('search-by-name', 'UsersController.searchByName'); 
     Route.get('register', 'UsersController.register'); 
@@ -136,6 +138,6 @@ Route.group(()=>{
     Route.get('test', 'PayrollsController.test')
   }).prefix('payrolls')
 
-}).prefix('/api')
 
-// "update `app_settings` set `delivery_radius_m` = 2000, `store_location` = {"lat":"13.4449707","long":"121.8299243"}, `updated_at` = '2023-12-09 16:01:25' where `id` = 1 - Unknown column 'long' in 'field list'"
+
+}).prefix('/api')

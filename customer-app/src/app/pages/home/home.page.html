@@ -15,6 +15,9 @@
         <ion-button *ngIf="userService.isAuth()" expand="block" [routerLink]="['/menu']">
           Go to Menu
         </ion-button>
+        <ion-button *ngIf="userService.isAuth()" (click)="userService.logout()" expand="block"  fill="outline">
+          Logout
+        </ion-button>
     </div>
   </div>
  

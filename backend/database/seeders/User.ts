@@ -17,6 +17,13 @@ export default class extends BaseSeeder {
       isActive: true,
       privilegeLevel: 1,
     })
+    await user.load('employee')
+    await user.employee.related('serviceRecords').create({
+      from: '2023-10-23',
+      isActive: true,
+      perDaySalary: 1000,
+      position: "Store Owner"
+    })
 
   }
 }

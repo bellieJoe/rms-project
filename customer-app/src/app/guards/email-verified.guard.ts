@@ -6,8 +6,7 @@ import { UserService } from '../services/user.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class EmailVerifiedGuard implements CanActivate {
   constructor(
     private userService : UserService,
     private router : Router
@@ -16,7 +15,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return  this.userService.isAuth() ? this.userService.isAuth() : this.router.createUrlTree(['/signin']);
+      return  this.userService.isAuth() && this.userService.auth.email_verified_at  ? true : this.router.createUrlTree(['/email-verification']);
   }
   
 }

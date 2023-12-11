@@ -25,6 +25,12 @@ export class UserService {
     private errorHandler : ErrorHandlerService
   ) { }
 
+  public get auth() : any {
+    const _auth : any = localStorage.getItem('user')
+    const auth = JSON.parse(_auth)
+    return auth
+  }
+  
   emailInUseValidator(control: AbstractControl): Promise<ValidationErrors | null> {
     const email = control.value;
     return new Promise((resolve) => {
@@ -99,5 +105,35 @@ export class UserService {
     // edit-profile
     const res = await axios.put(`${environment.apiUrl}users/edit-profile`, data)
     return res
+  }
+
+  async sendVerificationEmail(email:string, code:string){
+    // 
+    const res = await axios.post(`${environment.apiUrl}users/send-verification-email`, {
+      email: email,
+      code : code
+    })
+    return res
+  }
+  async verifyEmail(email:string){
+    // 
+    const loader = await this.loadingCtrl.create({
+      message: 'Verifying Account',
+      spinner: 'lines',
+      backdropDismiss: false
+    })
+    try {
+      await loader.present()
+      const res = await axios.post(`${environment.apiUrl}users/verify-email`, {
+        email: email
+      })
+      localStorage.setItem('user', JSON.stringify(res.data))
+      this.router.navigate(['/home'])
+      await loader.dismiss()
+    } catch (error) {
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
+    }
+    
   }
 }

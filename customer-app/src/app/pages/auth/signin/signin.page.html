@@ -1,7 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-button [routerLink]="['/home']" expand="block" fill="clear" shape="round">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Sign In</ion-title>
   </ion-toolbar>

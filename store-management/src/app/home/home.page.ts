@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { RefresherCustomEvent } from '@ionic/angular';
+import { Component, ViewChild, inject } from '@angular/core';
+import { IonActionSheet, RefresherCustomEvent } from '@ionic/angular';
 
 import { DataService, Message } from '../services/data.service';
 import { UserService } from '../services/user.service';
@@ -16,6 +16,8 @@ export class HomePage {
     private userService : UserService,
     private router : Router
   ) {}
+
+  @ViewChild('settings_action_sheet') settings_action_sheet! : IonActionSheet
 
   items : any = [
     {
@@ -82,6 +84,11 @@ export class HomePage {
       },
     },
   ];
+
+  async openActions(){
+    // alert('action sheet opened')
+    await this.settings_action_sheet.present()
+  }
 
 
 
