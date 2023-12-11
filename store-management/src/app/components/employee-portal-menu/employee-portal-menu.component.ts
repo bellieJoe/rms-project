@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-employee-portal-menu',
@@ -7,8 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeePortalMenuComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+    private userService : UserService
+  ) { }
 
-  ngOnInit() {}
+  auth : any = this.userService.auth
+
+  async ngOnInit() {
+    
+  }
 
 }

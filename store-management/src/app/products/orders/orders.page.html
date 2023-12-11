@@ -79,7 +79,8 @@
             </ion-label>
             <ion-label>{{order.date_ordered | date:'MMM d, y h:mm a'}}</ion-label>
             <ion-label *ngIf="order.is_pos">Ordered through POS</ion-label>
-            <ion-label *ngIf="!order.is_pos">Ordered By</ion-label>
+            <ion-label color="dark" *ngIf="order.is_pos">Table #{{ order.table_no }}<br></ion-label>
+            <ion-label *ngIf="!order.is_pos">Ordered By {{ order.user.userProfile.name }}</ion-label>
             <ion-label color="{{ order.status == 'Pending' ? 'medium' : (order.status == 'Completed' ? 'primary' : 'warning') }}">{{ order.status }}</ion-label>
           </ion-label>
         </ion-item>

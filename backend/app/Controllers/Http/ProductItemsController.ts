@@ -54,7 +54,7 @@ export default class ProductItemsController {
     }
 
     async searchByName({request}){
-        const products = await ProductItem.query().where('name', 'like', `%${request.input('keyword')}%`)
+        const products = await ProductItem.query().where('name', 'like', `%${request.input('keyword')}%`).preload('productCategory').preload('productVariants')
         return products;
     }
 

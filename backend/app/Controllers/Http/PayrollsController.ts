@@ -44,7 +44,8 @@ export default class PayrollsController {
         const _emp_ids = _dtrs.map((val)=>{
             return val.employeeId
         })
-        const _employees = await Employee.query().whereIn('id', _emp_ids)
+        const _employees = await Employee.query()
+        .whereIn('id', _emp_ids)
         .preload('serviceRecords', (q)=>{
             q.where('is_active', 1)
         })
@@ -71,6 +72,19 @@ export default class PayrollsController {
     async index({request}){
         const from = request.input('from')
         const to = request.input('to')
+        const employee_id = request.input('employee_id')
+        if(employee_id){
+            const _payrolls = await Payroll.query().where('employee_id', employee_id).where('from','>=', from).andWhere('to','<=', to)
+            .preload('employee', (q)=>{
+                q.preload('user', (q1)=>{
+                    q1.preload('userProfile')
+                })
+                .preload('serviceRecords', (q1)=>{
+                    q1.where('is_active', 1)
+                })
+            })
+            return _payrolls
+        }
         const _payrolls = await Payroll.query().where('from','>=', from).andWhere('to','<=', to)
         .preload('employee', (q)=>{
             q.preload('user', (q1)=>{

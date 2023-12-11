@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 import { GeneratePayrollData } from 'src/app/interfaces/form-inputs';
 import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 import { PayrollService } from 'src/app/services/payroll.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-payrolls',
@@ -21,7 +22,8 @@ export class PayrollsPage implements OnInit {
     private toastCtrl : ToastController,
     private router : Router,
     private payrollService : PayrollService,
-    private alertCtrl : AlertController
+    private alertCtrl : AlertController,
+    public userService : UserService
   ) { }
 
   payrolls : any = []

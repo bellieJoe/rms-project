@@ -24,6 +24,12 @@ export class UserService {
     private loadingCtrl : LoadingController
   ) { }
 
+  public get auth() : any {
+    const _auth : any = localStorage.getItem('user')
+    const auth = JSON.parse(_auth)
+    return auth
+  }
+  
   isAuth() : boolean {
     const user = localStorage.getItem('user')
     return user ? true : false;

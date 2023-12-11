@@ -115,6 +115,7 @@ export class UserService {
     })
     return res
   }
+  
   async verifyEmail(email:string){
     // 
     const loader = await this.loadingCtrl.create({

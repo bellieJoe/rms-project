@@ -91,6 +91,10 @@ const routes: Routes = [
     path: 'payrolls',
     loadChildren: () => import('./employees/payrolls/payrolls.module').then( m => m.PayrollsPageModule)
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./employees/dashboard/dashboard.module').then( m => m.DashboardPageModule)
+  },
 
 
 

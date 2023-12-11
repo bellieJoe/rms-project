@@ -84,7 +84,7 @@ export class AddVariantPage implements OnInit {
       })
       await loader.dismiss()
       toast.present()
-      this.location.back()
+      this.router.navigate(['/products'])
     } catch (error) {
       await loader.dismiss()
       console.log(error);

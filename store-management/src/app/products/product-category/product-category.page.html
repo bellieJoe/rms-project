@@ -14,7 +14,7 @@
   </ion-refresher>
 
   <app-grid-wrapper>
-    <ion-searchbar (ionClear)="fetchCategories()"   (ionChange)="searchCategoryByName($event)" placeholder="Searh Category" inputmode="decimal" type="decimal"  [debounce]="250" showCancelButton="always"></ion-searchbar>
+    <ion-searchbar (ionClear)="fetchCategories()"   (ionChange)="searchCategoryByName($event)" placeholder="Search Category"   [debounce]="250" ></ion-searchbar>
     <ion-note class="ion-padding"><i class="fa-solid fa-circle-info mr-2"></i>Lorem ipsum dolor sit amet.</ion-note>
     <app-produc-category-list [(categories)]="categories"></app-produc-category-list>
   </app-grid-wrapper>

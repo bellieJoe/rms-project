@@ -45,7 +45,7 @@ export class HomePage {
       title: "Employee Portal",
       subtitle: "Lorem ipsum dolor sit.",
       icon: 'enter',
-      route: '/employees',
+      route: '/dashboard',
       image: '../../assets/images/employee.jpg'
     },
 

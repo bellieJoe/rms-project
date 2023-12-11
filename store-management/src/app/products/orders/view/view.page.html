@@ -15,6 +15,7 @@
         <ion-label color="dark">Date Ordered : {{order.date_ordered | date:'MMM d, y h:mm a'}}</ion-label><br>
         <ion-label color="dark">Through : {{ order.is_pos ? 'POS' : 'Online'}}</ion-label><br>
         <ion-label color="dark">Created By : {{ order.user.userProfile.name }}</ion-label><br>
+        <ion-label color="dark" *ngIf="order.is_pos">Table #{{ order.table_no }}<br></ion-label>
         <ion-label color="{{ order.status == 'Pending' ? 'medium' : (order.status == 'Completed' ? 'primary' : 'warning') }}">{{ order.status }}</ion-label>
       </ion-card-content>
     </ion-card>
