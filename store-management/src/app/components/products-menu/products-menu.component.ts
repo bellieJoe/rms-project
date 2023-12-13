@@ -11,9 +11,9 @@ export class ProductsMenuComponent  implements OnInit {
 
   menus = [
     {
-      text: 'Dashboard',
+      text: 'Home',
       route: '/home',
-      icon: 'grid-outline'
+      icon: 'home-outline'
     },
     {
       text: 'Products',

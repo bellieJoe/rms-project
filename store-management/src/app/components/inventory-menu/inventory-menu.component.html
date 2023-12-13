@@ -7,31 +7,23 @@
   <ion-content>
     <ion-menu-toggle menu="inventory-menu" auto>
       <ion-item  lines="none" [routerLink]="['/home']" routerLinkActive="selected">
-        <ion-icon slot="start" name="arrow-back"></ion-icon>
-        <ion-label>Back to Dashboard</ion-label>
+        <ion-icon slot="start" name="home-outline"></ion-icon>
+        <ion-label>Home</ion-label>
       </ion-item>
     </ion-menu-toggle>  
+    <ion-menu-toggle menu="inventory-menu" auto>
+      <ion-item  lines="none" [routerLink]="['/supply-inventory']" routerLinkActive="selected">
+        <ion-icon slot="start" name="caret-forward-outline"></ion-icon>
+        <ion-label>Supply</ion-label>
+      </ion-item>
+    </ion-menu-toggle>  
+    <ion-menu-toggle menu="inventory-menu" auto>
+      <ion-item  lines="none" [routerLink]="['/equipment-inventory']" routerLinkActive="selected">
+        <ion-icon slot="start" name="caret-forward-outline"></ion-icon>
+        <ion-label>Equipment</ion-label>
+      </ion-item>
+    </ion-menu-toggle>  
+    <app-menu-logout class="py-3"></app-menu-logout>
 
-    <ion-list>
-      <ion-list-header>Supply Inventory</ion-list-header>
-      <ion-menu-toggle menu="inventory-menu" auto>
-        <ion-item  lines="none" [routerLink]="['/supply-inventory']" routerLinkActive="selected">
-          <ion-icon slot="start" name="caret-forward"></ion-icon>
-          <ion-label>Items</ion-label>
-        </ion-item>
-      </ion-menu-toggle>  
-    </ion-list>
-    <ion-list>
-      <ion-list-header>Equipment Inventory</ion-list-header>
-      <ion-menu-toggle menu="inventory-menu" auto>
-        <ion-item  lines="none" [routerLink]="['/equipment-inventory']" routerLinkActive="selected">
-          <ion-icon slot="start" name="caret-forward"></ion-icon>
-          <ion-label>Items</ion-label>
-        </ion-item>
-      </ion-menu-toggle>  
-    </ion-list>
-    <ion-list>
-      <app-menu-logout class="py-3"></app-menu-logout>
-    </ion-list>
   </ion-content>
 </ion-menu>

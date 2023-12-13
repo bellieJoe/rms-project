@@ -5,34 +5,32 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-menu-toggle menu="employee-portal-menu" auto>
-      <ion-item  lines="none" [routerLink]="['/home']" routerLinkActive="selected">
-        <ion-icon slot="start" name="arrow-back"></ion-icon>
-        <ion-label>Back to Dashboard</ion-label>
-      </ion-item>
-    </ion-menu-toggle>  
 
     <ion-list>
+      <ion-menu-toggle menu="employee-portal-menu" auto>
+        <ion-item  lines="none" [routerLink]="['/home']" routerLinkActive="selected">
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-label>Home</ion-label>
+        </ion-item>
+      </ion-menu-toggle> 
       <ion-menu-toggle menu="employee-portal-menu" auto [routerLink]="['/dashboard']" routerLinkActive="selected">
         <ion-item  lines="none" >
-          <ion-icon slot="start" name="person"></ion-icon>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
           <ion-label>Employee Dashboard</ion-label>
         </ion-item>
       </ion-menu-toggle>  
       <ion-menu-toggle menu="employee-portal-menu" auto *ngIf="auth.employee.privilege_level == 1">
         <ion-item  lines="none" [routerLink]="['/employees']" routerLinkActive="selected">
-          <ion-icon slot="start" name="people"></ion-icon>
+          <ion-icon slot="start" name="people-outline"></ion-icon>
           <ion-label>Employees</ion-label>
         </ion-item>
       </ion-menu-toggle>  
       <ion-menu-toggle menu="employee-portal-menu" auto >
         <ion-item  lines="none" [routerLink]="['/payrolls']" routerLinkActive="selected">
-          <ion-icon slot="start" name="receipt"></ion-icon>
+          <ion-icon slot="start" name="receipt-outline"></ion-icon>
           <ion-label>Payrolls</ion-label>
         </ion-item>
       </ion-menu-toggle>  
-    </ion-list>
-    <ion-list>
       <ion-menu-toggle menu="employee-portal-menu">
         <app-menu-logout class="py-3"></app-menu-logout>
       </ion-menu-toggle>

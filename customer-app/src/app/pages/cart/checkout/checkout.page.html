@@ -32,11 +32,11 @@
         <ion-item-divider>
           <ion-label>Other Details</ion-label>
         </ion-item-divider>
-        <ion-select #deliveryMode (ionChange)="onSelectDelivery()" class="mb-2" fill="solid" label="Delivery Mode" labelPlacement="floating" placeholder="Select Delivery Mode">
+        <!-- <ion-select #deliveryMode (ionChange)="onSelectDelivery()" class="mb-2" fill="solid" label="Delivery Mode" labelPlacement="floating" placeholder="Select Delivery Mode">
           <ng-container *ngFor="let i of delivery_types">
             <ion-select-option  value="{{ i.id }}">{{ i.name }}</ion-select-option>
           </ng-container>
-        </ion-select>
+        </ion-select> -->
         <ion-input value="{{ 'latitude: ' +  location.lat + ', longitude: ' + location.long }}"  readonly *ngIf="selectedDelivery == 3" #address fill="solid" type="text" label="Pick Location" labelPlacement="floating" placeholder="Select Delivery Address" (click)="selectCoordinates()"></ion-input>
         <ion-input [value]="deliveryCharge" readonly *ngIf="selectedDelivery == 3" #address fill="solid" type="text" label="Delivery Charge" labelPlacement="floating" ></ion-input>
         <ion-textarea #notesInput fill="solid" label="Notes" labelPlacement="floating"></ion-textarea>

@@ -36,7 +36,7 @@ export class CheckoutPage implements OnInit {
 
   checkout : any
   delivery_types : any = []
-  selectedDelivery : any = null
+  selectedDelivery : any = 3
   selectedAddress : any = null
   deliveryCharge : number = 0
   location : Coordinates = {

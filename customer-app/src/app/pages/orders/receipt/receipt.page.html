@@ -45,7 +45,7 @@
     </table>
     <br>
     <br>
-
+    <p *ngIf="order.delivery_type_id == 3">Delivery Fee : {{ order.delivery_charge | currency:'PHP' }}</p>
     <p class="mb-0"><span class="font-weight-bold">Total : {{ total | currency:'PHP' }}</span></p>
   </app-grid-wrapper>
 </ion-content>

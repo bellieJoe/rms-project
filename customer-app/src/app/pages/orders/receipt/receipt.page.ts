@@ -54,6 +54,9 @@ export class ReceiptPage implements OnInit {
     this.items.forEach((val:any) => {
       this.total += (val.price * val.quantity)
     });
+    if(this.order.delivery_type_id == 3){
+      this.total += this.order.delivery_charge
+    }
   }
 
 }
