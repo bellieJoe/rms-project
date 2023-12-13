@@ -125,6 +125,7 @@ Route.group(()=>{
     Route.get('', 'EmployeesController.index')
     Route.get('test', 'EmployeesController.test')
     Route.post('end-employment', 'EmployeesController.endEmployment')
+    Route.get('dashboard', 'EmployeesController.dashboard')
   }).prefix('employees')
   
   Route.group(()=>{

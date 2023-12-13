@@ -8,5 +8,41 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
+  <ng-container *ngIf="userService.auth.employee.privilege_level == 1">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col >
+          <ion-card color="primary">
+            <ion-card-content>
+              <h1 class="font-weight-bold"><ion-label color="dark">{{dashboard.employee_count}}</ion-label></h1>
+              <ion-label color="dark">Employee/s</ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col >
+          <ion-card>
+            <ion-card-content>
+              <h1 class="font-weight-bold"><ion-label color="dark">{{dashboard.employee_active_count}}</ion-label></h1>
+              Active
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col >
+          <ion-card>
+            <ion-card-content>
+              <h1 class="font-weight-bold"><ion-label color="dark">{{dashboard.employee_inactive_count}}</ion-label></h1>
+              In-active
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <app-grid-wrapper>
+      <ion-card>
+        <ion-card-content>
+          <ion-datetime class="d-block mx-auto" display-format="DD.MM.YYYY HH:mm" presentation="date"></ion-datetime>
+        </ion-card-content>
+      </ion-card>
+    </app-grid-wrapper>
+  </ng-container>
 </ion-content>

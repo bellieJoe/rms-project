@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public userService : UserService,
+    private errorHandler : ErrorHandler,
+    private employeeService : EmployeeService
+  ) { }
 
-  ngOnInit() {
+  dashboard : any = {}
+  async ngOnInit() {
+    try {
+      const res = await this.employeeService.dashboard()
+      this.dashboard = res.data
+    } catch (error) {
+      this.errorHandler.handleError(error)
+    }
   }
 
 }

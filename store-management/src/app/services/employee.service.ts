@@ -34,4 +34,9 @@ export class EmployeeService {
     })
     return res
   }
+
+  async dashboard(){
+    const res = await axios.get(`${environment.apiUrl}employees/dashboard`)
+    return res
+  }
 }

@@ -75,5 +75,12 @@ export default class EmployeesController {
         _service_record!.to = DateTime.now().toFormat('y-M-d')
         _service_record?.save()
     }
+    async dashboard({request}){
+        return {
+            employee_count: (await Employee.all()).length,
+            employee_active_count: (await Employee.query().where('is_active', 1)).length,
+            employee_inactive_count: (await Employee.query().where('is_active', 0)).length,
+        }
+    }
 
 }
