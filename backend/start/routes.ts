@@ -139,6 +139,10 @@ Route.group(()=>{
     Route.get('test', 'PayrollsController.test')
   }).prefix('payrolls')
 
+  Route.group(()=>{
+    Route.get('monthly', 'SalesController.monthly')
+  }).prefix('sales')
+
 
 
 }).prefix('/api')

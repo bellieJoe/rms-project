@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="products-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Sales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-card>
+      <ion-card-content>
+        <h1 class="font-weight-bold mb-0">{{ 20000 | currency:'PHP' }}</h1>
+        <ion-label>Total Sales</ion-label>
+      </ion-card-content>
+    </ion-card>
+  </app-grid-wrapper>
+</ion-content>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime (ionChange)="datetime_changed($event)" [showDefaultButtons]="true" id="datetime" presentation="month-year"></ion-datetime>
+  </ng-template>
+</ion-modal>

@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./employees/dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
+  {
+    path: 'sales',
+    loadChildren: () => import('./products/sales/sales.module').then( m => m.SalesPageModule)
+  },
 
 
 

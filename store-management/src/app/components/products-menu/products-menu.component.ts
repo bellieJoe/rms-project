@@ -25,6 +25,11 @@ export class ProductsMenuComponent  implements OnInit {
       route: '/product-category',
       icon: 'file-tray-stacked-outline'
     },
+    {
+      text: 'Sales',
+      route: '/sales',
+      icon: 'bar-chart-outline'
+    },
     // {
     //   text: 'Menu',
     //   route: '/menu',
