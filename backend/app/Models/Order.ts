@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasMany, belongsTo, column, computed, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
+import OrderItem from './OrderItem'
 
 export default class Order extends BaseModel {
   static table = "orders"
@@ -42,5 +43,21 @@ export default class Order extends BaseModel {
 
   @belongsTo(() => User)
   public user : BelongsTo<typeof User>
+
+  @hasMany(()=>OrderItem)
+  public orderItems : HasMany<typeof OrderItem>
+
+  @computed()
+  public get total() : any {
+    if(!this.orderItems){
+      return null
+    }
+    let total = this.deliveryCharge ? this.deliveryCharge : 0
+    this.orderItems.forEach((item:any)=>{
+      total += item.price * item.quantity
+    })
+    return total 
+  }
+  
 
 }
