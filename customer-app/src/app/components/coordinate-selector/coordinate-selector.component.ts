@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { circle, Icon, icon, latLng, Map, MapOptions, Marker, marker, Point, Polygon, tileLayer } from 'leaflet';
 import { AppSettingsService } from 'src/app/services/app-settings.service';
+import { MapService } from 'src/app/services/map.service';
 
 @Component({
   selector: 'app-coordinate-selector',
@@ -10,7 +11,8 @@ import { AppSettingsService } from 'src/app/services/app-settings.service';
 export class CoordinateSelectorComponent  implements OnInit {
 
   constructor(
-    private appSettingsService : AppSettingsService
+    private appSettingsService : AppSettingsService,
+    private mapService : MapService
   ) {
     this.mapOptions = {
       layers: [
@@ -27,6 +29,8 @@ export class CoordinateSelectorComponent  implements OnInit {
     }, 900);
 
   }
+
+  addresses_suggestions : any = []
   isDisplayed : boolean = false
   @Output() onMapSelect = new EventEmitter<any>
   map!: Map
@@ -63,6 +67,40 @@ export class CoordinateSelectorComponent  implements OnInit {
       iconUrl: '../../../assets/icon/location-dot-solid.svg'
     }))
     .addTo(this.map)
+  }
+
+  async searchAddress(ev:any){
+    console.log(ev.detail.value)
+    const addresses = await this.mapService.getAddressSuggestion(ev.detail.value)
+    this.addresses_suggestions = addresses
+    console.log(addresses)
+  }
+
+  async address_searchbar_clear(){
+    this.addresses_suggestions = []
+  }
+
+  async address_searchbar_selected(place:any){
+    console.log(place)
+    const coordinates = {
+      lat: place.lat,
+      lng : place.lon
+    }
+    this.tappedCoordinates = {
+      lat: parseFloat(place.lat),
+      lng: parseFloat(place.lon)
+    };
+    this.onMapSelect.emit(this.tappedCoordinates)
+    this.tapMarker.setLatLng({
+      lat: parseFloat(place.lat),
+      lng: parseFloat(place.lon),
+    })
+    .setIcon(icon({
+      iconUrl: '../../../assets/icon/location-dot-solid.svg'
+    }))
+    .addTo(this.map)
+    this.map.flyTo(this.tappedCoordinates)
+    this.addresses_suggestions = []
   }
 
 }

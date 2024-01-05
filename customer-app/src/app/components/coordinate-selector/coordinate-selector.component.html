@@ -1,3 +1,12 @@
+<ion-searchbar (ionInput)="searchAddress($event)" (ionClear)="address_searchbar_clear()" (ionCancel)="address_searchbar_clear()" placeholder="Enter Address" [debounce]="250" showCancelButton="always"></ion-searchbar>
+<ion-list class="address_searchbar_results" *ngIf="addresses_suggestions.length > 0">
+  <ng-container *ngFor="let place of addresses_suggestions">
+    <ion-item button (click)="address_searchbar_selected(place)">
+      <ion-label>{{ place.display_name }}</ion-label>
+    </ion-item>
+  </ng-container>
+</ion-list>
+
 <div *ngIf="isDisplayed" style="height: 100%;"
   leaflet 
   [leafletOptions]="mapOptions"

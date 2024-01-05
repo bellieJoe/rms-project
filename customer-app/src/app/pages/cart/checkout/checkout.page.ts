@@ -35,6 +35,7 @@ export class CheckoutPage implements OnInit {
   }
 
   checkout : any
+  addresses_suggestions: any = []
   delivery_types : any = []
   selectedDelivery : any = 3
   selectedAddress : any = null
@@ -155,6 +156,8 @@ export class CheckoutPage implements OnInit {
     })
     this.location.lat = coordinates.lat
     this.location.long = coordinates.lng
+    const test = await this.mapService.getAddressFromCoordinates(this.location.lat, this.location.long)
+    console.log(test.display_name)
     const start : Coordinates = {
       lat: this.appSettingsService.appSettings.json_store_location.lat,
       long: this.appSettingsService.appSettings.json_store_location.long
@@ -170,6 +173,26 @@ export class CheckoutPage implements OnInit {
 
   closeMapModal(){
     this.mapModal.dismiss()
+  }
+
+  async searchAddress(ev:any){
+    console.log(ev.detail.value)
+    const addresses = await this.mapService.getAddressSuggestion(ev.detail.value)
+    this.addresses_suggestions = addresses
+    console.log(addresses)
+  }
+
+  async address_searchbar_clear(){
+    this.addresses_suggestions = []
+  }
+  async address_searchbar_selected(place:any){
+    console.log(place)
+    const coordinates = {
+      lat: place.lat,
+      lng : place.lon
+    }
+    this.coordinates_selected(coordinates)
+    this.address_searchbar_clear()
   }
 
 }

@@ -68,7 +68,18 @@
               Close
             </ion-button>
           </ion-buttons>
+          <ion-title>Select Location</ion-title>
         </ion-toolbar>
+        <!-- <ion-toolbar>
+          <ion-searchbar (ionInput)="searchAddress($event)" (ionClear)="address_searchbar_clear()" (ionCancel)="address_searchbar_clear()" placeholder="Enter Address" [debounce]="250" showCancelButton="always"></ion-searchbar>
+          <ion-list class="address_searchbar_results" *ngIf="addresses_suggestions.length > 0">
+            <ng-container *ngFor="let place of addresses_suggestions">
+              <ion-item button (click)="address_searchbar_selected(place)">
+                <ion-label>{{ place.display_name }}</ion-label>
+              </ion-item>
+            </ng-container>
+          </ion-list>
+        </ion-toolbar> -->
       </ion-header>
       <ion-content>
         <app-coordinate-selector (onMapSelect)="coordinates_selected($event)"></app-coordinate-selector>
