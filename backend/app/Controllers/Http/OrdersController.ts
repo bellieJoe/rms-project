@@ -10,6 +10,7 @@ export default class OrdersController {
     async getPending(){
         const orders = Order.query().where('status', 'Pending')
     }
+    
     async getProcessing(){
         const orders = Order.query().where('status', 'Processing').paginate(1, 30)
         return (await orders).all()

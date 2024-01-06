@@ -104,7 +104,7 @@ export class CheckoutPage implements OnInit {
     })
     const data : PlaceOrderData  = {
       items: _items,
-      address : this.selectedDelivery == 1 ? this.address.el.value : null,
+      address : this.selectedAddress,
       notes: this.notesInput.el.value,
       user_id : await (await this.userService.getAuth()).id,
       delivery_type_id: this.selectedDelivery,
@@ -149,6 +149,8 @@ export class CheckoutPage implements OnInit {
   // }
 
   async coordinates_selected(coordinates:any){
+    this.selectedAddress = await this.mapService.getAddressFromCoordinates(coordinates.lat, coordinates.lng)
+    this.selectedAddress = this.selectedAddress.display_name
     const toast = await this.toastCtrl.create({
       message: "Coordinates changed",
       duration: 700,
@@ -185,6 +187,7 @@ export class CheckoutPage implements OnInit {
   async address_searchbar_clear(){
     this.addresses_suggestions = []
   }
+
   async address_searchbar_selected(place:any){
     console.log(place)
     const coordinates = {
@@ -194,5 +197,7 @@ export class CheckoutPage implements OnInit {
     this.coordinates_selected(coordinates)
     this.address_searchbar_clear()
   }
+
+
 
 }
