@@ -33,6 +33,17 @@ export class MenuService {
     }
   }
 
+  async initializeRecommendations(){
+    try {
+      const res = await axios.get(`${environment.apiUrl}menu/generate-recommendations`)
+      console.log(res.data)
+      return res.data
+    } catch (error) {
+      console.log(error)
+      this.errorHandler.handleError(error)
+    }
+  }
+
   async addToCart(data : AddToCartData){
     const _cart = this.getCart()
     if(!_cart || _cart.length <= 0){

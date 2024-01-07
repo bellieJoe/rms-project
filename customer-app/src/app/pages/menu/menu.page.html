@@ -19,6 +19,9 @@
     </h1>
 
     <ion-segment #categorySegment color="primary" value="{{ selectedCategory }}" [scrollable]="true"  (ionChange)="categorySelect($event)">
+      <ion-segment-button class="p-2" value="recommended"  >
+        <ion-label>Recommended</ion-label>
+      </ion-segment-button>
       <ion-segment-button class="p-2" *ngFor="let m of menu" value="{{ m.id }}"  >
         <ion-label>{{ m.name }}</ion-label>
       </ion-segment-button>
@@ -27,6 +30,18 @@
     <ion-grid fixed>
       <ion-row class="ion-align-items-center">
         <ng-container *ngFor="let item of products">
+          <ion-col class="p-0 " size-sm="6" size-md="3" size-lg="2" >
+            <app-menu-product-card [item]="item" (onAddCart)="addToCart($event)"></app-menu-product-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+
+    
+    <ion-grid fixed *ngIf="selectedCategory == 'recommended'">
+      <ion-label>Best Sellers</ion-label>
+      <ion-row class="ion-align-items-center">
+        <ng-container *ngFor="let item of recommendations.best_sellers">
           <ion-col class="p-0 " size-sm="6" size-md="3" size-lg="2" >
             <app-menu-product-card [item]="item" (onAddCart)="addToCart($event)"></app-menu-product-card>
           </ion-col>

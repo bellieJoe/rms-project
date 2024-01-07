@@ -83,6 +83,7 @@ Route.group(()=>{
     Route.post('place-order-pos', 'MenusController.placeOrderPOS')
     Route.post('place-order-online', 'MenusController.placeOrderOnline')
     Route.get('get-delivery-types', 'MenusController.getDeliveryTypes')
+    Route.get('generate-recommendations', 'MenusController.generateRecommendations')
   }).prefix('/menu')
 
   Route.group(()=>{

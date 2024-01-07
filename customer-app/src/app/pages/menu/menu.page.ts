@@ -20,16 +20,19 @@ export class MenuPage implements OnInit {
   ) { }
 
   @ViewChild('categorySegment') categorySegment : IonSegment|any;
-  selectedCategory : any
+  selectedCategory : any = 'recommended'
   products : any = []
   menu : any
   cartCount: number = this.menuService.countCart()
+  recommendations : any = {}
 
   async ngOnInit() {
     this.menu = await this.menuService.initializeMenu()
+    this.recommendations = await this.menuService.initializeRecommendations()
     await this.initImages()
-    this.selectedCategory = this.menu[0].id
-    this.products = this.menu[0].productItems
+    console.log(this.recommendations)
+    this.selectedCategory = 'recommended'
+    this.products = []
   }
 
   ionViewDidEnter(){
@@ -52,9 +55,26 @@ export class MenuPage implements OnInit {
         })
       })
     })
+    this.recommendations.best_sellers.forEach(async (item : any, j:number) => {
+      const image = await this.helperService.readImage(item.image)
+      this.recommendations.best_sellers[j].imageData = image.data
+      this.recommendations.best_sellers[j].price = 0
+      item.productVariants.forEach(async (variant:any, k:number) => {
+        const image = await this.helperService.readImage(variant.image)
+        this.recommendations.best_sellers[j].productVariants[k].imageData = image.data
+        if(this.recommendations.best_sellers[j].price == 0 ||this.recommendations.best_sellers[j].price > this.recommendations.best_sellers[j].productVariants[k].price){
+          this.recommendations.best_sellers[j].price = this.recommendations.best_sellers[j].productVariants[k].price
+        }
+      })
+    })
   }
 
   categorySelect(ev : any){
+    this.selectedCategory = ev.detail.value
+    if(ev.detail.value == 'recommended'){
+      this.products = []
+      return
+    }
     this.menu.forEach((val : any) => {
       if(val.id == ev.detail.value){
         this.products = val.productItems
@@ -63,7 +83,12 @@ export class MenuPage implements OnInit {
   }
 
   async handleRefresh(event : any){
+    if(this.categorySegment.value == 'recommended'){
+      this.products = []
+      return
+    }
     this.menu = await this.menuService.initializeMenu()
+    this.recommendations = await this.menuService.initializeRecommendations()
     await this.initImages()
     this.menu.forEach((val : any) => {
       if(val.id == this.categorySegment.value){
