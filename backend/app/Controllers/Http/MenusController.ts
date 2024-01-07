@@ -119,4 +119,12 @@ export default class MenusController {
         })
         
     }
+
+    async generateRecommendations(){
+        // const orders = 
+        return {
+            best_sellers : null,
+            personalize: null,
+        }
+    }
 }

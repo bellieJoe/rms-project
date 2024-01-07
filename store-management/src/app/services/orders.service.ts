@@ -54,4 +54,9 @@ export class OrdersService {
     const res = await axios.put(`${environment.apiUrl}orders/mark-as-delivery?order_id=${order_id}`)
     return res
   }
+
+  async markAsReadyForDelivery(order_id : number) {
+    const res = await axios.put(`${environment.apiUrl}orders/mark-as-ready-for-delivery?order_id=${order_id}`)
+    return res
+  }
 }

@@ -8,6 +8,7 @@ import { SalesPageRoutingModule } from './sales-routing.module';
 
 import { SalesPage } from './sales.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ComponentsModule } from 'src/app/components/components.module';
     IonicModule,
     SalesPageRoutingModule,
     ReactiveFormsModule,
-    ComponentsModule
+    ComponentsModule,
+    NgChartsModule
   ],
   declarations: [SalesPage]
 })

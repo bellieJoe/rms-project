@@ -160,3 +160,7 @@ export interface GeneratePayrollData {
     from: any
     to: any
 }
+
+// export interface DailyOrderSummary {
+//     date: string
+//   }

@@ -94,6 +94,7 @@ Route.group(()=>{
     Route.put('store-cancel', 'OrdersController.storeCancel')
     Route.put('store-process', 'OrdersController.storeProcess')
     Route.put('mark-as-delivery', 'OrdersController.markAsDelivery')
+    Route.put('mark-as-ready-for-delivery', 'OrdersController.markAsReadyForDelivery')
   }).prefix('/orders')
 
   Route.group(()=>{

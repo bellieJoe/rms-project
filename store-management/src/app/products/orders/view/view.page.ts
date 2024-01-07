@@ -160,5 +160,29 @@ export class ViewPage implements OnInit {
     })
     alert.present()
   }
+  
+  async markAsReadyForDelivery(){
+    const toast = await this.toastCtrl.create({
+      duration: 1000,
+      message: 'An order is now in delivery'
+    })
+    const alert = await this.alertCtrl.create({
+      header: 'Mark as In Delivery',
+      message: "Are you sure you want to mark this order as Ready for delivery?",
+      buttons: ['No', {
+        text: 'Yes',
+        handler: async()=>{
+          try {
+            await this.orderService.markAsReadyForDelivery(this.order.id)
+            this.router.navigate(['/orders'])
+            toast.present()
+          } catch (error) {
+            this.errorHandler.handleError(error)
+          }
+        }
+      }]
+    })
+    alert.present()
+  }
 
 }

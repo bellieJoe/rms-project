@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MinimaLight, MinimaDeepDark, MinimaDark } from '@alyle/ui/themes/minima';
 import { color } from '@alyle/ui/color';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-
+import { NgChartsModule } from 'ng2-charts';
 
 /**
  * For light theme
@@ -51,7 +51,7 @@ export class CustomMinimaDark implements PartialThemeVariables {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(),LeafletModule, AppRoutingModule, ComponentsModule, BrowserAnimationsModule],
+  imports: [BrowserModule, IonicModule.forRoot(),LeafletModule, AppRoutingModule, ComponentsModule, BrowserAnimationsModule, NgChartsModule],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
     { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }, 

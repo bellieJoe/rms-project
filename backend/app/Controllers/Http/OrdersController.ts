@@ -160,7 +160,24 @@ export default class OrdersController {
             await OrderStatusHistory.create({
                 status: 'In Delivery',
                 orderId: order_id,
-                notes: 'Store has marked the order as Reeady for Delivery',
+                notes: 'Order is being delivered',
+            })
+            order!.useTransaction(trx)
+        })
+    }
+
+    async markAsReadyForDelivery({request}){
+        await Database.transaction(async (trx)=>{
+            const order_id = request.input('order_id')
+            
+            const order = await Order.find(order_id)
+            order!.status = 'Ready for Delivery';
+            await order?.save()
+            order!.useTransaction(trx)
+            await OrderStatusHistory.create({
+                status: 'Ready for Delivery',
+                orderId: order_id,
+                notes: 'Store has marked the order as Ready for Delivery',
             })
             order!.useTransaction(trx)
         })

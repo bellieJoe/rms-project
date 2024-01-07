@@ -12,9 +12,29 @@
     <ion-datetime-button #month_selector_button datetime="datetime"></ion-datetime-button>
     <ion-card>
       <ion-card-content>
-        <h1 class="font-weight-bold mb-0">{{ 20000 | currency:'PHP' }}</h1>
-        <ion-label>Total Sales</ion-label>
+        <ion-label color="primary">
+          <span class=" mb-0 h3">{{ monthlyTotal | currency:'PHP' }} </span>
+          <ion-label color="medium">Total Sales</ion-label>
+        </ion-label><br>
+        <ion-label color="medium">
+          <span class="font-weight-bold mb-0">{{ (monthlyTotal - monthlyDeliveryTotal) | currency:'PHP' }} </span>
+          <ion-label>Total Order Sales</ion-label>
+        </ion-label><br>
+        <ion-label color="medium">
+          <span class="font-weight-bold mb-0">{{ monthlyDeliveryTotal | currency:'PHP' }} </span>
+          <ion-label>Total Delivery Charge</ion-label>
+        </ion-label>
       </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <h1 class="text-center">Monthly Sales Chart</h1>
+      <canvas style="width: 100% !important;"
+        baseChart
+        class="chart"
+        [data]="lineChartData"
+        [options]="lineChartOptions"
+        type="line"
+      ></canvas>
     </ion-card>
   </app-grid-wrapper>
 </ion-content>

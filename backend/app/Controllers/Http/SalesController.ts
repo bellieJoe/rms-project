@@ -19,10 +19,8 @@ export default class SalesController {
         .preload('orderItems', (q)=>{
             q.select('id', 'product_variant_id', 'price', 'quantity', 'order_id')
         })
-        return orders
+        return orders;
     }
-
-
 
     async yearly({request}){
         return "ok"
