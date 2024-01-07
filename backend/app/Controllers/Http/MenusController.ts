@@ -176,4 +176,8 @@ export default class MenusController {
             personalize: null,
         }
     }
+
+    async suggestProdByRecentOrders(){
+        
+    }
 }
