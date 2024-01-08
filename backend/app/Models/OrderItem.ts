@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, HasMany, HasOne, belongsTo, column, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import ProductVariant from './ProductVariant';
 
 export default class OrderItem extends BaseModel {
   static table = "order_items";
@@ -25,4 +26,7 @@ export default class OrderItem extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => ProductVariant)
+  public productVariant: BelongsTo<typeof ProductVariant>
 }

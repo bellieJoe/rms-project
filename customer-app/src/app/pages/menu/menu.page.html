@@ -48,6 +48,16 @@
         </ng-container>
       </ion-row>
     </ion-grid>
+    <ion-grid fixed *ngIf="selectedCategory == 'recommended'">
+      <ion-label>Recent Orders</ion-label>
+      <ion-row class="ion-align-items-center">
+        <ng-container *ngFor="let item of recommendations.personalize">
+          <ion-col class="p-0 " size-sm="6" size-md="3" size-lg="2" >
+            <app-menu-product-card [item]="item" (onAddCart)="addToCart($event)"></app-menu-product-card>
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
   </app-grid-wrapper>
 
 </ion-content>

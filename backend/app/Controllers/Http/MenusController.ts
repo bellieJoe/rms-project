@@ -122,7 +122,7 @@ export default class MenusController {
         
     }
 
-    async generateRecommendations(){
+    async generateRecommendations({request}){
         const to = DateTime.now()
         const from = to.minus({days: 30})
         const variants = await ProductVariant.query()
@@ -165,7 +165,9 @@ export default class MenusController {
         })
         // return variants_w_count
         
-        const items = await ProductItem.query().where('in_menu', 1)
+        const items = await ProductItem.query()
+        .where('in_menu', 1)
+        .whereIn('id', variants_w_count)
         .preload('productCategory')
         .preload('productVariants')
         // return items
@@ -173,11 +175,71 @@ export default class MenusController {
 
         return {
             best_sellers : items,
-            personalize: null,
+            personalize: await this.suggestProdByRecentOrders(request.input('user_id')),
         }
     }
 
-    async suggestProdByRecentOrders(){
-        
+    async suggestProdByRecentOrders(user_id){
+        const to = DateTime.now()
+        const from = to.minus({days: 30})
+        let orders = await Order.query()
+        .where('user_id', user_id)
+        .whereBetween('date_ordered', [from.toFormat('y-MM-dd'), to.toFormat('y-MM-dd')])
+        .preload('orderItems', (q)=>{
+            q.preload('productVariant')
+        })
+        let productItems : any = []
+        orders.forEach(order=>{
+            order.orderItems.forEach(item=>{
+                productItems.push(item.productVariant.productItemId)
+            })
+        })
+        const variants = await ProductVariant.query()
+        .where('is_archived', 0)
+        .where('in_menu', 1)
+        .where('online_availability', 1)
+        .preload('orderItems', (q)=>{
+            q.whereBetween('created_at', [from.toFormat('y-MM-dd'), to.toFormat('y-MM-dd')])
+        })
+        .withCount('orderItems',  (q)=>{
+            q.whereBetween('created_at', [from.toFormat('y-MM-dd'), to.toFormat('y-MM-dd')])
+            q.as('orderItemsCount')
+        })
+        let variants_w_count : any = variants.map((variant)=>{
+            return {
+                product_item_id : variant.productItemId,
+                orderItemsCount : variant.$extras.orderItemsCount
+            }
+        }) 
+        variants_w_count.sort((a:any,b:any)=>{
+            if (a.orderItemsCount > b.orderItemsCount) {
+                return -1;
+              }
+              if (a.orderItemsCount < b.orderItemsCount) {
+                return 1;
+              }
+            
+              return 0; 
+        })
+        variants_w_count = variants_w_count.filter(val => {
+            return val.orderItemsCount != 0
+        })
+        variants_w_count = variants_w_count.filter((val, i) => {
+            return i < 4
+        })
+        variants_w_count = variants_w_count.map(val=>{
+            console.log(productItems)
+            return val.product_item_id
+            if(productItems.includes(val.product_item_id)){
+                return val.product_item_id
+            }
+            return 0
+        })
+        const items = await ProductItem.query()
+        .where('in_menu', 1)
+        .whereIn('id', variants_w_count)
+        .preload('productCategory')
+        .preload('productVariants')
+        return items;
     }
 }
