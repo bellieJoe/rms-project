@@ -3,6 +3,7 @@ import { AddToCartData, PlaceOrderData } from '../interfaces/form-inputs';
 import { environment } from 'src/environments/environment';
 import axios from 'axios';
 import { ErrorHandlerService } from './error-handler.service';
+import { UserService } from './user.service';
 
 
 axios.defaults.withCredentials = true;
@@ -17,7 +18,8 @@ axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 export class MenuService {
 
   constructor(
-    private errorHandler : ErrorHandlerService
+    private errorHandler : ErrorHandlerService,
+    private authService : UserService
   ) { }
 
   cartCount:any = 0
@@ -35,7 +37,7 @@ export class MenuService {
 
   async initializeRecommendations(){
     try {
-      const res = await axios.get(`${environment.apiUrl}menu/generate-recommendations`)
+      const res = await axios.get(`${environment.apiUrl}menu/generate-recommendations?user_id=${this.authService.auth.id}`)
       console.log(res.data)
       return res.data
     } catch (error) {

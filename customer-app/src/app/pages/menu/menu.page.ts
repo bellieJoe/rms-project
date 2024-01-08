@@ -67,6 +67,18 @@ export class MenuPage implements OnInit {
         }
       })
     })
+    this.recommendations.personalize.forEach(async (item : any, j:number) => {
+      const image = await this.helperService.readImage(item.image)
+      this.recommendations.personalize[j].imageData = image.data
+      this.recommendations.personalize[j].price = 0
+      item.productVariants.forEach(async (variant:any, k:number) => {
+        const image = await this.helperService.readImage(variant.image)
+        this.recommendations.personalize[j].productVariants[k].imageData = image.data
+        if(this.recommendations.personalize[j].price == 0 ||this.recommendations.best_sellers[j].price > this.recommendations.best_sellers[j].productVariants[k].price){
+          this.recommendations.personalize[j].price = this.recommendations.best_sellers[j].productVariants[k].price
+        }
+      })
+    })
   }
 
   categorySelect(ev : any){
