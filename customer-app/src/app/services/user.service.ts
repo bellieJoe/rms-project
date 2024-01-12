@@ -137,4 +137,10 @@ export class UserService {
     }
     
   }
+
+  async sendPasswordResetLink(email:string){
+    const res = await axios.post(`${environment.apiUrl}users/send-password-reset-link`, {
+      email: email
+    })
+  }
 }

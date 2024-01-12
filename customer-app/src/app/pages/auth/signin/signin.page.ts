@@ -16,6 +16,7 @@ export class SigninPage implements OnInit {
     private userService : UserService
   ) { }
 
+  isPasswordVisible = false
   signinForm = this.fb.group({
     email: [''],
     password: ['']
@@ -30,6 +31,11 @@ export class SigninPage implements OnInit {
         email: this.signinForm.value.email, 
         password: this.signinForm.value.password
     })
+  }
+
+  async togglePassword(event:any){
+    (console.log(event))
+    this.isPasswordVisible = !this.isPasswordVisible
   }
 
 }

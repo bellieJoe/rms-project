@@ -12,8 +12,10 @@
           <ion-card-content>
             <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
               <ion-input fill="solid" labelPlacement="floating" label="Email" required formControlName="email" type="text"></ion-input>
-              <ion-input fill="solid"  labelPlacement="floating" label="Password" required formControlName="password" type="password"></ion-input>
-              
+              <ion-input fill="solid"  labelPlacement="floating" label="Password" required formControlName="password" type="{{ isPasswordVisible ? 'text' : 'password' }}"></ion-input>
+              <ion-button (click)="togglePassword($event)" expand="block" fill="clear" >
+                {{ isPasswordVisible ? 'Hide Password' : 'See Password' }}
+              </ion-button>
               <br>
               <ion-button expand="block"  color="primary" type="submit" [disabled]="loginForm.invalid">
                 <ion-icon slot="start" name="log-in-outline"></ion-icon>

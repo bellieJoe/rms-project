@@ -28,13 +28,17 @@
       <app-input-err-msg *ngIf="(contact_number?.hasError('maxlength') || contact_number?.hasError('minlength')) && contact_number?.touched">Length must be 11 characters</app-input-err-msg>
       <!-- <br> -->
 
-      <ion-input type="password" label="Password" labelPlacement="floating" fill="solid" formControlName="password"></ion-input>
+      <ion-input type="{{ isPasswordVisible ? 'text' : 'password' }}" label="Password" labelPlacement="floating" fill="solid" formControlName="password"></ion-input>
       <app-input-err-msg *ngIf="password?.hasError('required') && password?.touched">Password is required</app-input-err-msg>
       <app-input-err-msg *ngIf="password?.hasError('minlength') && password?.touched">Length must be minimum if 8 characters</app-input-err-msg>
       <app-input-err-msg *ngIf="signupForm.errors?.['passwordMismatch'] && password?.touched">Password doesn't match</app-input-err-msg>
       <!-- <br> -->
 
-      <ion-input type="password" label="Re-Enter Password" labelPlacement="floating" fill="solid" formControlName="password_confirmation"></ion-input>
+      <ion-input type="{{ isPasswordVisible ? 'text' : 'password' }}" label="Re-Enter Password" labelPlacement="floating" fill="solid" formControlName="password_confirmation"></ion-input>
+
+      <ion-button (click)="togglePassword($event)" expand="block" fill="clear" >
+        {{ isPasswordVisible ? 'Hide Password' : 'See Password' }}
+      </ion-button>
       <br>
       <ion-button expand="block" color="primary" type="submit" [disabled]="signupForm.invalid">
         Sign Up

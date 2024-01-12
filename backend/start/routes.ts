@@ -40,6 +40,7 @@ Route.group(()=>{
     Route.get('email-inused/:email', 'UsersController.emailInUsed'); 
     Route.get('test', 'UsersController.test'); 
     Route.put('edit-profile', 'UsersController.editProfile'); 
+    Route.post('send-password-reset-link', 'UsersController.sendPasswordResetLink'); 
   }).prefix('/users')
 
   Route.group(()=>{

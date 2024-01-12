@@ -167,6 +167,23 @@ export default class UsersController {
         return user
     }
 
+    async sendPasswordResetLink({request, response}){
+        const email = request.input('email')
+        const user = await User.query().where('email', email).preload('userProfile').first()
+        if(!user){
+            return response.abort('Email not found')
+        }
+        // send email
+        MailController.sendEmail(
+            'emails/password-reset', 
+            {
+                name: user.userProfile.name,
+                url: `${process.env.CUSTOMER_URL}/reset-password?email=${user.email}&password=${user.password}`
+            },
+            user.email
+        )
+    }
+
     
 
 }

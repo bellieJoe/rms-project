@@ -17,6 +17,7 @@ export class SigninPage implements OnInit {
     private userService : UserService
   ) { }
 
+  isPasswordVisible = false
   loginForm = new FormGroup({
     email:  new FormControl(''),
     password: new FormControl('')
@@ -30,6 +31,11 @@ export class SigninPage implements OnInit {
         email: this.loginForm.value.email, 
         password: this.loginForm.value.password
     })
+  }
+
+  async togglePassword(event:any){
+    (console.log(event))
+    this.isPasswordVisible = !this.isPasswordVisible
   }
 
 }

@@ -56,7 +56,15 @@ const routes: Routes = [
     path: 'email-verification',
     loadChildren: () => import('./pages/email-verification/email-verification.module').then( m => m.EmailVerificationPageModule),
     canActivate: [AuthGuard]
+  },  {
+    path: 'forgot-password',
+    loadChildren: () => import('./pages/auth/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+
 
   
 

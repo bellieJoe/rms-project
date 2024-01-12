@@ -23,6 +23,7 @@ export class SignupPage implements OnInit {
     private router : Router
   ) { }
 
+  isPasswordVisible  = false
   passwordValidation : ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     const password = control.get('password')
     const password_confirmation = control.get('password_confirmation')
@@ -92,6 +93,11 @@ export class SignupPage implements OnInit {
       await loader.dismiss()
       this.errorHandler.handleError(error)
     }
+  }
+
+  async togglePassword(event:any){
+    (console.log(event))
+    this.isPasswordVisible = !this.isPasswordVisible
   }
 
   

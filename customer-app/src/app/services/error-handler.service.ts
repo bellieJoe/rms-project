@@ -20,6 +20,7 @@ export class ErrorHandlerService {
     if(error.response && error.response.message){
       alert.message = error.response.message
     }
+    
     // if(error.response && error.response.data.message){
     //   alert.message = error.response.data.message
     // }
@@ -28,6 +29,9 @@ export class ErrorHandlerService {
     }
     if(error.response && error.response.status == 422){
       alert.message = error.response.data.message
+    }
+    if(error.response && error.response.data){
+      alert.message = error.response.data
     }
     
     await alert.present();
