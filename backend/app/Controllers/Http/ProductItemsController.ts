@@ -46,7 +46,16 @@ export default class ProductItemsController {
     }
 
     async active({request}){
+        const product_category_id = request.input('product_category_id')
+        if(product_category_id && product_category_id == 0){
+            const _products = await ProductItem.query()
+            .preload('productVariants')
+            .preload('productCategory')
+            .paginate(request.input('page'), 20)
+            return _products.all()
+        }
         const _products = await ProductItem.query()
+        .where('product_category_id', product_category_id)
         .preload('productVariants')
         .preload('productCategory')
         .paginate(request.input('page'), 20)

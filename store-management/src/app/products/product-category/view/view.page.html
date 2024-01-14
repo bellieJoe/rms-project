@@ -31,9 +31,9 @@
         <ion-icon slot="start" name="create"></ion-icon>
         <ion-label>Edit</ion-label>
       </ion-item>
-      <ion-item button>
-        <ion-icon slot="start" name="archive"></ion-icon>
-        <ion-label >Archive</ion-label>
+      <ion-item button (click)="archiveCategory()">
+        <ion-icon slot="start" name="archive" color="danger"></ion-icon>
+        <ion-label color="danger">Archive</ion-label>
       </ion-item>
     </ion-list>
   </app-grid-wrapper>

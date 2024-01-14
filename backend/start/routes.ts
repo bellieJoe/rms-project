@@ -67,6 +67,7 @@ Route.group(()=>{
     Route.put('update/:id', 'ProductCategoriesController.update')
     Route.get('', 'ProductCategoriesController.index')
     Route.get('search-by-name', 'ProductCategoriesController.searchByName')
+    Route.put('archive', 'ProductCategoriesController.archive')
     Route.get('active', 'ProductCategoriesController.active')
   }).prefix('/product-categories')
 

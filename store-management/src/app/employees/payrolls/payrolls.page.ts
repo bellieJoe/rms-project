@@ -142,5 +142,28 @@ export class PayrollsPage implements OnInit {
     })
   }
 
+  async filter_payroll_form__submit(){
+    // const data : GeneratePayrollData = {
+    //   from: this.filter_payroll_form?.get('from')?.value!,
+    //   to: this.filter_payroll_form?.get('to')?.value!
+    // }
+    const loader = await this.loadingCtrl.create({
+      message: "Fetching Data",
+      backdropDismiss: false,
+      spinner: 'lines'
+    })
+    try {
+      await loader.present()
+      const res = await this.payrollService.getPayrolls(this.filter_payroll_form.get('year')?.value!)
+      await loader.dismiss()
+      this.payrolls = res.data
+      await this.payrollFilterMenu.close()
+      console.log(this.payrolls)
+    } catch (error) {
+      await loader.dismiss()
+      this.errorHandler.handleError(error)
+    }
+  }
+
 
 }

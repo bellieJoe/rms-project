@@ -49,12 +49,12 @@ export class ProductItemService {
     return res;
   }
 
-  async fetchProducts(){
+  async fetchProducts(product_category:any){
     if(this.page == 1){
       this.products = []
     }
     try {
-      const res = await axios.get(`${environment.apiUrl}products/active?page=${this.page}`)
+      const res = await axios.get(`${environment.apiUrl}products/active?page=${this.page}&product_category_id=${product_category}`)
       this.products = [...this.products, ...res.data]
       this.products = this.products.map((product : any) => {
         // product.imageData = await (await this.helperService.readImage(product.image)).data

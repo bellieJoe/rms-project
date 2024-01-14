@@ -115,7 +115,7 @@ export default class PayrollsController {
     //     return _payrolls
     // }
 
-    async index({request}){
+    async index({request}) {
         const year = request.input('year')
         const firstDay = DateTime.fromISO(`${year}-01-01`);
         const lastDay = DateTime.fromISO(`${year}-12-31`);

@@ -11,9 +11,14 @@ export default class ProductCategoriesController {
     }
 
     async index({request}){
-        const categories = await ProductCategory.query().paginate(request.input('page'), 20)
+        const categories = await ProductCategory.query().where('is_archived', 0).paginate(request.input('page'), 20)
         return categories.all();
     }
+
+    // async index({request}){
+    //     const categories = await ProductCategory.query().paginate(request.input('page'), 20)
+    //     return categories.all();
+    // }
 
     async searchByName({request}){
         const categories = await ProductCategory.query().where('name', 'like', `%${request.input('keyword')}%`)
@@ -30,5 +35,12 @@ export default class ProductCategoriesController {
         category!.name = request.input('name')
         category!.description = request.input('description')
         category!.save()
+    }
+
+    async archive({request}){
+        const product_category_id = request.input('product_category_id')
+        const product_category = await ProductCategory.find(product_category_id)
+        product_category!.isArchived = true
+        await product_category?.save()
     }
 }

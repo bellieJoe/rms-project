@@ -45,4 +45,9 @@ export class ProductCategoryService {
     const res = await axios.get(`${environment.apiUrl}product-categories/active`)
     return res;
   }
+
+  async archive(product_category_id : string|number){
+    const res = await axios.put(`${environment.apiUrl}product-categories/archive?product_category_id=${product_category_id}`)
+    return res;
+  }
 }

@@ -5,14 +5,13 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <!-- <form [formGroup]="filter_payroll_form" (ngSubmit)="filter_payroll_form__submit()">
-      <ion-input fill="solid" type="date" label="Start Date" labelPlacement="floating" formControlName="from"></ion-input>
-      <ion-input fill="solid" type="date" label="End Date" labelPlacement="floating" formControlName="to"></ion-input>
+    <form [formGroup]="filter_payroll_form" (ngSubmit)="filter_payroll_form__submit()">
+      <ion-input fill="solid" type="numbrer" label="Year" labelPlacement="floating" formControlName="year"></ion-input>
       <ion-button  color="primary" expand="block" type="submit" [disabled]="filter_payroll_form.invalid">
         <ion-icon slot="start" name="filter"></ion-icon>
         Apply Filters
       </ion-button>
-    </form> -->
+    </form>
   </ion-content>
 </ion-menu>
 
