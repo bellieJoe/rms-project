@@ -138,6 +138,8 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.get('', 'PayrollsController.index')
+    Route.get('get-list', 'PayrollsController.getList')
+    Route.delete('delete-payroll-range', 'PayrollsController.deletePayrollRange')
     Route.post('generate-payroll', 'PayrollsController.generatePayroll')
     Route.get('test', 'PayrollsController.test')
   }).prefix('payrolls')

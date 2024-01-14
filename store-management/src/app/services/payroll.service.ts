@@ -22,11 +22,21 @@ export class PayrollService {
     return res;
   }
 
-  async getPayrolls(data : GeneratePayrollData){
+  async getPayrolls(year:number){
     const employee_id = this.userService.auth.employee.id
     const res = this.userService.auth.employee.privilege_level == 1 
-    ? await axios.get(`${environment.apiUrl}payrolls?from=${encodeURI(data.from)}&to=${encodeURI(data.to)}`)
-    : await axios.get(`${environment.apiUrl}payrolls?from=${encodeURI(data.from)}&to=${encodeURI(data.to)}&employee_id=${employee_id}`)
+    ? await axios.get(`${environment.apiUrl}payrolls?year=${year}`)
+    : await axios.get(`${environment.apiUrl}payrolls?year=${year}`)
+    return res;
+  }
+
+  async getPayrollsByPayrollRange(payroll_range_id:number){
+    const res = await axios.get(`${environment.apiUrl}payrolls/get-list?payroll_range_id=${payroll_range_id}`)
+    return res;
+  }
+
+  async deletePayrollRanage(payroll_range_id:number){
+    const res = await axios.delete(`${environment.apiUrl}payrolls/delete-payroll-range?payroll_range_id=${payroll_range_id}`)
     return res;
   }
 }

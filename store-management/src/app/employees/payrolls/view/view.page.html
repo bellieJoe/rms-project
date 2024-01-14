@@ -1,0 +1,42 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>View Payroll</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-grid-wrapper>
+    <ion-card>
+      <ion-card-content>
+        <ion-label>Start Date: {{ payroll_range.from | date:'mediumDate' }}</ion-label><br>
+        <ion-label>End Date: {{ payroll_range.to | date:'mediumDate' }}</ion-label>
+      </ion-card-content>
+    </ion-card>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Actions</ion-label>
+      </ion-list-header>
+      <ion-item button (click)="deletePayroll()">
+        <ion-icon slot="start" name="trash" color="danger"></ion-icon>
+        <ion-label color="danger">Delete Payroll</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Payroll List</ion-label>
+      </ion-list-header>
+      <ng-container *ngFor="let payroll of payrolls">
+        <ion-item button>
+          <ion-label>
+            <ion-label color="primary">{{ payroll.employee.user.userProfile.name }}</ion-label>
+            <ion-label>No. of Days Work : {{ payroll.days_worked }}</ion-label>
+            <ion-label>Net Pay : {{ payroll.net_pay }}</ion-label>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+    </ion-list>
+  </app-grid-wrapper>
+</ion-content>

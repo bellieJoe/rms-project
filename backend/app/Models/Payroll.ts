@@ -6,10 +6,16 @@ export default class Payroll extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  // @column()
+  // from : any
+  // @column()
+  // to:any
   @column()
-  from : any
+  payroll_range_id:number
   @column()
-  to:any
+  isRemitted:boolean
+  @column()
+  isDeleted:boolean
   @column()
   employeeId:number
   @column()

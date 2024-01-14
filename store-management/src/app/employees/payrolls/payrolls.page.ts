@@ -26,27 +26,24 @@ export class PayrollsPage implements OnInit {
     public userService : UserService
   ) { }
 
-  payrolls : any = []
-  selectedPayroll : any = {}
-  @ViewChild('payroll_filter_menu') payrollFilterMenu! : IonMenu
-  @ViewChild('view_payroll_details_modal') viewPayrollDetailsModal! : IonModal
-  today = DateTime.now().toFormat('y-M-d')
-  @ViewChild('generatePayrollModal') generatePayrollModal! : IonModal
-  filter_payroll_form = this.fb.group({
-    from: [DateTime.now().startOf('month').toFormat('y-MM-dd'), [Validators.required]],
-    to: [DateTime.now().endOf('month').toFormat('y-MM-d'), [Validators.required]]
+  public payrolls : any = []
+  public today = DateTime.now().toFormat('y-M-d')
+  public filter_payroll_form = this.fb.group({
+    year : DateTime.now().year
   })
-  generate_payroll_form = this.fb.group({
+  public generate_payroll_form = this.fb.group({
     from: [null, [Validators.required]],
     to: [null, [Validators.required]]
   })
-  
   public get from() {
     return this.generate_payroll_form.get('from')
   }
   public get to() {
     return this.generate_payroll_form.get('to')
   }
+
+  @ViewChild('payroll_filter_menu') private payrollFilterMenu! : IonMenu
+  @ViewChild('generatePayrollModal') private generatePayrollModal! : IonModal
 
   ngOnInit() {
     // this.filter_payroll_form?.get('from')?.setValue(DateTime.now().startOf('month').toFormat('y-M-d'))
@@ -55,10 +52,10 @@ export class PayrollsPage implements OnInit {
   }
 
   async ionViewDidEnter(){
-    const data : GeneratePayrollData = {
-      from: this.filter_payroll_form?.get('from')?.value!,
-      to: this.filter_payroll_form?.get('to')?.value!
-    }
+    // const data : GeneratePayrollData = {
+    //   from: this.filter_payroll_form?.get('from')?.value!,
+    //   to: this.filter_payroll_form?.get('to')?.value!
+    // }
     const loader = await this.loadingCtrl.create({
       message: "Fetching Data",
       backdropDismiss: false,
@@ -68,7 +65,7 @@ export class PayrollsPage implements OnInit {
       await loader.present()
     }
     try {
-      const res = await this.payrollService.getPayrolls(data)
+      const res = await this.payrollService.getPayrolls(this.filter_payroll_form?.get('year')?.value!)
       await loader.dismiss()
       this.payrolls = res.data
       console.log(this.payrolls)
@@ -81,6 +78,10 @@ export class PayrollsPage implements OnInit {
   async doRefresh(e:any){
     await this.ionViewDidEnter()
     e.detail.complete()
+  }
+
+  async viewFilterMenu(){
+    await this.payrollFilterMenu.open()
   }
 
   async showGeneratePayroll(){
@@ -133,37 +134,13 @@ export class PayrollsPage implements OnInit {
     return true
   }
 
-  async viewFilterMenu(){
-    await this.payrollFilterMenu.open()
-  }
-
-  async filter_payroll_form__submit(){
-    const data : GeneratePayrollData = {
-      from: this.filter_payroll_form?.get('from')?.value!,
-      to: this.filter_payroll_form?.get('to')?.value!
-    }
-    const loader = await this.loadingCtrl.create({
-      message: "Fetching Data",
-      backdropDismiss: false,
-      spinner: 'lines'
+  async viewPayrollDetails(payroll:any){
+    await this.router.navigate(['/payrolls/view'], {
+      state: {
+        payroll_range : payroll
+      }
     })
-    try {
-      await loader.present()
-      const res = await this.payrollService.getPayrolls(data)
-      await loader.dismiss()
-      this.payrolls = res.data
-      await this.payrollFilterMenu.close()
-      console.log(this.payrolls)
-    } catch (error) {
-      await loader.dismiss()
-      this.errorHandler.handleError(error)
-    }
   }
 
-  async viewPayrollDetails(payroll : any){
-    this.selectedPayroll = payroll
-    console.log(this.selectedPayroll)
-    await this.viewPayrollDetailsModal.present()
-  }
 
 }

@@ -22,10 +22,10 @@ export class HelperService {
   ) { }
 
 
-  getRouterNavState() : any{
-    if(!this.router.getCurrentNavigation()?.extras.state ){
-      location.href = "/";
-    }
+  getRouterNavState() : any {
+    // if(!this.router.getCurrentNavigation()?.extras.state ){
+    //   location.href = "/";
+    // }
     return this.router.getCurrentNavigation()?.extras.state;
   }
 

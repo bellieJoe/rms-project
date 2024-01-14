@@ -1,4 +1,4 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { IonActionSheet, RefresherCustomEvent } from '@ionic/angular';
 
 import { DataService, Message } from '../services/data.service';
@@ -10,7 +10,7 @@ import { Route, Router } from '@angular/router';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   constructor(
     private userService : UserService,
@@ -41,13 +41,13 @@ export class HomePage {
       route: '/supply-inventory',
       image: '../../assets/images/inventory.jpg'
     },
-    {
-      title: "Employee Portal",
-      subtitle: "Lorem ipsum dolor sit.",
-      icon: 'enter',
-      route: '/dashboard',
-      image: '../../assets/images/employee.jpg'
-    },
+    // {
+    //   title: "Employee Portal",
+    //   subtitle: "Lorem ipsum dolor sit.",
+    //   icon: 'enter',
+    //   route: '/dashboard',
+    //   image: '../../assets/images/employee.jpg'
+    // },
 
   ]
 
@@ -88,6 +88,21 @@ export class HomePage {
   async openActions(){
     // alert('action sheet opened')
     await this.settings_action_sheet.present()
+  }
+
+  async ngOnInit() {
+    console.log(this.userService.getAuth())
+    if(this.userService.getAuth().employee.privilege_level == 1){
+      this.items.push(
+        {
+          title: "Employee Portal",
+          subtitle: "Lorem ipsum dolor sit.",
+          icon: 'enter',
+          route: '/dashboard',
+          image: '../../assets/images/employee.jpg'
+        }
+      )
+    }
   }
 
 
