@@ -137,19 +137,22 @@
                   <ion-note color="danger">Depleted</ion-note><br>
                 </ion-label>
               </ion-item>
-              <ion-item-sliding *ngIf="stockSegmentValue == 1 && stock.remaining > 0">
-                <ion-item>
+              <!-- <ion-item-sliding *ngIf="stockSegmentValue == 1 && stock.remaining > 0"> -->
+                <ion-item *ngIf="stockSegmentValue == 1 && stock.remaining > 0">
                   <ion-label>
                     <ion-label>Batch No.: {{ stock.batch_no }}</ion-label>
                     <ion-note *ngIf="stock.expiration_date">Will Expire on {{ stock.expiration_date | date:'mediumDate' }}<br></ion-note>
                     <ion-note>Amount Added: {{ stock.stock_amount }}</ion-note><br>
                     <ion-note>{{ stock.remaining }} Remaining</ion-note><br>
                   </ion-label>
+                  <ion-button (click)="pullSupplyStock(stock)" slot="end"  expand="block" fill="clear" shape="round">
+                    Pull
+                  </ion-button>
                 </ion-item>
-                <ion-item-options side="end">
+                <!-- <ion-item-options side="end">
                   <ion-item-option color="primary" (click)="pullSupplyStock(stock)">Pull</ion-item-option>
-                </ion-item-options>
-              </ion-item-sliding>
+                </ion-item-options> -->
+              <!-- </ion-item-sliding> -->
             </ng-container>
           </ion-list>
         </ng-container>
