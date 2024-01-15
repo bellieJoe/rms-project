@@ -152,4 +152,38 @@ export class ViewPage implements OnInit {
     return true
   }
 
+  async archiveProduct(){
+    const alert = await this.alertCtrl.create({
+      message : "Are you sure you want to archive this Product?",
+      buttons: [
+        {
+          text: "Cancel"
+        },
+        {
+          text: "Archive",
+          handler : async () => {
+            const loader = await this.loadingCtrl.create({
+              message: "Archiving Product"
+            })
+            try {
+              await loader.present()
+              await this.productItemService.archive(this.product.id)
+              const toast = await this.toastCtrl.create({
+                message: "Product Category successfully archived",
+                duration: 1000
+              })
+              this.router.navigate(['/products'])
+              await toast.present()
+              await loader.dismiss()
+            } catch (error) {
+              await loader.dismiss()
+              this.errorHandler.handleError(error)
+            }
+          }
+        }
+      ]
+    })
+    alert.present()
+  }
+
 }

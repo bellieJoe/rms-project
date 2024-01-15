@@ -38,7 +38,7 @@ export default class ProductVariantsController {
     }
     
     async getVariantsByProductItemId ({request}) {
-        const variants = ProductVariant.query().where('product_item_id', request.input('product_item_id'))
+        const variants = ProductVariant.query().where('product_item_id', request.input('product_item_id')).where('is_archived', 0)
         return variants;
     }
 
@@ -90,5 +90,13 @@ export default class ProductVariantsController {
         variant!.onlineAvailability = variant?.inMenu == 0 ? true : false;
         await variant!.save()
         return variant
+    }
+
+    async archive({request}){
+        const product_variant_id = request.input('product_variant_id')
+        const product_variant = await ProductVariant.find(product_variant_id)
+        product_variant!.isArchived = 1
+        await product_variant?.save()
+        
     }
 }

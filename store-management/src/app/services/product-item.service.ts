@@ -92,4 +92,9 @@ export class ProductItemService {
     return res
   }
 
+  async archive(product_item_id:any){
+    const res = await axios.put(`${environment.apiUrl}products/archive?product_item_id=${product_item_id}`)
+    return res
+  }
+
 }

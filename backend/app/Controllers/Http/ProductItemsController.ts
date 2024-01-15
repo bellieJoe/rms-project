@@ -3,6 +3,7 @@
 import Application from '@ioc:Adonis/Core/Application'
 import ProductItem from "App/Models/ProductItem";
 import Drive from '@ioc:Adonis/Core/Drive'
+import ProductVariant from 'App/Models/ProductVariant';
 
 export default class ProductItemsController {
 // 
@@ -49,6 +50,7 @@ export default class ProductItemsController {
         const product_category_id = request.input('product_category_id')
         if(product_category_id && product_category_id == 0){
             const _products = await ProductItem.query()
+            .where('is_archived', 0)
             .preload('productVariants')
             .preload('productCategory')
             .paginate(request.input('page'), 20)
@@ -56,6 +58,7 @@ export default class ProductItemsController {
         }
         const _products = await ProductItem.query()
         .where('product_category_id', product_category_id)
+        .where('is_archived', 0)
         .preload('productVariants')
         .preload('productCategory')
         .paginate(request.input('page'), 20)
@@ -89,5 +92,16 @@ export default class ProductItemsController {
         await item!.save()
         await item?.load('productVariants')
         return item
+    }
+
+    async archive({request}){
+        const product_item_id = request.input('product_item_id')
+        const product_item = await ProductItem.find(product_item_id)
+        product_item!.isArchived = true
+        await product_item?.save()
+        await ProductVariant.query().where('product_item_id', product_item_id).update({
+            'is_archived' : 1
+        })
+        // product_variants.forEach
     }
 }

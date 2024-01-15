@@ -64,4 +64,9 @@ export class ProductVariantService {
     const res = await axios.put(`${environment.apiUrl}product-variants/toggle-online`, {id : id})
     return res
   }
+
+  async archive(product_variant_id:any){
+    const res = await axios.put(`${environment.apiUrl}product-variants/archive?product_variant_id=${product_variant_id}`)
+    return res
+  }
 }

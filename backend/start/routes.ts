@@ -52,6 +52,7 @@ Route.group(()=>{
     Route.post('upload-image', 'ProductItemsController.uploadImage');
     Route.get('read-image', 'ProductItemsController.readImage');
     Route.put('toggle-in-menu', 'ProductItemsController.toggleInMenu');
+    Route.put('archive', 'ProductItemsController.archive');
   }).prefix('/products')
 
   Route.group(()=>{
@@ -60,6 +61,7 @@ Route.group(()=>{
     Route.put('toggle-in-menu', 'ProductVariantsController.toggleInMenu');
     Route.put('toggle-online', 'ProductVariantsController.toggleOnline');
     Route.get('get-variants-by-product-item-id', 'ProductVariantsController.getVariantsByProductItemId');
+    Route.put('archive', 'ProductVariantsController.archive');
   }).prefix('/product-variants')
 
   Route.group(()=>{
