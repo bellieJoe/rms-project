@@ -43,7 +43,7 @@ export default class PayrollsController {
         const to = request.input('to')
 
         // validate range duplication
-        const _existing_payroll_ranges = await PayrollRange.query().where('from', from).where('to', to)
+        const _existing_payroll_ranges = await PayrollRange.query().where('from', from).where('to', to).where('is_deleted', 0)
         if(_existing_payroll_ranges && _existing_payroll_ranges.length > 0){
             return response.abort('Duplicate Payroll detected')
         }

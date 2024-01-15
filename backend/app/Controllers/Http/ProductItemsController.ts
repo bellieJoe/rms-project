@@ -7,7 +7,11 @@ import ProductVariant from 'App/Models/ProductVariant';
 
 export default class ProductItemsController {
 // 
-    async store({request}){
+    async store({request, response}){
+        const _duplicate = await ProductItem.query().where('name', request.input('name')).where('product_category_id', request.input('product_category'))
+        if(_duplicate && _duplicate.length > 0){
+            return response.abort("Duplicate Product")
+        }
         const productItem = await ProductItem.create({
             name: request.input('name'),
             productCategoryId: request.input('product_category'),
