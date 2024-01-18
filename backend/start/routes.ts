@@ -149,6 +149,8 @@ Route.group(()=>{
 
   Route.group(()=>{
     Route.get('monthly', 'SalesController.monthly')
+    Route.get('yearly', 'SalesController.yearly')
+    Route.get('daily', 'SalesController.daily')
   }).prefix('sales')
 
 

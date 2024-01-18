@@ -9,6 +9,20 @@
 
 <ion-content [fullscreen]="true">
   <app-grid-wrapper>
+    <ion-segment mode="ios" (ionChange)="dateCategorySelect($event)" [value]="dateCategory">
+      <ion-segment-button value="daily">
+        <ion-label>Daily</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="monthly">
+        <ion-label>Monthly</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="yearly">
+        <ion-label>Yearly</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </app-grid-wrapper>
+
+  <app-grid-wrapper *ngIf="dateCategory == 'monthly'">
     <ion-datetime-button #month_selector_button datetime="datetime"></ion-datetime-button>
     <ion-card>
       <ion-card-content>
@@ -31,8 +45,68 @@
       <canvas style="width: 100% !important;"
         baseChart
         class="chart"
-        [data]="lineChartData"
-        [options]="lineChartOptions"
+        [data]="monthlyLineChartData"
+        [options]="monthlyLineChartOptions"
+        type="line"
+      ></canvas>
+    </ion-card>
+  </app-grid-wrapper>
+
+  <app-grid-wrapper *ngIf="dateCategory == 'yearly'">
+    <ion-datetime-button #yearly_selector_button datetime="yearly_selector"></ion-datetime-button>
+    <ion-card>
+      <ion-card-content>
+        <ion-label color="primary">
+          <span class=" mb-0 h3">{{ yearlyTotal | currency:'PHP' }} </span>
+          <ion-label color="medium">Total Sales</ion-label>
+        </ion-label><br>
+        <ion-label color="medium">
+          <span class="font-weight-bold mb-0">{{ (yearlyTotal - yearlyDeliveryTotal) | currency:'PHP' }} </span>
+          <ion-label>Total Order Sales</ion-label>
+        </ion-label><br>
+        <ion-label color="medium">
+          <span class="font-weight-bold mb-0">{{ yearlyDeliveryTotal | currency:'PHP' }} </span>
+          <ion-label>Total Delivery Charge</ion-label>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <h1 class="text-center">Yearly Sales Chart</h1>
+      <canvas style="width: 100% !important;"
+        baseChart
+        class="chart"
+        [data]="yearlyLineChartData"
+        [options]="yearlyLineChartOptions"
+        type="line"
+      ></canvas>
+    </ion-card>
+  </app-grid-wrapper>
+
+  <app-grid-wrapper *ngIf="dateCategory == 'daily'">
+    <ion-datetime-button #daily_selector_button datetime="daily_selector"></ion-datetime-button>
+    <ion-card>
+      <ion-card-content>
+        <ion-label color="primary">
+          <span class=" mb-0 h3">{{ dailyTotal | currency:'PHP' }} </span>
+          <ion-label color="medium">Total Sales</ion-label>
+        </ion-label><br>
+        <ion-label color="medium">
+          <span class="font-weight-bold mb-0">{{ (dailyTotal - dailyDeliveryTotal) | currency:'PHP' }} </span>
+          <ion-label>Total Order Sales</ion-label>
+        </ion-label><br>
+        <ion-label color="medium">
+          <span class="font-weight-bold mb-0">{{ dailyDeliveryTotal | currency:'PHP' }} </span>
+          <ion-label>Total Delivery Charge</ion-label>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <h1 class="text-center">Daily Sales Chart</h1>
+      <canvas style="width: 100% !important;"
+        baseChart
+        class="chart"
+        [data]="dailyLineChartData"
+        [options]="dailyLineChartOptions"
         type="line"
       ></canvas>
     </ion-card>
@@ -41,6 +115,16 @@
 
 <ion-modal [keepContentsMounted]="true">
   <ng-template>
-    <ion-datetime #month_selector (ionChange)="datetime_changed($event)" [showDefaultButtons]="true" id="datetime" presentation="month-year"></ion-datetime>
+    <ion-datetime #month_selector (ionChange)="monthly_datetime_changed($event)" [showDefaultButtons]="true" id="datetime" presentation="month-year"></ion-datetime>
+  </ng-template>
+</ion-modal>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime #daily_selector (ionChange)="daily_datetime_changed($event)" [showDefaultButtons]="true" id="daily_selector" presentation="date"></ion-datetime>
+  </ng-template>
+</ion-modal>
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime #yearly_selector (ionChange)="yearly_datetime_changed($event)" [showDefaultButtons]="true" id="yearly_selector" presentation="year"></ion-datetime>
   </ng-template>
 </ion-modal>

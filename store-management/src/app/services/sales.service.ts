@@ -17,4 +17,14 @@ export class SalesService {
     const res = await axios.get(`${environment.apiUrl}sales/monthly?month=${month}&year=${year}`)
     return res;
   }
+  
+  async daily(month:number, year:number, day:number){
+    const res = await axios.get(`${environment.apiUrl}sales/daily?month=${month}&year=${year}&day=${day}`)
+    return res;
+  }
+
+  async yearly(year:number){
+    const res = await axios.get(`${environment.apiUrl}sales/yearly?year=${year}`)
+    return res;
+  }
 }
