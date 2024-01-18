@@ -86,7 +86,7 @@ export default class MenusController {
             const orderItems = await OrderItem.createMany([...cleanOrderItems])
             order.useTransaction(trx)
             await OrderStatusHistory.create({
-                status: 'Processing',
+                status: 'Pending',
                 orderId: order.id,
                 notes: 'Order created using POS',
             })

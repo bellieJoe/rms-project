@@ -23,6 +23,7 @@ export class AddToCartPage implements OnInit {
    }
 
   @ViewChild('quantityEl', { static: true }) quantityEl: IonInput|any;
+  quantity = 0
   item : any
   selectedVariant : any
   price : any
@@ -103,6 +104,14 @@ export class AddToCartPage implements OnInit {
     }
     const total = this.selectedVariant.price * this.quantityEl.value
     this.total = total
+  }
+
+  quantityIncrement(){
+    this.quantityEl.value++
+  }
+
+  quantityDecrement(){
+    this.quantityEl.value--
   }
 
 }

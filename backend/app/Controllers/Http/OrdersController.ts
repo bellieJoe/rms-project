@@ -17,7 +17,8 @@ export default class OrdersController {
     }
 
     async index({request}) {
-        const orders = Order.query().orderBy('created_at', 'desc')
+        const orders = Order.query()
+        .orderBy('created_at', 'desc')
         const order_id = request.input('order_id')
         const page = request.input('page')
         const status = request.input('status')
@@ -40,13 +41,20 @@ export default class OrdersController {
         }
         await orders.preload('user' , async (q) => {
             await q.preload('userProfile')
+        })
+        .preload('orderStatusHistory', (q)=>{
+            q.orderBy('created_at', 'desc')
         })
         await orders.paginate(page, 30)
         return orders
     }
 
     async customerOrders({request}) {
-        const orders = Order.query().where('user_id', request.input('user_id')).orderBy('created_at', 'desc')
+        const orders = Order.query().where('user_id', request.input('user_id'))
+        .preload('orderStatusHistory', (q)=>{
+            q.orderBy('created_at', 'desc')
+        })
+        .orderBy('created_at', 'desc')
         const order_id = request.input('order_id')
         const page = request.input('page')
         const status = request.input('status')
@@ -71,6 +79,7 @@ export default class OrdersController {
             await q.preload('userProfile')
         })
         await orders.paginate(page, 30)
+        
         return orders
     }
 
@@ -149,6 +158,7 @@ export default class OrdersController {
             order!.useTransaction(trx)
         })
     }
+
     async markAsDelivery({request}){
         await Database.transaction(async (trx)=>{
             const order_id = request.input('order_id')

@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, HasMany, belongsTo, column, computed, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import OrderItem from './OrderItem'
+import OrderStatusHistory from './OrderStatusHistory'
 
 export default class Order extends BaseModel {
   static table = "orders"
@@ -46,6 +47,9 @@ export default class Order extends BaseModel {
 
   @hasMany(()=>OrderItem)
   public orderItems : HasMany<typeof OrderItem>
+
+  @hasMany(()=>OrderStatusHistory)
+  public orderStatusHistory : HasMany<typeof OrderStatusHistory>
 
   @computed()
   public get total() : any {

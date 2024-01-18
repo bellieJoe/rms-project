@@ -37,6 +37,20 @@
         <ion-label>View Items</ion-label>
       </ion-item>
     </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Order Updates</ion-label>
+      </ion-list-header>
+      <ion-grid fixed>
+        <ion-row>
+          <ng-container *ngFor="let history of order.orderStatusHistory ">
+            <ion-col size="3"><ion-label class="small" color="primary">{{ history.created_at | date:'short' }}</ion-label></ion-col>
+            <ion-col size="6">{{ history.notes }}</ion-col>
+            <ion-col size="3"><ion-label class="small" color="medium">{{ history.status }}</ion-label></ion-col>
+          </ng-container>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
   </app-grid-wrapper>
 
   <ion-alert

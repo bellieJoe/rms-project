@@ -91,4 +91,22 @@ export class CartPage implements OnInit {
     })
   }
 
+  quantityIncrement(item:any){
+    // this.quantityEl.value++
+    this.cart.forEach((val:any,i:any)=>{
+      if(val.variant.id == item.variant.id){
+        this.cart[i].quantity++
+      }
+    })
+  }
+
+  quantityDecrement(item:any){
+    // this.quantityEl.value--
+    this.cart.forEach((val:any,i:any)=>{
+      if(val.variant.id == item.variant.id){
+        this.cart[i].quantity--
+      }
+    })
+  }
+
 }

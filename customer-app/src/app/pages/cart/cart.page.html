@@ -18,7 +18,24 @@
           <ion-note>{{ i.variant.price | currency:'PHP' }}</ion-note>
         </ion-label>
       </ion-item>
-      <ion-input (ionChange)="computeTotalPrice()" id="{{ i.variant.id }}"  fill="solid" label="Quantity:" type="number"  [value]="i.quantity"></ion-input><br>
+      <!-- <ion-input (ionChange)="computeTotalPrice()" id="{{ i.variant.id }}"  fill="solid" label="Quantity:" type="number"  [value]="i.quantity"></ion-input><br> -->
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="3">
+            <ion-button (click)="quantityDecrement(i)" expand="block" fill="clear" shape="round">
+              <ion-icon slot="icon-only" name="remove"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-input class="text-center" (ionChange)="computeTotalPrice()" id="{{ i.variant.id }}"  fill="solid"  type="number"  [value]="i.quantity"></ion-input><br>
+          </ion-col>
+          <ion-col size="3">
+            <ion-button (click)="quantityIncrement(i)" expand="block" fill="clear" shape="round">
+              <ion-icon slot="icon-only" name="add"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ng-container>
     <ng-container *ngIf="!cart || cart.length <= 0">
       <p class="text-center my-3">
