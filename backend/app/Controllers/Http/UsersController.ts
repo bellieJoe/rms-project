@@ -178,10 +178,36 @@ export default class UsersController {
             'emails/password-reset', 
             {
                 name: user.userProfile.name,
-                url: `${process.env.CUSTOMER_URL}/reset-password?email=${user.email}&password=${user.password}`
+                url: `${process.env.CUSTOMER_URL}/reset-password?email=${user.email}&password=${encodeURIComponent(user.password)}`
             },
             user.email
         )
+    }
+
+    async validatePasswordResetLink({request, response}){
+        const email = request.input('email')
+        const password = request.input('password')
+        const user = await User.findBy('email', email)
+        // // return Hash.
+        // return encodeURIComponent(user!.password)
+        if(!user){
+            return response.abort('Invalid Password Reset Link')
+        }
+        if(user?.password != password){
+            return response.abort('Invalid Password Reset Link.')
+        }
+        return
+    }
+    
+    async updatePassword({request, response}){
+        const email = request.input('email')
+        const password = request.input('password')
+        const user = await User.findBy('email', email)
+        if(!user){
+            return response.abort('Invalid Password Reset Link')
+        }
+        user.password = await Hash.make(password)
+        await user.save()
     }
 
     

@@ -143,4 +143,20 @@ export class UserService {
       email: email
     })
   }
+
+  async validatePasswordResetLink(email:any, password:any){
+    const res = await axios.post(`${environment.apiUrl}users/validate-password-reset-link`, {
+      email: email,
+      password: password
+    })
+    return res
+  }
+
+  async updatePassword(email:any, password:any){
+    const res = await axios.post(`${environment.apiUrl}users/update-password`, {
+      email: email,
+      password: password
+    })
+    return res
+  }
 }

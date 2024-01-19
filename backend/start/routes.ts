@@ -41,6 +41,8 @@ Route.group(()=>{
     Route.get('test', 'UsersController.test'); 
     Route.put('edit-profile', 'UsersController.editProfile'); 
     Route.post('send-password-reset-link', 'UsersController.sendPasswordResetLink'); 
+    Route.post('validate-password-reset-link', 'UsersController.validatePasswordResetLink'); 
+    Route.post('update-password', 'UsersController.updatePassword'); 
   }).prefix('/users')
 
   Route.group(()=>{

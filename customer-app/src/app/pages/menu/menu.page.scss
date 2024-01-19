@@ -1,3 +1,11 @@
+
+@font-face {
+    font-family: 'RegularBrush';
+    src: URL('../../../assets/fonts/regular_brush-webfont.woff') format ('woff'), url('../../../assets/fonts/regular_brush-webfont.woff2') format('woff2');
+}
+.tagline{
+    font-family: 'RegularBrush';
+}
 // @media (prefers-color-scheme: light) {
 //     ion-segment{
 //         position: sticky;
